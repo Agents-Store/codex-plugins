@@ -85,14 +85,21 @@ Arguments: `[--secrets] [--docs] [--all]`
 
 # Config Validate
 
-Validate the current OpenClaw instance's `openclaw.json` against official documentation and best practices. The active instance dir is `$OPENCLAW_PROJECT_DIR` when set, otherwise the current working directory (standard: `~/.openclaw/`, Docker multi-instance: `~/.openclaw-{name}/`).
+Validate the current OpenClaw instance's `openclaw.json` against official documentation and best practices.
+
+**Path resolution (in priority order):**
+1. `$OPENCLAW_INSTANCE_DIR` — runtime workspace dir holding `openclaw.json` (standard: `~/.openclaw/`, Docker multi-instance: `~/.openclaw-{name}/`).
+2. `$OPENCLAW_PROJECT_DIR` — git/docker-compose project dir; fallback only.
+3. `$(pwd)` — current directory.
+
+Workspace commands always target the **instance** dir, which usually differs from the project dir.
 
 ## Process
 
 ### 1. Resolve and read openclaw.json
 
 ```bash
-INSTANCE_DIR="${OPENCLAW_PROJECT_DIR:-$(pwd)}"
+INSTANCE_DIR="${OPENCLAW_INSTANCE_DIR:-${OPENCLAW_PROJECT_DIR:-$(pwd)}}"
 cd "$INSTANCE_DIR" || { echo "ERROR: cannot access $INSTANCE_DIR"; exit 1; }
 cat ./openclaw.json
 ```
@@ -642,7 +649,14 @@ Arguments: `<soul|agents|user|tools|heartbeat|identity|memory|bootstrap|boot|con
 
 # Workspace Optimize
 
-Optimize a specific OpenClaw workspace file following best practices. CWD is the instance root (standard: `~/.openclaw/`, Docker multi-instance: `~/.openclaw-{name}/`). Files are read from and written to `./workspace/`.
+Optimize a specific OpenClaw workspace file following best practices. Files are read from and written to `./workspace/` under the resolved instance dir.
+
+**Path resolution (in priority order):**
+1. `$OPENCLAW_INSTANCE_DIR` — runtime workspace dir (standard: `~/.openclaw/`, Docker multi-instance: `~/.openclaw-{name}/`).
+2. `$OPENCLAW_PROJECT_DIR` — git/docker-compose project dir; fallback only.
+3. `$(pwd)` — current directory.
+
+`OPENCLAW_PROJECT_DIR` is **only** used in step 9 below (docker compose context for permission fixes) — usually a different path than the instance dir.
 
 **All generated content MUST be in English.** The interview/conversation with the user can be in any language, but workspace file content is always English.
 
@@ -653,8 +667,12 @@ Parse from "$ARGUMENTS".
 
 ## Process
 
-### 1. Parse arguments
-Extract file type from arguments.
+### 1. Parse arguments and resolve instance dir
+Extract file type from arguments, then cd into the instance dir:
+```bash
+INSTANCE_DIR="${OPENCLAW_INSTANCE_DIR:-${OPENCLAW_PROJECT_DIR:-$(pwd)}}"
+cd "$INSTANCE_DIR" || { echo "ERROR: cannot access $INSTANCE_DIR"; exit 1; }
+```
 
 ### 2. Read current file
 Map file type to filename:
@@ -733,12 +751,15 @@ Following the skill's best practices:
   6. Run: `openclaw doctor --fix` (Docker multi-instance: `openclaw-{name} doctor --fix`)
 
 ### 9. Fix permissions (Docker deployments only)
-After writing files in Docker deployments, fix permissions:
+After writing files in Docker deployments, fix permissions. The instance NAME is derived from `OPENCLAW_INSTANCE_DIR`, but `docker compose` must run in the **project** dir (`OPENCLAW_PROJECT_DIR`) where `docker-compose.yaml` lives:
 ```bash
-# Derive instance name from OPENCLAW_PROJECT_DIR (if set) or CWD (e.g., /root/.openclaw-team → team)
-INSTANCE_DIR="${OPENCLAW_PROJECT_DIR:-$(pwd)}"
+# Instance name comes from the instance dir basename (e.g., /root/.openclaw-team → team)
+INSTANCE_DIR="${OPENCLAW_INSTANCE_DIR:-${OPENCLAW_PROJECT_DIR:-$(pwd)}}"
 INSTANCE=$(basename "$INSTANCE_DIR" | sed 's/^\.openclaw-//')
-cd "${OPENCLAW_PROJECT_DIR:-/docker/openclaw-$INSTANCE}"
+
+# docker compose runs in the PROJECT dir (where docker-compose.yaml lives)
+PROJECT_DIR="${OPENCLAW_PROJECT_DIR:-/docker/openclaw-$INSTANCE}"
+cd "$PROJECT_DIR"
 docker compose exec -u root openclaw-gateway chown -R node:node /home/node/.openclaw/
 ```
 For non-Docker deployments, skip this step.
@@ -776,13 +797,20 @@ Arguments: `[quick|full|security]`
 
 # Workspace Scan
 
-Perform a quick health check of the current OpenClaw instance. The active instance dir is `$OPENCLAW_PROJECT_DIR` when set, otherwise the current working directory (standard: `~/.openclaw/`, Docker multi-instance: `~/.openclaw-{name}/`).
+Perform a quick health check of the current OpenClaw instance.
+
+**Path resolution (in priority order):**
+1. `$OPENCLAW_INSTANCE_DIR` — runtime workspace dir (holds `openclaw.json`, `workspace/`, `agents/`, etc.). Standard: `~/.openclaw/`, Docker multi-instance: `~/.openclaw-{name}/`.
+2. `$OPENCLAW_PROJECT_DIR` — git/docker-compose project dir; used as a fallback only when `OPENCLAW_INSTANCE_DIR` is unset AND it happens to also be the instance root.
+3. `$(pwd)` — current directory.
+
+`OPENCLAW_INSTANCE_DIR` and `OPENCLAW_PROJECT_DIR` are distinct concepts and usually live in **different** places (e.g. project `/docker/openclaw-pitline/`, instance `~/.openclaw-pitline/`). Workspace commands like this one always target the **instance** dir.
 
 ## Process
 
 ### 1. Resolve and verify instance dir
 ```bash
-INSTANCE_DIR="${OPENCLAW_PROJECT_DIR:-$(pwd)}"
+INSTANCE_DIR="${OPENCLAW_INSTANCE_DIR:-${OPENCLAW_PROJECT_DIR:-$(pwd)}}"
 cd "$INSTANCE_DIR" || { echo "ERROR: cannot access $INSTANCE_DIR"; exit 1; }
 [ -f ./openclaw.json ] && echo "openclaw.json: OK" || echo "WARNING: not in an OpenClaw instance root ($INSTANCE_DIR)"
 [ -d ./workspace ] && echo "workspace/: OK" || echo "WARNING: workspace/ not found"
