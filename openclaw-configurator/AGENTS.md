@@ -1,6 +1,6 @@
 # openclaw-configurator
 
-> OpenClaw instance configurator and operations plugin. Scan, analyze, and optimize all workspace files (AGENTS.md, SOUL.md, USER.md, IDENTITY.md, TOOLS.md, HEARTBEAT.md, MEMORY.md, BOOT.md, BOOTSTRAP.md) plus openclaw.json. Update instances from official GitHub releases. Guided interviews, session log analysis, standing orders design, security audit, config validation, permission fix hooks, and 6 industry-specific workspace templates.
+> OpenClaw instance configurator and operations plugin. Scan, analyze, and optimize all workspace files (AGENTS.md, SOUL.md, USER.md, IDENTITY.md, TOOLS.md, HEARTBEAT.md, MEMORY.md, BOOT.md, BOOTSTRAP.md) plus openclaw.json. Update instances from official GitHub releases and reconcile config against new releases (recommend new features, migrate legacy settings, run openclaw doctor). Set up model-provider authentication with an OAuth/CLI-backend-first, cost-saving bias (Claude CLI, Codex OAuth). Migrate .env secrets into self-hosted Infisical. Guided interviews, session log analysis, standing orders design, security audit, config validation, permission fix hooks, centralized doc research, and 6 industry-specific workspace templates.
 
 Canonical source: https://github.com/agents-store/claude-public-plugins/tree/main/plugins/openclaw-configurator
 
@@ -11,11 +11,15 @@ This plugin ships the following skills under `skills/`. Codex loads them context
 - **agents-md** — Guide for creating and customizing AGENTS.md — the operating rules, procedures, and behavioral guardrails for an OpenClaw agent. Use this skill whenever the user is working on agent behavior, operating procedures, session startup sequences, memory management policies, group chat rules, safety red lines, tool usage priorities, or standing order references. Even if they just say "the agent should do X differently" or "add a rule for Y", this skill applies because operational rules belong in AGENTS.md. Also use when deciding what belongs in AGENTS.md versus SOUL.md — this skill clarifies the boundary.
 - **bootstrap-boot** — Guide for BOOTSTRAP.md (first-run setup ritual) and BOOT.md (gateway restart checklist) in OpenClaw. Use this skill whenever the user is setting up a new agent for the first time, configuring onboarding flows, creating first-run discovery processes, or defining what should happen on gateway restart. Even questions like "what should happen when the agent starts for the first time", "how do I initialize a fresh agent", or "what runs on reboot" need this skill.
 - **config-validation** — Validates openclaw.json against official OpenClaw documentation and checks for latest features, deprecated settings, and security issues. Use this skill whenever the user wants to verify their configuration is correct, check if they're using the latest OpenClaw features, audit their openclaw.json for problems, or compare their config against best practices. Also applies when the user says things like "is my config OK", "what am I missing in my setup", or "check my OpenClaw configuration".
+- **docs-research** — How to fetch official OpenClaw documentation using whatever web-search/scrape tool is enabled, with a fallback ladder, plus the canonical OpenClaw doc URL map. Use whenever any openclaw-configurator skill or command needs to verify a feature, config field, auth method, or release note against official docs. Also use when the user asks to "check the latest docs", "is this still the recommended way", or before recommending any feature/auth change.
 - **examples** — Complete end-to-end workspace customization examples for different industries — legal firms, dev teams, marketing agencies, customer support, personal assistants, and content creators. Use this skill whenever the user wants to see a reference implementation, asks "how would you set up OpenClaw for X", wants to see what a complete workspace looks like, or needs a starting template for their industry. Even vague requests like "show me an example" or "what does a good workspace look like" should trigger this skill.
 - **heartbeat-md** — Guide for configuring HEARTBEAT.md — the periodic background task checklist that OpenClaw executes on a schedule. Use this skill whenever the user needs background monitoring, periodic checks, standing orders integration, quiet hours configuration, or wants to understand heartbeat mechanics and token costs. Even questions like "how do I make the agent check something periodically", "set up monitoring", or "reduce heartbeat token costs" need this skill.
 - **identity-md** — Guide for creating IDENTITY.md — the agent's name, creature type, vibe, emoji, and avatar in OpenClaw. Use this skill whenever the user is naming their agent, choosing an emoji or avatar, setting up the agent's visual identity, or asking how agent identity works. Even simple questions like "what should I name my agent", "how do I set the bot emoji", or "change the agent's avatar" need this skill.
+- **infisical-migration** — Migrate an OpenClaw instance's secrets from plaintext .env into self-hosted Infisical, then wire the Docker stack to inject them at runtime. Use when the user wants to move .env secrets into Infisical, eliminate plaintext API keys, set up SecretRef-backed config, or asks "migrate my secrets to Infisical". Pairs with the /infisical-migrate command. OAuth/CLI credentials stay in OpenClaw's encrypted store and are out of scope.
 - **memory-system** — Guide for OpenClaw's memory system — MEMORY.md curation, daily logs, memory flush, and vector search. Use this skill whenever the user asks about how the agent remembers things between sessions, wants to configure memory management, needs to understand daily logs versus long-term memory, or is setting up memory curation processes. Also applies to questions about vector search, memory security in groups, or "how does the agent remember".
 - **openclaw-config** — Comprehensive guide for openclaw.json — the central gateway configuration file controlling models, channels, tools, plugins, and sessions. Use this skill whenever the user needs to understand, modify, or troubleshoot their openclaw.json. Covers agent settings, Telegram/Discord/WhatsApp channel setup, tool profiles, plugin management, session behavior, secret handling with SecretRef, and model configuration. Even questions like "how do I add Telegram", "change the model", or "what does this config field do" need this skill.
+- **provider-auth** — How to authenticate OpenClaw model providers — API key vs OAuth vs CLI backend — with a cost-saving, OAuth/CLI-first bias for Claude and Codex. Use whenever the user is setting up or changing model-provider credentials, asks to "stop paying per-token for chat", wants OAuth keys for Claude/Codex, mentions auth-profiles.json, the Claude CLI backend, `openclaw models auth`, or "which auth method should I use". Pairs with the /provider-setup command.
+- **release-migration** — Reconcile an OpenClaw instance's configuration against a new release — read the changelog/release notes between two tags, recommend newly available features, flag and migrate deprecated/legacy settings, then run openclaw doctor. Use after updating OpenClaw (invoked by /instance-update), when the user says "I just updated OpenClaw — check my config", "what new features should I enable", "fix legacy/deprecated settings", or "migrate my config to the new version".
 - **security-audit** — Workspace prompt security audit checklist — checks for hardcoded secrets, prompt injection risks, data leakage, missing safety rules, PII exposure, and overly broad standing orders. Use this skill whenever auditing workspace security, checking for vulnerabilities, reviewing prompt safety, or as part of any workspace optimization. Even if the user doesn't explicitly ask for security, include these checks when doing a full workspace review, optimization, or pre-deployment audit.
 - **session-analysis** — Techniques for analyzing OpenClaw session JSONL logs to understand user behavior, tool effectiveness, error patterns, token costs, and active hours. Use this skill whenever the user wants to analyze how their agent is performing, what users are asking, which tools work best, what errors occur, or how to improve the workspace based on real usage data. Also applies to questions like "what do my users ask about", "is my agent working well", or "show me session stats".
 - **soul-md** — Guide for creating and refining SOUL.md — the agent's personality, values, tone, and boundaries. Use this skill whenever the user is working on who the agent should be, its communication style, persona traits, behavioral boundaries, or domain-specific character. Even requests like "make the agent more friendly", "add a boundary", "change the tone", or "the agent sounds too corporate" need this skill because personality and tone live in SOUL.md, not AGENTS.md.
@@ -77,9 +81,9 @@ Codex CLI doesn't support custom slash commands — invoke these workflows via n
 
 ### `config-validate`
 
-Validate openclaw.json against official documentation, check for latest features, detect inline secrets, and verify cross-references with workspace files
+Validate openclaw.json against official documentation, check for latest features, detect inline secrets, verify cross-references with workspace files, and optionally reconcile config against a newer release
 
-Arguments: `[--secrets] [--docs] [--all]`
+Arguments: `[--secrets] [--docs] [--all] [--upgrade] [--upgrade-from <tag>]`
 
 <details><summary>Prompt template</summary>
 
@@ -165,18 +169,7 @@ Cross-checks:
 
 ### 6. Fetch Latest Documentation
 
-Use available search/scraping tools to check official OpenClaw docs for latest features:
-
-**Tool priority** (use the best available):
-1. Firecrawl tools — `firecrawl_scrape` for page content, `firecrawl_search` for queries
-2. Exa.ai — `web_search_exa` for code-aware search
-3. Perplexity — `search` for synthesis
-4. Jina — `read_url` for page reading
-5. WebFetch — basic URL fetch
-
-**What to check**:
-- `https://docs.openclaw.ai` — latest configuration reference
-- `https://github.com/openclaw/openclaw` — changelog, new features
+To check official OpenClaw docs for latest features, follow the **docs-research** skill — it holds the tool-priority ladder (Firecrawl → Exa → Perplexity → Jina → context7 → WebFetch) and the OpenClaw documentation URL map.
 
 Compare current config with latest available features. Flag:
 - New fields available but not configured
@@ -232,11 +225,113 @@ If issues found, offer to fix them:
 - After editing: run `openclaw doctor --fix` to verify (Docker multi-instance: `openclaw-{name} doctor --fix`)
 - For workspace file issues: suggest using `/workspace-optimize <file>`
 
+### 9. Upgrade Reconciliation Mode (`--upgrade` / `--upgrade-from <tag>`)
+
+For an instance whose **code** was already updated but whose **config** was never reconciled against the new release (e.g. updated manually, outside `/instance-update`), run this mode after the normal validation above.
+
+Determine the tag range, then hand off to the **release-migration** skill:
+
+```bash
+PROJECT_DIR="${OPENCLAW_PROJECT_DIR:-$(pwd)}"
+NEW_TAG=$(git -C "$PROJECT_DIR" describe --tags --abbrev=0 2>/dev/null)
+
+# --upgrade-from <tag>  → OLD_TAG is the provided tag
+# --upgrade (no arg)    → OLD_TAG is the tag before NEW_TAG
+OLD_TAG="${UPGRADE_FROM:-$(git -C "$PROJECT_DIR" describe --tags --abbrev=0 "$NEW_TAG^" 2>/dev/null)}"
+echo "Reconciling config from $OLD_TAG → $NEW_TAG"
+```
+
+Invoke **release-migration** with `OLD_TAG` and `NEW_TAG`. It reads the changelog, recommends new features, migrates deprecated/legacy settings (with the safeguards above), and runs `openclaw doctor --fix`. This is the same reconciliation phase `/instance-update` runs automatically — use it standalone here.
+
+</details>
+
+### `infisical-migrate`
+
+Migrate an OpenClaw instance's secrets from plaintext .env into self-hosted Infisical and wire the Docker stack to inject them at runtime. Prompts for the Infisical project id; pushes sensitive keys; patches Dockerfile/compose/wrapper; rebuilds; strips plaintext; audits.
+
+Arguments: `[infisical-project-id]`
+
+<details><summary>Prompt template</summary>
+
+# Infisical Migrate
+
+Migrate an OpenClaw instance's secrets from plaintext `.env` into self-hosted Infisical and wire the Docker stack to inject them at runtime. This is **destructive** (rebuilds containers, strips plaintext) — every step that changes state requires explicit confirmation, and backups are taken first.
+
+Load the **infisical-migration** skill for the full playbook, troubleshooting matrix, and maintenance commands. Verify Infisical CLI syntax via **docs-research** (`https://infisical.com/docs/cli/overview`).
+
+> **Rollback (state up-front):** restore `.env`, `docker-compose.yml`, and `Dockerfile` from their `.pre-infisical.bak` copies, then `cd "$PROJECT_DIR" && docker compose down && docker compose up -d --build`.
+
+## Path resolution — uses BOTH dirs
+
+```bash
+INSTANCE_DIR="${OPENCLAW_INSTANCE_DIR:-${OPENCLAW_PROJECT_DIR:-$(pwd)}}"   # secrets live here
+INSTANCE=$(basename "$INSTANCE_DIR" | sed 's/^\.openclaw-//')             # e.g. team
+PROJECT_DIR="${OPENCLAW_PROJECT_DIR:-/docker/openclaw-$INSTANCE}"          # docker files live here
+```
+
+- **Instance dir** → `openclaw.json` (SecretRef ids), `agents/main/agent/auth-profiles.json`, instance `.env`.
+- **Project dir** → `docker-compose.yml`/`docker-compose.yaml`, `Dockerfile`, `scripts/`, `.infisical.conf`.
+
+## Process
+
+### Step 1 — Inputs
+
+- Parse the Infisical **project id** from `$ARGUMENTS`. If absent, ask the user for it.
+- Ask for the environment slug (default `prod`) and domain (default `https://k.macstack.ai`).
+- Read machine-identity creds from `/etc/openclaw/infisical.env`. If missing, instruct the user to create it (mode 600, `INFISICAL_CLIENT_ID` + `INFISICAL_CLIENT_SECRET`) and stop — never hardcode creds.
+
+### Step 2 — Preconditions & backups
+
+```bash
+command -v infisical >/dev/null || { echo "Install Infisical CLI first: npm install -g @infisical/cli"; exit 1; }
+COMPOSE_FILE=$([ -f "$PROJECT_DIR/docker-compose.yaml" ] && echo docker-compose.yaml || echo docker-compose.yml)
+[ -f "$PROJECT_DIR/$COMPOSE_FILE" ] || { echo "ERROR: no $COMPOSE_FILE in $PROJECT_DIR"; exit 1; }
+
+cp "$INSTANCE_DIR/.env" "$INSTANCE_DIR/.env.pre-infisical.bak" 2>/dev/null
+cp "$PROJECT_DIR/$COMPOSE_FILE" "$PROJECT_DIR/$COMPOSE_FILE.pre-infisical.bak"
+cp "$PROJECT_DIR/Dockerfile" "$PROJECT_DIR/Dockerfile.pre-infisical.bak" 2>/dev/null
+```
+
+### Step 3 — Enumerate keys & confirm
+
+Run **infisical-migration** Step 1 to build the key set (openclaw.json SecretRef ids ∪ `.env` keys ∪ security-audit inline findings). Show the user the list of **key names** (never values) and ask for explicit confirmation before any push. Exclude OAuth/CLI credentials (`openai-codex:default`, Claude CLI tokens) — those stay in OpenClaw's encrypted store.
+
+### Step 4 — Authenticate & push
+
+Run **infisical-migration** Step 2: universal-auth login, `infisical secrets set` for the confirmed keys, then list them back to verify. Read each value from `.env`; never echo values.
+
+### Step 5 — Patch the Docker stack
+
+Run **infisical-migration** Steps 3–5 via Edit: create `.infisical.conf`, copy the `openclaw-with-infisical` wrapper, patch the `Dockerfile` (install CLI + ENTRYPOINT) and `docker-compose` (`env_file` for both services, CLI-service entrypoint). Show each diff and confirm before writing.
+
+### Step 6 — Build & start
+
+Only after a final confirmation, run **infisical-migration** Step 6 (`docker compose build` + `down`/`up -d`) and tail logs. Verify success indicators (`Injecting N Infisical secrets`, `[gateway] ready`). On `SecretRefResolutionError`, follow the skill's troubleshooting matrix (add the missing key, or disable the skill in `openclaw.json`) before continuing.
+
+### Step 7 — Strip plaintext & migrate auth-profiles
+
+Confirm, then run **infisical-migration** Step 7: reduce `.env` to infrastructure-only vars and migrate the `auth-profiles.json` API key to a `keyRef` SecretRef. Validate JSON before writing each file. Restart the stack.
+
+### Step 8 — Audit & finish
+
+```bash
+cd "$PROJECT_DIR"
+docker compose exec openclaw-gateway-$INSTANCE openclaw secrets audit --check
+```
+
+Expected `plaintext=1, unresolved=0, shadowed=0, legacy=0` (the `plaintext=1` codex sentinel is a known false positive — do not touch). Prompt for a Telegram/bot smoke test. When verified, offer to remove the `*.pre-infisical.bak` backups.
+
+## Notes
+
+- This command needs `$OPENCLAW_PROJECT_DIR` set (or to be run from the project dir) because it edits Docker files there; `$OPENCLAW_INSTANCE_DIR` locates the secrets.
+- Never commit `.infisical.conf` or `/etc/openclaw/infisical.env`.
+- After future OpenClaw upgrades, re-run `openclaw secrets audit --check` (see **release-migration**).
+
 </details>
 
 ### `instance-update`
 
-Update OpenClaw instance from official GitHub repo — fetch latest tag, merge into dev preserving local changes, rebuild Docker containers
+Update OpenClaw instance from official GitHub repo — fetch latest tag, merge into dev preserving local changes, rebuild Docker containers, then reconcile config against the new release and run openclaw doctor
 
 Arguments: `[tag-or-version]`
 
@@ -478,7 +573,26 @@ If not all containers are running:
 2. Show logs: `docker compose logs --tail=50 <failed_service>`
 3. Offer to retry or roll back
 
-### Step 11: Restore Stashed Changes
+### Step 11: Post-Update Release Analysis & Config Reconciliation
+
+A code update is not done until the config is reconciled against the new release. Run this even on a clean merge.
+
+Config lives in the **instance** dir, not the git project dir:
+
+```bash
+INSTANCE_DIR="${OPENCLAW_INSTANCE_DIR:-${OPENCLAW_PROJECT_DIR:-$(pwd)}}"
+```
+
+Invoke the **release-migration** skill with `OLD_TAG=$PRE_UPDATE_TAG` and `NEW_TAG=$TARGET_TAG`. It will:
+1. Read the changelog between tags (`git show "$TARGET_TAG:CHANGELOG.md"`, `git log "$PRE_UPDATE_TAG..$TARGET_TAG"`) and fetch release notes/docs via **docs-research**.
+2. Recommend newly available features (opt-in), flag deprecated/legacy settings, and migrate `openclaw.json` with the **openclaw-config** safeguards (diff → confirm → backup → validate JSON → never delete sections).
+3. Run `openclaw doctor --fix` — **mandatory** here. Standard: `openclaw doctor --fix`. Docker multi-instance (run in the project dir): `cd "$OPENCLAW_PROJECT_DIR" && docker compose exec openclaw-gateway-$INSTANCE_NAME openclaw doctor --fix`.
+
+If `openclaw.json` was edited from the host in a Docker deployment, fix permissions (chown + doctor) as in `/workspace-optimize` step 9 — `docker compose` runs in `$OPENCLAW_PROJECT_DIR`.
+
+Capture the migration report (new features recommended, legacy items migrated, doctor result) for the final summary.
+
+### Step 12: Restore Stashed Changes
 
 If changes were stashed in Step 2:
 
@@ -489,7 +603,7 @@ echo "Restored stashed changes"
 
 If stash pop has conflicts, show them and help resolve.
 
-### Step 12: Summary
+### Step 13: Summary
 
 ```
 === OpenClaw Instance Update Complete ===
@@ -499,6 +613,8 @@ Previous version: $PRE_UPDATE_TAG ($PRE_UPDATE_COMMIT)
 Updated to:       $TARGET_TAG ($(git rev-parse --short HEAD))
 Branch:           dev (local only — NOT pushed)
 Conflicts:        [None / N resolved]
+Config reconcile: [N features recommended / M migrations applied]
+doctor:           [pass / N fixes applied / issues remain]
 Backups:          ${COMPOSE_FILE}.pre-update.bak
 Containers:       [docker compose ps summary]
 
@@ -512,6 +628,127 @@ Ask user if they want to keep or remove backup files:
 rm -f "${COMPOSE_FILE}.pre-update.bak" .env.pre-update.bak
 echo "Backup files removed"
 ```
+
+</details>
+
+### `provider-setup`
+
+Configure OpenClaw model-provider authentication with an OAuth/CLI-backend-first, cost-saving bias (Claude CLI, Codex OAuth). Detects current auth, recommends the cheapest working path, runs non-interactive config steps, and prints interactive logins for you to run.
+
+Arguments: `[anthropic|codex|openai|google|status|all]`
+
+<details><summary>Prompt template</summary>
+
+# Provider Setup
+
+Set up or change OpenClaw model-provider authentication. Biases toward the **cheapest working path**: reuse a local CLI subscription session (Claude CLI / Codex OAuth) for chat models so you don't pay metered API tokens, and reserve API keys for functions/skills that need the embedded API.
+
+Load the **provider-auth** skill for the full method matrix and the **docs-research** skill for fetching current docs.
+
+**Path resolution (in priority order):**
+1. `$OPENCLAW_INSTANCE_DIR` — runtime workspace dir holding `openclaw.json` + `agents/main/agent/auth-profiles.json` (standard: `~/.openclaw/`, Docker multi-instance: `~/.openclaw-{name}/`).
+2. `$OPENCLAW_PROJECT_DIR` — git/docker-compose project dir; fallback only.
+3. `$(pwd)` — current directory.
+
+## Arguments
+
+- `$ARGUMENTS` — optional target: `anthropic`, `codex`, `openai`, `google`, `all`, or `status`.
+  - `status` → run Steps 1–3 only (report current auth + recommendation, **no changes**).
+  - A provider name → focus the setup on that provider.
+  - empty / `all` → review every configured provider.
+
+## Process
+
+### 1. Detect current auth
+
+```bash
+INSTANCE_DIR="${OPENCLAW_INSTANCE_DIR:-${OPENCLAW_PROJECT_DIR:-$(pwd)}}"
+cd "$INSTANCE_DIR" || { echo "ERROR: cannot access $INSTANCE_DIR"; exit 1; }
+
+# Current default model + runtime
+openclaw config get agents.defaults.model --json 2>/dev/null || grep -n '"model"' ./openclaw.json
+
+# Which providers are authenticated and how (credential type + expiry)
+openclaw models status 2>/dev/null
+
+# Which auth profiles exist (NAMES + mode/managedBy only — never read token values aloud)
+grep -oE '"[a-z0-9:-]+"[[:space:]]*:[[:space:]]*\{' ./agents/main/agent/auth-profiles.json 2>/dev/null | sed 's/[":{ ]//g'
+
+# Is a local CLI login available on the host?
+command -v claude && claude auth status --text 2>/dev/null
+command -v codex
+```
+
+**Security:** read `auth-profiles.json` to learn which profiles/modes exist — do **not** print token values.
+
+### 2. Verify current guidance (docs change)
+
+Load **docs-research** and fetch the current recommended method for the target provider(s):
+- Anthropic → `/providers/anthropic`, `/gateway/cli-backends`
+- Codex/OpenAI → `/providers/openai`, `/concepts/oauth`
+- General → `/gateway/authentication`, `/concepts/model-providers`
+
+Auth methods (API key vs OAuth vs CLI backend) and recommended models change between releases — confirm before recommending.
+
+### 3. Recommend (cost-first)
+
+Load **provider-auth**. Decide the cheapest working path:
+
+- **Claude:** if `claude` is installed and `claude auth status` shows logged-in → recommend the **Claude CLI backend** (no API key, auto token refresh, bills against the Claude subscription session). Otherwise recommend `claude auth login` first, falling back to an API key only if CLI auth can't work on this host.
+- **Codex/OpenAI:** if a ChatGPT/Codex subscription is available → recommend **Codex OAuth** (`openai-codex`) with model `openai/gpt-5.5`.
+- **Google/others:** API key via `openclaw models auth add`, or Gemini CLI backend if present.
+
+State the savings explicitly (e.g. "this routes chat through your Claude subscription instead of metered API tokens"). Note that any skill/plugin needing the **embedded API** still requires an API key (kept in `.env`/SecretRef).
+
+If `status` was requested, stop here with the report + recommendation.
+
+### 4. Interactive logins — PRINT, do not run
+
+OAuth/CLI logins open a browser and bind a local callback port; they cannot run in this command's context. Print the exact commands for the user to run via the `!` prefix (or their own shell on the gateway host):
+
+```
+! claude auth login
+! claude auth status --text
+! openclaw models auth login --provider anthropic --method cli --set-default
+```
+
+For Codex:
+```
+! openclaw models auth login --provider openai-codex
+```
+
+Wait for the user to confirm they completed the interactive step before continuing.
+
+### 5. Non-interactive config (run, with safeguards)
+
+Apply the canonical model ref + runtime and remove any precedence-blocking embedded-API token profile. Prefer `openclaw` CLI over hand-editing JSON when available:
+
+```bash
+# Set canonical model ref (example: Claude)
+openclaw models set anthropic/claude-opus-4-7
+
+# Remove a stale embedded-API token profile so the CLI backend takes effect
+openclaw config unset auth.profiles.anthropic:claude 2>/dev/null
+openclaw config unset agents.defaults.cliBackends.anthropic 2>/dev/null
+```
+
+If a field must be edited directly in `openclaw.json` (e.g. model-scoped `agentRuntime.id: "claude-cli"`), follow the **openclaw-config** safeguards:
+1. Show the proposed diff and ask for explicit confirmation.
+2. `cp ./openclaw.json ./openclaw.json.bak`
+3. Validate JSON syntax before writing.
+4. Never delete unrelated sections.
+
+### 6. Verify
+
+```bash
+openclaw models status
+openclaw models list --provider anthropic
+openclaw doctor          # Docker multi-instance: openclaw-{name} doctor
+```
+
+Report the final auth state: provider, credential type (oauth/cli/api-key), default model + runtime, and whether chat now routes through a subscription session (cost win) vs. the metered API.
+
+**Docker note:** if `openclaw.json` was edited from the host in a Docker deployment, fix permissions (chown + doctor) as in `/workspace-optimize` step 9 before finishing.
 
 </details>
 
