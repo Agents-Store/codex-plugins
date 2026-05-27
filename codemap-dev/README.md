@@ -1,6 +1,6 @@
 # codemap-dev (Codex plugin)
 
-Code understanding plugin for developers. Helps onboard to unfamiliar projects through beginner-friendly code review, step-by-step explanations, and visual diagrams (architecture, ERD, flows) via drawio-mcp.
+Code understanding plugin for developers. Helps onboard to unfamiliar projects through beginner-friendly code review, step-by-step explanations, visual diagrams (architecture, ERD, flows) via drawio-mcp, and frontend testing via Playwright MCP.
 
 ## Install
 
@@ -16,10 +16,10 @@ codex plugin marketplace add .
 
 ## Components
 
-- 4 skill(s) under `skills/`
-- 3 subagent(s) under `.codex/agents/`
+- 5 skill(s) under `skills/`
+- 4 subagent(s) under `.codex/agents/`
 - MCP server config in `.mcp.json`
-- 6 workflow template(s) — see AGENTS.md
+- 7 workflow template(s) — see AGENTS.md
 
 ## Source
 
