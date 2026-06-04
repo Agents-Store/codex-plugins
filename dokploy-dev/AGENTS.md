@@ -1,6 +1,6 @@
 # dokploy-dev
 
-> Dokploy self-hosted PaaS development plugin (aligned with Dokploy v0.29.x). Deploy applications, provision 6 database types (Postgres, MySQL, MariaDB, MongoDB, Redis, LibSQL), manage domains and Docker Compose stacks, AND debug failed deployments end-to-end with AI-powered log analysis (ai-analyzeLogs), Docker container introspection, Traefik diagnosis, and a guided recovery chain. Uses the official @dokploy/mcp server (500+ tools across 49 categories) plus 5 debugging-focused slash commands.
+> Dokploy self-hosted PaaS development plugin (aligned with Dokploy v0.29.5). Deploy applications, provision 6 database types (Postgres, MySQL, MariaDB, MongoDB, Redis, LibSQL), manage domains and Docker Compose stacks, AND debug failed deployments end-to-end — reads runtime logs of every container (including each container in a Docker Compose stack) over the API/MCP with tail/since/search, plus AI-powered log analysis (ai-analyzeLogs), Docker container introspection, Traefik diagnosis, and a guided recovery chain. Complete MCP/REST coverage: all 526 v0.29.5 operations across 49 categories indexed with params. Uses the official @dokploy/mcp server plus debugging-focused slash commands including /compose-logs.
 
 Canonical source: https://github.com/agents-store/claude-public-plugins/tree/main/plugins/dokploy-dev
 
@@ -25,10 +25,11 @@ This plugin ships the following skills under `skills/`. Codex loads them context
 
 - **ai-assist** — This skill should be used when the user wants AI-powered deployment debugging on Dokploy — wiring up an LLM provider (OpenAI, Anthropic, Gemini, Ollama, OpenRouter, etc.), summarising build logs with AI, or asking Dokploy for a next-step suggestion. Triggers: "analyze my failed deploy with AI", "ai analyze logs dokploy", "set up dokploy ai", "configure ai provider in dokploy", "why is dokploy not suggesting fixes", "dokploy ai-analyzeLogs", "dokploy ai-suggest".
 - **api-reference** — This skill should be used when making direct HTTP/curl calls to the Dokploy API, looking up endpoint parameters, or building integrations that bypass the MCP server. Triggers: "dokploy API", "curl dokploy", "REST endpoint", "HTTP request to dokploy".
-- **cli-recipes** — This skill should be used when running Dokploy operations from the terminal, deploying via CLI, managing environment variables with env push/pull, or provisioning databases via command line. Triggers: "dokploy cli", "dokploy command", "env push", "env pull", "dokploy deploy cli".
+- **cli-recipes** — This skill should be used when running Dokploy operations from the terminal with the @dokploy/cli — authenticating, creating projects/apps, deploying, managing environment variables, or provisioning databases via command line. Triggers: "dokploy cli", "dokploy command", "dokploy authenticate", "dokploy app deploy", "env push", "env pull", "deploy dokploy from terminal".
 - **debug-deploy** — This skill should be used when a Dokploy deployment fails, gets stuck, or behaves incorrectly after deploying — provides an end-to-end decision tree that locates the failed run, reads the right logs, inspects the container and Traefik state, summarises root cause with AI, and recovers safely. Triggers: "my dokploy deploy failed", "deployment stuck", "build error in dokploy", "app crashed after deploy", "diagnose failed deployment", "dokploy deploy not working", "why did my deploy fail", "recover from broken deploy".
 - **examples** — This skill should be used when learning how to deploy apps, provision databases, set up Docker Compose stacks, or debug a failed deployment on Dokploy. Provides end-to-end workflow walkthroughs. Triggers: "dokploy example", "how to deploy on dokploy", "dokploy tutorial", "dokploy walkthrough", "show me how to use dokploy", "dokploy debug example".
 - **mcp-patterns** — This skill should be used when deploying applications, managing projects, provisioning databases, configuring domains, working with Docker Compose, or performing any Dokploy operation via MCP tools. Triggers: "deploy app", "create project", "add domain", "provision database", "dokploy compose", "manage dokploy".
+- **read-logs** — This skill should be used whenever the user wants to read, tail, stream, or search Dokploy logs — application runtime logs, Docker Compose stack logs (every container), database logs, or deployment build logs — and especially to diagnose why something failed. Triggers: "read the logs", "show me the dokploy logs", "tail the logs", "compose logs", "all containers' logs", "container logs", "why is my app crashing", "why did my deploy fail — check the logs", "grep the logs for an error", "runtime logs", "build logs". Use it instead of telling the user logs aren't available over the API — in Dokploy v0.29.5 they are.
 - **setup** — This skill should be used when verifying Dokploy MCP connection, CLI installation, and API access. Use when user says "set up dokploy", "verify dokploy connection", "check dokploy", "test dokploy access", or enables the dokploy-dev plugin for the first time.
 - **troubleshoot** — This skill is the symptom-to-cause lookup reference for Dokploy problems — domains, databases, Docker, Traefik, MCP connection. Use for known-symptom diagnosis. For an end-to-end failed-deploy workflow, the canonical entry point is the `debug-deploy` skill and the `/dokploy-dev:debug` command. Triggers: "dokploy 502", "domain not resolving", "database connection refused", "mcp tools not found", "dokploy api 401", "traefik dashboard".
 
@@ -48,8 +49,8 @@ assistant: "I'll create a project, set up the application with your GitHub repo,
 <example>
 Context: User needs to debug a failed deployment
 user: "My deployment is failing with a build error, can you check what's wrong?"
-assistant: "I'll run the full debug-deploy workflow: locate the failed run, read the build log, inspect the container and Traefik, AI-summarise if a provider is configured, then recommend a recovery action."
-<commentary>Diagnostic workflow: deployment-all → application-readLogs → docker-getContainersByAppLabel → docker-getConfig → application-readTraefikConfig → ai-analyzeLogs (if enabled) → killBuild/redeploy/rollback. Use `/dokploy-dev:debug` to chain it.</commentary>
+assistant: "I'll run the full debug-deploy workflow: locate the failed run, read the build log (or per-container runtime logs for a compose stack), inspect the container and Traefik, AI-summarise if a provider is configured, then recommend a recovery action."
+<commentary>Diagnostic workflow: deployment-all → deployment-readLogs (build) or application-readLogs / per-container compose-readLogs (runtime) → docker-getContainersByAppLabel/Match → docker-getConfig → application-readTraefikConfig → ai-analyzeLogs {aiId,logs,context} (if enabled) → killBuild/redeploy/rollback. Use `/dokploy-dev:debug`, or `/dokploy-dev:compose-logs` to read every container.</commentary>
 </example>
 
 <example>
@@ -126,79 +127,77 @@ Parse from "$ARGUMENTS".
 
 ### `analyze`
 
-AI-summarise a failed Dokploy deployment via the configured ai provider
+AI-summarise a failed Dokploy deployment or a crashing container via the configured ai provider
 
-Arguments: `deployment-id|app-name-or-id`
+Arguments: `deployment-id|app-name-or-id|compose-name-or-id`
 
 <details><summary>Prompt template</summary>
 
-# AI-Analyse Deployment
+# AI-Analyse a Failure
 
-One-shot wrapper around `ai-analyzeLogs`. Locates a failed deployment, runs the configured AI provider against its build log, and reports root cause + suggested fix.
+Pipeline around `ai-analyzeLogs`: fetch the relevant log text, then ask the configured AI provider for a root cause + suggested fix. `ai-analyzeLogs` takes the **log text** (not a `deploymentId`) plus an `aiId` and a `context`.
+
+Follow the `read-logs` skill (`${CLAUDE_PLUGIN_ROOT}/skills/read-logs/SKILL.md`) §5 for the analyze step.
 
 ## Arguments
 
-Format: `[deployment-id|app-name-or-id]` (optional)
+Format: `[deployment-id|app-name-or-id|compose-name-or-id]` (optional)
 
-- If a deployment ID is passed, analyse that specific deployment.
-- If an application/compose name or ID is passed, find its most recent failed deployment.
-- If **no argument**, call `deployment-allCentralized`, filter to the most recent `status: error` rows, and ask the user which to analyse.
+- Deployment id → analyse that build log (`context: "build"`).
+- App / compose name or id → fetch its current runtime log (`context: "runtime"`); for a failed build, fetch the most recent errored deployment's build log instead.
+- No argument → `deployment-allCentralized`, list recent `status: error` rows, ask which to analyse.
 
 Parse from "$ARGUMENTS".
 
 ## Process
 
-1. **Verify AI is configured** — `mcp__dokploy__ai-getEnabledProviders`. If empty:
-   - Tell the user no AI provider is configured.
-   - Offer the manual debug path: "Run `/dokploy-dev:debug <id>` instead."
-   - Optionally point them at the `ai-assist` skill to wire one up.
-   - Stop here.
+1. **Verify AI is configured** — `mcp__dokploy__ai-getEnabledProviders`.
+   - If the array is **empty**: tell the user no AI provider is enabled, offer `/dokploy-dev:debug <id>` (manual decision tree), and point at the `ai-assist` skill to wire one up. Stop.
+   - Else: take the `aiId` of an enabled provider.
 
-2. **Resolve the deployment ID:**
-   - If a deployment ID is passed, use it directly.
-   - If a resource name/ID is passed, call `deployment-all { applicationId }` (or `composeId`), filter to `status: error`, take the most recent.
+2. **Fetch the log text** (this is the `logs` argument):
+   - Build failure → `deployment-readLogs { deploymentId, tail: 1000 }` → `context: "build"`.
+   - App runtime → `application-readLogs { applicationId, tail: 500, since: "2h" }` → `context: "runtime"`.
+   - Compose runtime → enumerate containers and concatenate each container's `compose-readLogs { composeId, containerId, tail }` (or run `/dokploy-dev:compose-logs` first) → `context: "runtime"`.
+   - Truncate very large logs before sending (provider context limits).
 
 3. **Run the analysis:**
 
    ```
    mcp__dokploy__ai-analyzeLogs
-     → { deploymentId }
+     → { aiId: "<enabled provider id>", logs: "<text from step 2>", context: "build" | "runtime" }
    ```
 
-4. **Present the result** in this format:
+4. **Present the result:**
 
    ```
-   ## AI Analysis: <appName / composeName>
+   ## AI Analysis: <resource name>
 
-   **Deployment:** <deploymentId>
-   **Started:** <timestamp>
-   **Status:** error
+   **Context:** build | runtime
+   **Provider:** <providerName>/<model>
 
-   ### Root cause (per <providerName>/<model>)
-   <ai-analyzeLogs.rootCause>
-
-   ### Summary
-   <ai-analyzeLogs.summary>
+   ### Root cause
+   <ai-analyzeLogs root cause>
 
    ### Suggested fix
-   <ai-analyzeLogs.suggestedFix>
+   <ai-analyzeLogs suggested fix>
 
    ### Verify before applying
-   - Compare against the actual build log: `<logPath>`
-   - Run `/dokploy-dev:logs <id>` to see the raw output
-   - LLMs occasionally invent fixes for symptoms they don't fully understand
+   - Cross-check against the raw log (`/dokploy-dev:logs <id>` or `/dokploy-dev:compose-logs <name>`).
+   - The model only sees the log you sent it, not the codebase — trust the log if they conflict.
    ```
 
 5. **Offer follow-up:**
    - "Apply this fix? I can update env / build type / Dockerfile and redeploy."
-   - "Want a deeper analysis? Run `/dokploy-dev:debug <id>` for the full decision tree."
+   - "Want the full decision tree? Run `/dokploy-dev:debug <id>`."
 
 ## Example Usage
 
 ```
 /dokploy-dev:analyze
 /dokploy-dev:analyze web-frontend
-/dokploy-dev:analyze deploy_abc123def456
+/dokploy-dev:analyze my-compose-stack
+/dokploy-dev:analyze <deploymentId>
 ```
 
 </details>
@@ -274,6 +273,82 @@ In that case, escalate: ssh to the server and run `du -sh /var/lib/docker /etc/d
 ```
 /dokploy-dev:cleanup
 /dokploy-dev:cleanup --dry-run
+```
+
+</details>
+
+### `compose-logs`
+
+Read the logs of EVERY container in a Dokploy Docker Compose stack and highlight errors
+
+Arguments: `<compose-name-or-id> [--tail <N>] [--since <1h>] [--search <term>] [--errors-only]`
+
+<details><summary>Prompt template</summary>
+
+# Read All Compose Container Logs
+
+Reads the runtime logs of **every container** in a Docker Compose stack, aggregates them, and surfaces errors per container. This is the right tool when a multi-service stack is misbehaving and you don't yet know which service is at fault.
+
+Follow the `read-logs` skill (`${CLAUDE_PLUGIN_ROOT}/skills/read-logs/SKILL.md`), §2 — load it first.
+
+## Arguments
+
+Format: `<compose-name-or-id> [--tail <N>] [--since <1h>] [--search <term>] [--errors-only]`
+
+- `compose-name-or-id` — required. Name or `composeId` of the compose stack.
+- `--tail` — lines per container (default `200`, max `10000`).
+- `--since` — time window: `all` or `<n>{s|m|h|d}` (e.g. `30m`, `2h`). Default `all`.
+- `--search` — server-side substring filter applied to every container's log.
+- `--errors-only` — show only lines matching the error patterns (see skill §6); hide clean output.
+
+Parse from "$ARGUMENTS".
+
+## Process
+
+1. **Resolve the stack.**
+   - If given a name, `mcp__dokploy__compose-search { q: "<name>" }` → pick the match → `composeId`.
+   - `mcp__dokploy__compose-one { composeId }` → read `appName` and `composeType`.
+
+2. **Enumerate every container** (skill §2 step 2):
+   - `composeType: "docker-compose"` → `mcp__dokploy__docker-getContainersByAppNameMatch { appName, appType: "docker-compose" }`
+   - `composeType: "stack"` → `mcp__dokploy__docker-getStackContainersByAppName { appName }`
+   - Fallback → `mcp__dokploy__docker-getContainers {}` and filter to names containing `appName`.
+   - Collect each container's identifier (`containerId` / `name`) and current `state` / `status`.
+
+3. **Loop — read logs for EACH container** (never stop at the first):
+   ```
+   mcp__dokploy__compose-readLogs
+     → { composeId, containerId: <each>, tail: <--tail>, since: <--since>, search: <--search?> }
+   ```
+
+4. **Aggregate the output:**
+   ```
+   ## Compose logs: <appName>   (<composeType>, <N> containers)
+
+   ### <containerId / service> — <state> (<status>)
+   <last --tail lines; error lines surfaced first>
+   ...repeat for every container...
+
+   ### Summary
+   - Containers down/unhealthy: <list>
+   - Errors found: <count> across <containers>
+   - Likely root cause: <the lowest-level failing service — e.g. a crashed db that others depend on>
+   ```
+   With `--errors-only`, print just the matching lines per container and skip clean ones.
+
+5. **Diagnose across containers.** A failure in one service often shows up as a symptom in another (a dead `db` → `ECONNREFUSED` in `web`). Identify the *lowest-level* failing container as the root cause, not the loudest one.
+
+6. **Offer next steps:**
+   - `/dokploy-dev:analyze <composeId>` — AI root-cause on the collected logs (`ai-analyzeLogs { aiId, logs, context: "runtime" }`).
+   - `/dokploy-dev:debug <composeId>` — full failure decision tree (build log, Traefik, recovery).
+
+## Example Usage
+
+```
+/dokploy-dev:compose-logs n8n-stack
+/dokploy-dev:compose-logs supabase --since 1h --search error
+/dokploy-dev:compose-logs my-stack --tail 500 --errors-only
+/dokploy-dev:compose-logs cmp_abc123
 ```
 
 </details>
@@ -432,12 +507,12 @@ Read `${CLAUDE_PLUGIN_ROOT}/skills/debug-deploy/SKILL.md` and follow every step 
 Key checkpoints:
 
 1. **Step 0 — Platform health.** Run `settings-health`, `checkInfrastructureHealth`, `getDockerDiskUsage`. If any fail, fix server before deploy issue.
-2. **Step 1 — Locate the failed run.** Use `deployment-all` filtered by the resource ID. Save `deploymentId` and `logPath`.
-3. **Step 2 — Read the build log.** Use `application-readLogs` / `compose-readLogs` for metadata; for the actual log content, use Beszel (`beszel-getContainerLogs`) or ask the user to `tail` the log file on the server (Dokploy does not expose runtime stdout via REST — issue #3719). Match against the build-failure pattern table.
-4. **Step 3 — Container introspection.** `docker-getContainersByAppLabel { appName }` for state/health. `docker-getConfig` for env/command/mounts. Use `docker-restartContainer` / `killContainer` if wedged.
+2. **Step 1 — Locate the failed run.** Use `deployment-all` filtered by the resource ID. Save `deploymentId`.
+3. **Step 2 — Read the logs (v0.29.5, all over MCP — see the `read-logs` skill).** Build failure → `deployment-readLogs { deploymentId, tail }`. Runtime crash → `application-readLogs { applicationId, tail, since, search }` for an app, or **read every container** of a compose stack: `docker-getContainersByAppNameMatch { appName, appType: "docker-compose" }` then `compose-readLogs { composeId, containerId, tail, since, search }` per container (or `/dokploy-dev:compose-logs`). Match against the build-failure pattern table.
+4. **Step 3 — Container introspection.** `docker-getContainersByAppLabel { appName, type: "standalone" }` for state/health. `docker-getConfig` for env/command/mounts. Use `docker-restartContainer` / `killContainer` if wedged.
 5. **Step 4 — Request path.** Only if container is running but HTTP requests fail. `application-readTraefikConfig`, check port, network, listen address.
 6. **Step 5 — Recovery.** Use the smallest action that unblocks: `killBuild` / `cancelDeployment` / `cleanQueues` / `dropDeployment` / `rollback-rollback`. Confirm destructive ops with the user.
-7. **Step 6 — AI summary.** If `ai-getEnabledProviders` is non-empty, call `ai-analyzeLogs { deploymentId }` and present the result. Otherwise note that AI is not configured and continue manually.
+7. **Step 6 — AI summary.** If `ai-getEnabledProviders` is non-empty, pass the log text from Step 2 to `ai-analyzeLogs { aiId, logs, context: "build" | "runtime" }` and present the result. Otherwise note that AI is not configured and continue manually.
 8. **Step 7 — Verify the fix.** After applying a fix, `application-redeploy` (or `compose-redeploy`), poll `deployment-all` until `status: done`, validate domains, hit the endpoint with curl.
 
 ## Output format
@@ -524,8 +599,8 @@ Parse from "$ARGUMENTS".
 6. **Monitor until completion:**
    - Poll `deployment.all?applicationId=<id>` every 30-60 seconds to check latest deployment status.
    - If status is `done` — report success and verify the app is reachable (check health endpoint or domain).
-   - If status is `error` — read deployment logs via Beszel container logs or Dokploy log endpoints, diagnose the issue, fix it (update env vars, build type, Dockerfile, etc.), and redeploy. Repeat until deployment succeeds.
-   - Show the user build logs and errors transparently.
+   - If status is `error` — read the logs over MCP: build failure → `deployment-readLogs { deploymentId, tail }`; runtime crash → `application-readLogs { applicationId, tail, since, search }` or, for a compose stack, the per-container `compose-readLogs` loop (`/dokploy-dev:compose-logs`). Diagnose, fix it (update env vars, build type, Dockerfile, etc.), and redeploy. Repeat until deployment succeeds.
+   - Show the user the build/runtime logs and errors transparently.
 
 ## Example Usage
 ```
@@ -599,61 +674,62 @@ List all projects on the Dokploy instance.
 
 ### `logs`
 
-Read logs for a Dokploy application, compose stack, database, or deployment
+Read runtime or build logs for a Dokploy application, compose stack, database, or deployment
 
-Arguments: `<resource-name-or-id> [--type <app|compose|db|deployment>] [--tail <N>]`
+Arguments: `<resource-name-or-id> [--type <app|compose|db|deployment>] [--tail <N>] [--since <1h>] [--search <term>]`
 
 <details><summary>Prompt template</summary>
 
 # Read Dokploy Logs
 
-Unified log reader. Resolves the resource type, picks the right MCP tool, and falls back to file-path / Beszel for runtime stdout (which Dokploy does not yet expose via REST — see [issue #3719](https://github.com/Dokploy/dokploy/issues/3719)).
+Unified log reader. Resolves the resource type and reads logs **directly over MCP/REST** (Dokploy v0.29.5 — runtime logs are first-class; no SSH/Beszel needed). For a multi-container compose stack, use `/dokploy-dev:compose-logs` instead — it reads every container.
+
+Follow the `read-logs` skill (`${CLAUDE_PLUGIN_ROOT}/skills/read-logs/SKILL.md`) — load it first.
 
 ## Arguments
 
-Format: `<resource-name-or-id> [--type <app|compose|db|deployment>] [--tail <N>]`
+Format: `<resource-name-or-id> [--type <app|compose|db|deployment>] [--tail <N>] [--since <1h>] [--search <term>]`
 
-- `resource-name-or-id` — required. Name or UUID of the app / compose / database / deployment.
-- `--type` — optional. Force a specific resource type. If omitted, auto-detect by trying `application-one` → `compose-one` → `<db>-one` → `deployment-all` in that order.
-- `--tail` — optional. Number of recent lines to return (default 200). Honored only for the file/Beszel fallback paths.
+- `resource-name-or-id` — required. Name or id of the app / compose / database / deployment.
+- `--type` — optional. Force a resource type. If omitted, auto-detect: `application-one` → `compose-one` → `{type}-one` (postgres/mysql/mariadb/mongo/redis/libsql) → `deployment-allCentralized`.
+- `--tail` — recent lines, `1`–`10000` (default `200`).
+- `--since` — time window: `all` or `<n>{s|m|h|d}` (e.g. `30m`, `2h`). Default `all`.
+- `--search` — server-side substring filter (e.g. `error`, `ECONNREFUSED`).
 
 Parse from "$ARGUMENTS".
 
 ## Process
 
-1. **Resolve the resource:**
-   - If `--type` is set, jump straight to that branch.
-   - Else, try `application-one` → on miss, `compose-one` → on miss, each `{type}-one` for `postgres/mysql/mariadb/mongo/redis/libsql` → on miss, `deployment-allCentralized` and search by id.
+1. **Resolve the resource** (see arg notes for the auto-detect chain).
 
-2. **Pick the right tool:**
+2. **Pick the right tool and read the log:**
 
-   | Resource type | MCP tool | Returns |
+   | Resource type | MCP call | Log kind |
    |---|---|---|
-   | Application | `application-readLogs { applicationId }` | Build log metadata + `logPath` |
-   | Compose | `compose-readLogs { composeId }` | Build log metadata + `logPath` |
-   | Database (any of 6) | `{type}-readLogs { {type}Id }` | DB container log metadata |
-   | Deployment | `deployment-all` filtered to find this run | Includes `logPath` for the build log |
+   | Application | `application-readLogs { applicationId, tail, since, search }` | runtime stdout/stderr |
+   | Compose | per-container — **redirect to `/dokploy-dev:compose-logs <name>`** (enumerate containers, then `compose-readLogs { composeId, containerId, tail, since, search }` for each) | runtime, per container |
+   | Database (any of 6) | `{type}-readLogs { {type}Id, tail, since, search }` | runtime stdout/stderr |
+   | Deployment | `deployment-readLogs { deploymentId, tail }` (find the id via `deployment-all`/`deployment-allCentralized`) | build log |
 
-3. **Stream the actual log content:**
-   - `application-readLogs` / `compose-readLogs` return the build log **path** (and sometimes a snapshot), not a live tail. For real content:
-     - **Preferred:** if Beszel is installed, call `beszel-getContainerLogs` against the Dokploy container — the log files at `/etc/dokploy/logs/<appName>/*.log` are visible inside it.
-     - **Fallback:** print the `logPath` and tell the user to `sudo tail -n <N> <logPath>` on the server.
-   - For *database* logs and *runtime* container stdout, `{type}-readLogs` works directly via MCP.
+   - The runtime-log `.data` is a newline-joined string, each line prefixed with an RFC3339 timestamp.
+   - If a single `compose` resource is passed without `/compose-logs`, resolve `composeId` then read the **first** container but tell the user to run `/dokploy-dev:compose-logs <name>` to see all containers.
 
-4. **Format the output** so the user can immediately spot the relevant section:
-   - Show last `--tail` lines.
-   - Highlight ERROR / FATAL / panic / exited / unauthorized lines.
-   - If the deployment has `status: error`, surface the last 30 lines first.
+3. **Format the output:**
+   - Show the last `--tail` lines.
+   - Surface ERROR / FATAL / panic / exited / ECONNREFUSED / unauthorized lines first (see skill §6).
+   - If a deployment is `status: error`, show the last 30 build-log lines up top.
 
-5. **Suggest next step** when an error pattern is recognised — usually `/dokploy-dev:debug <id>` for a full diagnosis, or `/dokploy-dev:analyze <deploymentId>` to AI-summarise.
+4. **Suggest the next step** when an error pattern is found: `/dokploy-dev:analyze` (AI triage) or `/dokploy-dev:debug <id>` (full decision tree).
 
 ## Example Usage
 
 ```
-/dokploy-dev:logs web-frontend
-/dokploy-dev:logs my-stack --type compose
+/dokploy-dev:logs web-frontend --since 1h
+/dokploy-dev:logs web-frontend --tail 500 --search error
 /dokploy-dev:logs pg-main --type db --tail 500
-/dokploy-dev:logs deploy_abc123 --type deployment
+/dokploy-dev:logs <deploymentId> --type deployment
+# multi-container stack → use the dedicated command:
+/dokploy-dev:compose-logs my-stack
 ```
 
 </details>
