@@ -1,6 +1,6 @@
 # dokploy-dev
 
-> Dokploy self-hosted PaaS development plugin (aligned with Dokploy v0.29.5). Deploy applications, provision 6 database types (Postgres, MySQL, MariaDB, MongoDB, Redis, LibSQL), manage domains and Docker Compose stacks, AND debug failed deployments end-to-end — reads runtime logs of every container (including each container in a Docker Compose stack) over the API/MCP with tail/since/search, plus AI-powered log analysis (ai-analyzeLogs), Docker container introspection, Traefik diagnosis, and a guided recovery chain. Complete MCP/REST coverage: all 526 v0.29.5 operations across 49 categories indexed with params. Uses the official @dokploy/mcp server plus debugging-focused slash commands including /compose-logs.
+> Dokploy self-hosted PaaS development plugin (aligned with Dokploy v0.29.14). Deploy applications, provision 6 database types (Postgres, MySQL, MariaDB, MongoDB, Redis, LibSQL), manage domains and Docker Compose stacks, AND debug failed deployments end-to-end — reads runtime logs of every container (including each container in a Docker Compose stack) over the API/MCP with tail/since/search, plus AI-powered log analysis (ai-analyzeLogs), Docker container introspection, Traefik diagnosis, and a guided recovery chain. Complete MCP/REST coverage: all 546 v0.29.14 operations across 50 categories indexed with params — covers forward-auth SSO domain protection, SCIM provisioning, build concurrency, and the rewritten @dokploy/cli (546 auto-generated commands incl. read-logs). Uses the official @dokploy/mcp server plus debugging-focused slash commands including /compose-logs.
 
 Canonical source: https://github.com/agents-store/claude-public-plugins/tree/main/plugins/dokploy-dev
 
@@ -25,11 +25,11 @@ This plugin ships the following skills under `skills/`. Codex loads them context
 
 - **ai-assist** — This skill should be used when the user wants AI-powered deployment debugging on Dokploy — wiring up an LLM provider (OpenAI, Anthropic, Gemini, Ollama, OpenRouter, etc.), summarising build logs with AI, or asking Dokploy for a next-step suggestion. Triggers: "analyze my failed deploy with AI", "ai analyze logs dokploy", "set up dokploy ai", "configure ai provider in dokploy", "why is dokploy not suggesting fixes", "dokploy ai-analyzeLogs", "dokploy ai-suggest".
 - **api-reference** — This skill should be used when making direct HTTP/curl calls to the Dokploy API, looking up endpoint parameters, or building integrations that bypass the MCP server. Triggers: "dokploy API", "curl dokploy", "REST endpoint", "HTTP request to dokploy".
-- **cli-recipes** — This skill should be used when running Dokploy operations from the terminal with the @dokploy/cli — authenticating, creating projects/apps, deploying, managing environment variables, or provisioning databases via command line. Triggers: "dokploy cli", "dokploy command", "dokploy authenticate", "dokploy app deploy", "env push", "env pull", "deploy dokploy from terminal".
+- **cli-recipes** — This skill should be used when running Dokploy operations from the terminal with the @dokploy/cli — authenticating, creating projects/apps, deploying, managing environment variables, provisioning databases, or reading logs via command line. Triggers: "dokploy cli", "dokploy command", "dokploy auth", "dokploy application deploy", "dokploy read-logs from terminal", "deploy dokploy from terminal".
 - **debug-deploy** — This skill should be used when a Dokploy deployment fails, gets stuck, or behaves incorrectly after deploying — provides an end-to-end decision tree that locates the failed run, reads the right logs, inspects the container and Traefik state, summarises root cause with AI, and recovers safely. Triggers: "my dokploy deploy failed", "deployment stuck", "build error in dokploy", "app crashed after deploy", "diagnose failed deployment", "dokploy deploy not working", "why did my deploy fail", "recover from broken deploy".
 - **examples** — This skill should be used when learning how to deploy apps, provision databases, set up Docker Compose stacks, or debug a failed deployment on Dokploy. Provides end-to-end workflow walkthroughs. Triggers: "dokploy example", "how to deploy on dokploy", "dokploy tutorial", "dokploy walkthrough", "show me how to use dokploy", "dokploy debug example".
 - **mcp-patterns** — This skill should be used when deploying applications, managing projects, provisioning databases, configuring domains, working with Docker Compose, or performing any Dokploy operation via MCP tools. Triggers: "deploy app", "create project", "add domain", "provision database", "dokploy compose", "manage dokploy".
-- **read-logs** — This skill should be used whenever the user wants to read, tail, stream, or search Dokploy logs — application runtime logs, Docker Compose stack logs (every container), database logs, or deployment build logs — and especially to diagnose why something failed. Triggers: "read the logs", "show me the dokploy logs", "tail the logs", "compose logs", "all containers' logs", "container logs", "why is my app crashing", "why did my deploy fail — check the logs", "grep the logs for an error", "runtime logs", "build logs". Use it instead of telling the user logs aren't available over the API — in Dokploy v0.29.5 they are.
+- **read-logs** — This skill should be used whenever the user wants to read, tail, stream, or search Dokploy logs — application runtime logs, Docker Compose stack logs (every container), database logs, or deployment build logs — and especially to diagnose why something failed. Triggers: "read the logs", "show me the dokploy logs", "tail the logs", "compose logs", "all containers' logs", "container logs", "why is my app crashing", "why did my deploy fail — check the logs", "grep the logs for an error", "runtime logs", "build logs". Use it instead of telling the user logs aren't available over the API — since Dokploy v0.29.0 they are.
 - **setup** — This skill should be used when verifying Dokploy MCP connection, CLI installation, and API access. Use when user says "set up dokploy", "verify dokploy connection", "check dokploy", "test dokploy access", or enables the dokploy-dev plugin for the first time.
 - **troubleshoot** — This skill is the symptom-to-cause lookup reference for Dokploy problems — domains, databases, Docker, Traefik, MCP connection. Use for known-symptom diagnosis. For an end-to-end failed-deploy workflow, the canonical entry point is the `debug-deploy` skill and the `/dokploy-dev:debug` command. Triggers: "dokploy 502", "domain not resolving", "database connection refused", "mcp tools not found", "dokploy api 401", "traefik dashboard".
 
@@ -111,7 +111,7 @@ Parse from "$ARGUMENTS".
    - `path`: `/`
    - `https`: true if --https flag provided
 
-3. **Validate domain** using MCP tool `domain-validateDomain` to check DNS resolution.
+3. **Validate domain** using MCP tool `domain-validateDomain { domain: "<host>", serverIp? }` — pass the **hostname string** (NOT the domainId) to check DNS resolution.
 
 4. **Display result:**
    Show domain, port, HTTPS status, and validation result. If DNS not resolving, remind user to add an A record pointing to the server IP.
@@ -357,7 +357,7 @@ Parse from "$ARGUMENTS".
 
 Create a new application in a Dokploy project
 
-Arguments: `<name> --project <project> [--build <nixpacks|dockerfile|static>]`
+Arguments: `<name> --project <project> [--env <environment>] [--build <nixpacks|dockerfile|static>]`
 
 <details><summary>Prompt template</summary>
 
@@ -366,9 +366,10 @@ Arguments: `<name> --project <project> [--build <nixpacks|dockerfile|static>]`
 Create a new application in an existing Dokploy project.
 
 ## Arguments
-Format: `<name> --project <project> [--build <nixpacks|dockerfile|static>]`
+Format: `<name> --project <project> [--env <environment-name>] [--build <nixpacks|dockerfile|static>]`
 - name: Application name (required)
 - --project: Project name or ID (required)
+- --env: Environment name within the project (optional, default: `production`)
 - --build: Build type — nixpacks, dockerfile, heroku, paketo, railpack, or static (default: nixpacks)
 
 Parse from "$ARGUMENTS".
@@ -377,15 +378,17 @@ Parse from "$ARGUMENTS".
 
 1. **Resolve project:** If --project is a name, call `project-all` and find matching project.
 
-2. **Create application** using MCP tool `application-create` with:
+2. **Resolve the target environment:** `project-one { projectId }` → `environments[]` (default `production`); or `environment-byProjectId { projectId }`. If `--env` is given, match by name; if several environments exist and none is specified, ask the user.
+
+3. **Create application** using MCP tool `application-create` with:
    - `name`: the app name
    - `appName`: kebab-case version of name (for Docker container naming)
-   - `projectId`: resolved project ID
+   - `environmentId`: resolved environment ID (NOT projectId)
 
-3. **Set build type** using MCP tool `application-saveBuildType` if --build is specified.
+4. **Set build type** using MCP tool `application-saveBuildType` if --build is specified.
 
-4. **Display result:**
-   Show application ID, name, project, build type. Suggest next steps: connect git repo, set env vars, add domain, deploy.
+5. **Display result:**
+   Show application ID, name, project, environment, build type. Suggest next steps: connect git repo, set env vars, add domain, deploy.
 
 ## Example Usage
 ```
@@ -400,7 +403,7 @@ Parse from "$ARGUMENTS".
 
 Create and deploy a database in a Dokploy project
 
-Arguments: `<name> --project <project> --type <postgres|mysql|mariadb|mongo|redis> [--password <pass>]`
+Arguments: `<name> --project <project> --type <postgres|mysql|mariadb|mongo|redis|libsql> [--password <pass>]`
 
 <details><summary>Prompt template</summary>
 
@@ -409,17 +412,17 @@ Arguments: `<name> --project <project> --type <postgres|mysql|mariadb|mongo|redi
 Create and deploy a database instance in a Dokploy project.
 
 ## Arguments
-Format: `<name> --project <project> --type <postgres|mysql|mariadb|mongo|redis> [--password <pass>]`
+Format: `<name> --project <project> --type <postgres|mysql|mariadb|mongo|redis|libsql> [--password <pass>]`
 - name: Database name (required)
 - --project: Project name or ID (required)
-- --type: Database type — postgres, mysql, mariadb, mongo, redis (required)
-- --password: Database password (optional, auto-generated if omitted)
+- --type: Database type — postgres, mysql, mariadb, mongo, redis, libsql (required)
+- --password: Database password (generated if omitted — the API requires one)
 
 Parse from "$ARGUMENTS".
 
 ## Process
 
-1. **Resolve project** (same as create-app command).
+1. **Resolve project** (same as create-app command), then **resolve the target environment**: `project-one { projectId }` → `environments[]` (default `production`); or `environment-byProjectId { projectId }`. If several, ask the user.
 
 2. **Create database** using the type-specific MCP tool:
    - postgres: `postgres-create`
@@ -427,8 +430,13 @@ Parse from "$ARGUMENTS".
    - mariadb: `mariadb-create`
    - mongo: `mongo-create`
    - redis: `redis-create`
+   - libsql: `libsql-create`
 
-   Pass: name, projectId, databasePassword (if provided).
+   Pass `name`, `environmentId` (NOT projectId), plus the per-type REQUIRED fields:
+   - postgres/mysql/mariadb: `databaseName`, `databaseUser`, `databasePassword`
+   - mongo: `databaseUser`, `databasePassword`
+   - redis: `databasePassword`
+   - libsql: `databaseUser`, `databasePassword`, plus its extra required fields (`sqldNode`, `enableNamespaces`, …) — see `libsql-create` in the full index for defaults
 
 3. **Deploy database** using `{type}-deploy` with the created database ID.
 
@@ -508,7 +516,7 @@ Key checkpoints:
 
 1. **Step 0 — Platform health.** Run `settings-health`, `checkInfrastructureHealth`, `getDockerDiskUsage`. If any fail, fix server before deploy issue.
 2. **Step 1 — Locate the failed run.** Use `deployment-all` filtered by the resource ID. Save `deploymentId`.
-3. **Step 2 — Read the logs (v0.29.5, all over MCP — see the `read-logs` skill).** Build failure → `deployment-readLogs { deploymentId, tail }`. Runtime crash → `application-readLogs { applicationId, tail, since, search }` for an app, or **read every container** of a compose stack: `docker-getContainersByAppNameMatch { appName, appType: "docker-compose" }` then `compose-readLogs { composeId, containerId, tail, since, search }` per container (or `/dokploy-dev:compose-logs`). Match against the build-failure pattern table.
+3. **Step 2 — Read the logs (Dokploy v0.29.0+ — runtime logs are first-class over MCP/REST/CLI; see the `read-logs` skill).** Build failure → `deployment-readLogs { deploymentId, tail }`. Runtime crash → `application-readLogs { applicationId, tail, since, search }` for an app, or **read every container** of a compose stack: `docker-getContainersByAppNameMatch { appName, appType: "docker-compose" }` then `compose-readLogs { composeId, containerId, tail, since, search }` per container (or `/dokploy-dev:compose-logs`). Match against the build-failure pattern table.
 4. **Step 3 — Container introspection.** `docker-getContainersByAppLabel { appName, type: "standalone" }` for state/health. `docker-getConfig` for env/command/mounts. Use `docker-restartContainer` / `killContainer` if wedged.
 5. **Step 4 — Request path.** Only if container is running but HTTP requests fail. `application-readTraefikConfig`, check port, network, listen address.
 6. **Step 5 — Recovery.** Use the smallest action that unblocks: `killBuild` / `cancelDeployment` / `cleanQueues` / `dropDeployment` / `rollback-rollback`. Confirm destructive ops with the user.
@@ -682,7 +690,7 @@ Arguments: `<resource-name-or-id> [--type <app|compose|db|deployment>] [--tail <
 
 # Read Dokploy Logs
 
-Unified log reader. Resolves the resource type and reads logs **directly over MCP/REST** (Dokploy v0.29.5 — runtime logs are first-class; no SSH/Beszel needed). For a multi-container compose stack, use `/dokploy-dev:compose-logs` instead — it reads every container.
+Unified log reader. Resolves the resource type and reads logs **directly over MCP/REST** (Dokploy v0.29.0+ — runtime logs are first-class over MCP/REST/CLI; no SSH/Beszel needed). For a multi-container compose stack, use `/dokploy-dev:compose-logs` instead — it reads every container.
 
 Follow the `read-logs` skill (`${CLAUDE_PLUGIN_ROOT}/skills/read-logs/SKILL.md`) — load it first.
 

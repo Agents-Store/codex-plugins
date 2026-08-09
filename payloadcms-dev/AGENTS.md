@@ -13,7 +13,7 @@ This plugin ships the following skills under `skills/`. Codex loads them context
 - **admin-customization** — This skill should be used when the user asks to "customize the Payload admin panel", "swap in a custom React component", "build a custom field component", "create a custom admin view", "add a dashboard widget", "use useField/useForm", "change the admin logo or nav", "enable document locking", or "customize admin CSS" in PayloadCMS v3.
 - **api-reference** — This skill should be used when the user asks for "PayloadCMS REST endpoint", "Payload curl example", "Payload GraphQL query syntax", "Payload Local API method signature", "Payload login endpoint", "Payload auth headers", or needs the exact HTTP/method signature for a Payload API call.
 - **authentication** — This skill should be used when the user asks to "add login to Payload", "set up OAuth/SSO", "write a custom auth strategy", "use API keys", "configure auth cookies", "customize verification emails", "refresh a JWT", or "handle forgot-password" — anything about Payload v3 authentication strategies, operations, or auth emails beyond the basics covered in collections.
-- **cli-recipes** — This skill should be used when the user asks about "payload migrate", "payload generate:types", "payload generate:importmap", "payload migrate:create", "payload migrate:down", "payload migrate:reset", "payload migrate:refresh", "payload migrate:status", "Payload CLI commands", or needs to run the Payload command-line tool for schema migrations or codegen.
+- **cli-recipes** — This skill should be used when the user asks about "payload migrate", "payload generate:types", "payload generate:importmap", "payload migrate:create", "payload migrate:down", "payload migrate:reset", "payload migrate:refresh", "payload migrate:status", "payload run", "payload jobs:run", "generate:db-schema", "Payload CLI commands", or needs to run the Payload command-line tool for schema migrations, codegen, one-off scripts, or job processing.
 - **cms-migration** — This skill should be used when the user asks to "migrate WordPress to Payload", "move content from Contentful to Payload", "import Strapi data into Payload", "migrate Sanity to PayloadCMS", "Webflow CMS to Payload", "design Payload collections from CMS export", or needs a structured workflow for moving content from another CMS into Payload.
 - **collections** — This skill should be used when the user asks to "create a Payload collection", "define a CollectionConfig", "set up an auth collection", "build an upload collection", "add drafts/versions", "configure admin panel for a collection", "enable live preview", "set defaultColumns", or needs to model any content type in PayloadCMS v3.
 - **data-management** — This skill should be used when the user asks to "enable soft delete in Payload", "trash and restore documents", "recover a deleted record", "set up query presets", "save and share list filters", "organize documents in folders", "group documents by a field", "use admin.groupBy", or wants the recent v3 data-management features (Trash, Query Presets, Folders, Group By).
@@ -25,7 +25,7 @@ This plugin ships the following skills under `skills/`. Codex loads them context
 - **jobs-queue** — This skill should be used when the user asks about "Payload jobs queue", "Payload background tasks", "Payload workflows", "Payload cron scheduling", "Payload task retries", "Payload runJobs", "Payload autoRun", "queue a job in Payload", or needs to run any background or scheduled work in PayloadCMS.
 - **lexical-editor** — This skill should be used when the user asks about "Payload rich text", "Lexical editor in Payload", "custom Lexical feature", "richText blocks", "richText link/upload/relationship", "custom Lexical node", "render Payload Lexical to JSX", "convert Lexical to HTML", or needs to customize the editor inside `richText` fields.
 - **localization** — This skill should be used when the user asks to "add localization to Payload", "translate content into multiple languages", "configure locales", "make a field localized", "set a fallback locale", "internationalize the admin UI", "query a specific locale", or "add a language to the admin panel" in PayloadCMS v3.
-- **nextjs-integration** — This skill should be used when the user asks about "Payload with Next.js", "getPayload in server component", "Payload App Router", "Payload route groups", "Payload live preview Next.js", "revalidate Payload page", "Payload server actions", "Payload draft mode", "Payload Next.js cache", or needs to wire PayloadCMS into a Next.js v14/v15 frontend.
+- **nextjs-integration** — This skill should be used when the user asks about "Payload with Next.js", "getPayload in server component", "Payload App Router", "Payload route groups", "Payload live preview Next.js", "revalidate Payload page", "Payload server actions", "Payload draft mode", "Payload Next.js cache", or needs to wire PayloadCMS into a Next.js 15/16 App Router frontend.
 - **official-plugins** — This skill should be used when the user asks to "add the SEO plugin", "use plugin-form-builder", "set up multi-tenant", "add full-text search", "integrate Stripe", "add redirects", "configure the Payload Sentry plugin", "import/export data", "use the Payload MCP plugin", or "which official Payload plugin should I use" — installing and configuring the official @payloadcms/plugin-* packages in PayloadCMS v3.
 - **plugin-development** — This skill should be used when the user asks to "build a Payload plugin", "create payload-plugin package", "write a Payload plugin from scratch", "add fields via plugin", "preserve hooks in plugin", "publish payload-plugin to npm", "plugin architecture in Payload", or needs to author or maintain a reusable PayloadCMS plugin.
 - **queries** — This skill should be used when the user asks about "Payload Local API", "payload.find", "payload.findByID", "where query", "Payload query operators", "depth and populate", "filter Payload by relationship", "sort and paginate Payload results", "Payload REST API query string", "GraphQL queries", or needs to read or write data with Payload.
@@ -85,7 +85,7 @@ Use `AskUserQuestion` to gather (skip any the user already supplied as `$ARGUMEN
    - **PostgreSQL** (recommended for prod) — needs a `DATABASE_URI` connection string.
    - **MongoDB** — needs an `mongodb://` URI, ideally a replica set for transactions.
    - **SQLite** (libSQL) — `file:./payload.db` for local, `libsql://…` + auth token for Turso.
-3. **Template** — `blank` (recommended for custom builds) / `website` (marketing site demo) / `ecommerce` (Stripe demo).
+3. **Template** — `blank` (recommended for custom builds) / `website` (marketing site demo) / `ecommerce` (Stripe demo). (The payload repo also has `plugin`, `with-cloudflare-d1`, `with-vercel-*`, and the experimental `blank-tanstack` templates, cloned manually rather than via the prompts.)
 4. **Package manager** — pnpm (default) / npm / yarn / bun.
 
 ## Step 2 — Verify Prerequisites
@@ -93,11 +93,11 @@ Use `AskUserQuestion` to gather (skip any the user already supplied as `$ARGUMEN
 Run a Bash check before scaffolding:
 
 ```bash
-node --version          # Must be >= 20.9.0
+node --version          # Recommended >= 20.9.0 (payload engines allow ^18.20.2 || >=20.9.0)
 which pnpm || which npm || which yarn || which bun
 ```
 
-If Node is below 20.9.0, tell the user to install LTS Node via `nvm install --lts && nvm use --lts` and stop here.
+If Node is below the supported range (`^18.20.2 || >=20.9.0`), tell the user to install LTS Node via `nvm install --lts && nvm use --lts` and stop here. Node 20 LTS+ is the recommended baseline.
 
 ## Step 3 — Run the Scaffolder
 
@@ -150,7 +150,7 @@ Don't auto-invoke other skills. Tell the user to invoke the relevant ones based 
 ## Failure Modes
 
 - **`create-payload-app` errors with EACCES** → suggest `sudo chown -R $(whoami) ~/.npm` and rerun.
-- **`Node version too low`** → install Node 20.9+ via nvm.
+- **`Node version too low`** → install Node 20 LTS+ via nvm (engines allow `^18.20.2 || >=20.9.0`).
 - **`Cannot find module 'sharp'`** after install → run `pnpm add sharp` inside the project, then retry `pnpm dev`.
 - **Database connection refused** → confirm the DB is reachable from the dev machine and the URI matches.
 

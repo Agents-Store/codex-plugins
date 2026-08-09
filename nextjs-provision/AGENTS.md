@@ -1,6 +1,6 @@
 # nextjs-provision
 
-> Next.js provisioning plugin. Set up shadcn/ui and shadcn studio — component installation, theme configuration, MCP server setup, project scaffolding, and multi-registry component search across 30+ free community registries.
+> Next.js provisioning plugin. Set up shadcn/ui and shadcn studio — component installation, theme configuration, MCP server setup, project scaffolding, and multi-registry component search across 260+ registries from the official directory.
 
 Canonical source: https://github.com/agents-store/claude-public-plugins/tree/main/plugins/nextjs-provision
 
@@ -25,7 +25,7 @@ This plugin ships the following skills under `skills/`. Codex loads them context
 
 - **component-registry** — Browse, search, install, and use shadcn/ui and shadcn studio components, blocks, and templates. This skill should be used when the user asks to "install a shadcn component", "add a button", "list shadcn blocks", "find a form block", "browse shadcn studio components", "add a card component", "install a navigation block", "what components are available", "write code with shadcn components", "use Button component", "render shadcn component as link", "Button as a link", "shadcn component patterns", or needs to discover, install, or use UI components from shadcn registries correctly.
 
-- **component-search** — Search and install UI components from 30+ free community shadcn registries. This skill should be used when the user asks to "search for shadcn components", "find a calendar component", "browse community registries", "install from magicui", "what shadcn registries are available", "add animated components", "search for a date picker", "find UI blocks for landing page", "install from aceternity", "what community components exist", or needs to discover and install components from community registries beyond the standard shadcn/ui and shadcn studio registries.
+- **component-search** — Search and install UI components from 260+ registries in the official shadcn directory. This skill should be used when the user asks to "search for shadcn components", "find a calendar component", "browse community registries", "install from magicui", "what shadcn registries are available", "add animated components", "search for a date picker", "find UI blocks for landing page", "install from aceternity", "what community components exist", or needs to discover and install components from community registries beyond the standard shadcn/ui and shadcn studio registries.
 
 - **examples** — End-to-end scenario walkthroughs for setting up Next.js projects with shadcn/ui and shadcn studio. This skill should be used when the user asks for "shadcn setup walkthrough", "how to set up a project with shadcn from scratch", "add shadcn to existing project example", "full shadcn setup guide", "shadcn studio tutorial", "step-by-step shadcn setup", or needs a complete example of provisioning a Next.js project with shadcn components.
 
@@ -78,7 +78,7 @@ Context: User wants animated components from community registries
 user: "I need some cool animated components for my landing page — shimmer buttons, animated beams, parallax scroll"
 assistant: "I'll use the nextjs-provisioner agent to search community registries for animation components and install them."
 <commentary>
-User needs specialty components not in the standard shadcn/ui registry — agent searches community registries (MagicUI, Aceternity UI) and installs matching components.
+User needs specialty components not in the standard shadcn/ui registry — agent searches community registries (MagicUI, Aceternity, COSS…) and installs matching components.
 </commentary>
 </example>
 
@@ -89,7 +89,7 @@ Codex CLI doesn't support custom slash commands — invoke these workflows via n
 
 ### `add-registries`
 
-Fetch all 180+ shadcn registries from the official endpoint and add them to components.json
+Fetch all 260+ shadcn registries from the official endpoint and add them to components.json
 
 Arguments: `--filter <keyword>`
 
@@ -109,6 +109,12 @@ Fetch the complete list of shadcn-compatible registries from the official endpoi
    ```
    Or use WebFetch on `https://ui.shadcn.com/r/registries.json`.
 
+2b. For a handful of registries, the native CLI command is an alternative to the fetch-and-merge flow:
+   ```bash
+   npx shadcn registry add @name=https://domain.com/r/{name}.json @name2=https://other.com/r/{name}.json
+   ```
+   The fetch-and-merge flow below remains the way to add all 260+ in bulk.
+
 3. Parse the JSON response. Each entry has:
    - `name` — e.g. `"@magicui"`
    - `url` — e.g. `"https://magicui.design/r/{name}.json"`
@@ -120,7 +126,8 @@ Fetch the complete list of shadcn-compatible registries from the official endpoi
 
 6. Build the new registries object by merging existing entries with the fetched ones. For each fetched registry:
    - Key: the `name` field (e.g. `"@magicui"`)
-   - Value: the `url` field (e.g. `"https://magicui.design/r/{name}.json"`)
+   - Value: the `url` field (e.g. `"https://magicui.design/r/{name}"`)
+   - Do NOT clobber existing **object-valued** entries (registries with `headers`/`params` auth, e.g. shadcn studio premium) — the merge must preserve those objects as-is.
 
 7. Write the merged `"registries"` back to `components.json`. Preserve all other fields.
 
@@ -129,17 +136,17 @@ Fetch the complete list of shadcn-compatible registries from the official endpoi
 ## Example Output
 
 ```
-Fetched 180 registries from https://ui.shadcn.com/r/registries.json
-Added 175 new registries to components.json
+Fetched 267 registries from https://ui.shadcn.com/r/registries.json
+Added 262 new registries to components.json
 Skipped 5 already configured
-Total registries in components.json: 178
+Total registries in components.json: 265
 ```
 
 </details>
 
 ### `search-components`
 
-Search across 30+ free community shadcn registries for UI components, blocks, and templates
+Search across 260+ shadcn registries for UI components, blocks, and templates
 
 Arguments: `<what-you-need>`
 
@@ -147,7 +154,7 @@ Arguments: `<what-you-need>`
 
 # Search Components
 
-Search for shadcn-compatible components across 30+ community registries.
+Search for shadcn-compatible components across the 260+ registries in the official directory.
 
 ## Instructions
 
@@ -169,7 +176,10 @@ Search for shadcn-compatible components across 30+ community registries.
 ```
 
 6. Check if the user's project has `components.json` — if registries are not configured, suggest running `/setup-registries` first
-7. If MCP servers are available (`shadcn` or `shadcn-community`), use them to search for more specific matches
+7. If MCP servers are available, use them for more specific matches:
+   - `shadcn` (official) — searches across all registries configured in `components.json`
+   - `shadcn-community` (Jpisnice) — use `list_components` / `get_component` / `get_component_demo` / `list_blocks` / `get_block` for GitHub-based browsing
+8. Without MCP, suggest the CLI's server-side search as a fallback: `npx shadcn@latest search @registry -q "<term>"`
 
 </details>
 
@@ -199,7 +209,19 @@ Full project setup for shadcn community registry search — registries, MCP, CLA
    - `--claudemd` — only add CLAUDE.md section
    - `--skill` — only install official shadcn skill
 
-4. **Add registries** — Run `/add-registries` to fetch all 180+ registries from `https://ui.shadcn.com/r/registries.json` and add them to `components.json`
+4. **Add registries** — Run `/add-registries` to fetch all 260+ registries from `https://ui.shadcn.com/r/registries.json` and add them to `components.json`
+
+4b. **shadcn studio registries** — If the project uses shadcn studio, write the `@`-prefixed studio registries (not legacy `ss-*` keys):
+   ```json
+   "registries": {
+     "@shadcn-studio": "https://shadcnstudio.com/r/{style}/{name}.json",
+     "@ss-components": "https://shadcnstudio.com/r/components/{style}/{name}.json",
+     "@ss-blocks": "https://shadcnstudio.com/r/blocks/{style}/{name}.json",
+     "@ss-pages": "https://shadcnstudio.com/r/pages/{style}/{name}.json",
+     "@ss-themes": "https://shadcnstudio.com/r/themes/{name}.json"
+   }
+   ```
+   For premium, convert entries to objects with `"params": { "email": "${EMAIL}", "license_key": "${LICENSE_KEY}" }`.
 
 5. **Configure MCP servers** — Show the template from `${CLAUDE_PLUGIN_ROOT}/skills/component-search/references/mcp-config-template.json` and create/update the project's `.mcp.json`
 
