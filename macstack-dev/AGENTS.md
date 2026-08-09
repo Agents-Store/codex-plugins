@@ -11,6 +11,7 @@ This plugin ships the following skills under `skills/`. Codex loads them context
 - **best-practices** — This skill should be used when the user asks to "install best practice rules", "set up project rules", "add project rules and commands", "set up project conventions", or scaffold-project reaches the rules step. Installs the proven MACSTACK rule set (.claude/rules) and core commands into a project.
 - **discover-context** — This skill should be used when the user asks to "find plugins for this stack", "discover context for the project", "which plugins should I install", "find a prototype", "pick a stack prototype", or when init-project/generate-stack need context.plugins and prototype candidates. Searches Agents Store plugins and stackmakers-ai prototypes on GitHub.
 - **examples** — This skill should be used when the user asks for "macstack examples", "show a full macstack.json example", "how does a complete macstack.json look", "walk me through a macstack scenario", or needs an end-to-end scenario walkthrough for this plugin's skills.
+- **feedback** — This skill should be used when the user reports a problem with macstack-dev or the MACSTACK standard — "this skill did the wrong thing", "the schema is missing a field", "the passport for X is wrong", "send macstack feedback", "improve the schema based on my edit", "fix the macstack plugin" — and the fix must land in the right source (plugin, schema repo, or registry repo).
 - **generate-stack** — This skill should be used when the user asks to "generate macstack.json from scratch", "design a stack for…", "pick software and architecture for my need", "create a stack spec from my request", or describes a business need without an existing codebase. Designs goals, results, processes, workflows, software and architecture result-first and produces a validated macstack.json.
 - **infisical-env** — This skill should be used when the user asks to "set up Infisical for this project", "create .infisical.json", "pull the env keys", "wire the env", "sync secrets", or scaffold-project reaches the env step. Creates .infisical.json, pulls .env.prod/.env.dev, ensures every key from macstack.json resources.accesses exists, and installs the mandatory secrets scripts and commands.
 - **init-project** — This skill should be used when the user asks to "create macstack.json in this project", "add macstack.json", "init macstack", "describe this existing project as macstack.json", or an existing codebase has no macstack.json. Audits the existing project and produces a validated macstack.json draft.
@@ -56,6 +57,22 @@ The decision needs the result-first framework and the Agentic IT Ready criteria.
 ## Workflows (canonical slash commands)
 
 Codex CLI doesn't support custom slash commands — invoke these workflows via natural language. Each entry below is a prompt template you can adapt:
+
+### `feedback`
+
+Report a problem with macstack-dev, the macstack.json schema, or the registry — and fix it at the source
+
+Arguments: `<what went wrong>`
+
+<details><summary>Prompt template</summary>
+
+Use the macstack-dev:feedback skill for: $ARGUMENTS. Route the fix to the right
+source of truth (plugin skills / github.com/macstacks/macstack schema+examples /
+github.com/macstacks/registry), apply it, sync every mirror (the plugin's bundled
+schema copy, project mirrors), record the learning in LEARNINGS.md, bump versions
+where required, and report the commits/PRs.
+
+</details>
 
 ### `generate`
 

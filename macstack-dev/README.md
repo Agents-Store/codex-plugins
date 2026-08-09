@@ -16,10 +16,10 @@ codex plugin marketplace add .
 
 ## Components
 
-- 10 skill(s) under `skills/`
+- 11 skill(s) under `skills/`
 - 1 subagent(s) under `.codex/agents/`
 - No MCP server
-- 5 workflow template(s) — see AGENTS.md
+- 6 workflow template(s) — see AGENTS.md
 
 ## Source
 
