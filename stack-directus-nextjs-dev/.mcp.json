@@ -3,9 +3,7 @@
     "directus": {
       "type": "http",
       "url": "${NEXT_PUBLIC_DIRECTUS_URL}/mcp",
-      "http_headers": {
-        "Authorization": "Bearer ${DIRECTUS_ADMIN_TOKEN}"
-      }
+      "bearer_token_env_var": "DIRECTUS_ADMIN_TOKEN"
     }
   }
 }

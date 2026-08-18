@@ -29,31 +29,27 @@
     "n8n-native-mcp": {
       "type": "http",
       "url": "${N8N_NATIVE_MCP_URL}",
-      "http_headers": {
-        "Authorization": "Bearer ${N8N_MCP_TOKEN}"
-      }
+      "bearer_token_env_var": "N8N_MCP_TOKEN"
     },
     "nocodb": {
       "type": "http",
       "url": "${NOCODB_MCP_URL}",
-      "http_headers": {
-        "xc-mcp-token": "${NOCODB_TOKEN}"
+      "env_http_headers": {
+        "xc-mcp-token": "NOCODB_TOKEN"
       }
     },
     "postgresql-mcp": {
       "type": "http",
       "url": "${POSTGRESQL_MCP_URL}",
-      "http_headers": {
-        "Authorization": "Bearer ${POSTGRESQL_MCP_TOKEN}"
-      }
+      "bearer_token_env_var": "POSTGRESQL_MCP_TOKEN"
     },
     "nocobase-dev": {
       "type": "http",
       "url": "${NOCOBASE_DEV_URL}/api/mcp",
       "http_headers": {
-        "Authorization": "Bearer ${NOCOBASE_DEV_API_KEY}",
         "x-mcp-packages": "plugin-data-source-main,plugin-data-source-manager,plugin-workflow*,plugin-acl,plugin-users,plugin-auth,plugin-client,plugin-flow-engine,plugin-ai"
-      }
+      },
+      "bearer_token_env_var": "NOCOBASE_DEV_API_KEY"
     }
   }
 }

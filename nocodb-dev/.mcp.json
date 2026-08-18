@@ -3,8 +3,8 @@
     "nocodb": {
       "type": "http",
       "url": "${NOCODB_MCP_URL}",
-      "http_headers": {
-        "xc-mcp-token": "${NOCODB_MCP_TOKEN}"
+      "env_http_headers": {
+        "xc-mcp-token": "NOCODB_MCP_TOKEN"
       }
     }
   }

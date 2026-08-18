@@ -1,50 +1,80 @@
 ---
 name: troubleshoot
-description: 'Diagnose a Chatwoot API / CLI / webhook problem — run read-only connectivity, auth, and scope checks against the configured instance and report the fix. Arguments: [object Object].'
+description: This skill should be used when the user hits "Chatwoot API errors", "Chatwoot 401/403/404", "Chatwoot CLI not working", "Chatwoot webhook signature mismatch", "Chatwoot token not authorized", or needs to diagnose and fix problems with the Chatwoot API, CLI, or webhooks.
 ---
 
-Diagnose this Chatwoot problem: **$ARGUMENTS**
+# Chatwoot Troubleshooting
 
-Run the read-only checks below (all GETs — safe), interpret the results, and recommend a fix.
-Load the `troubleshoot` skill for the full symptom → cause → fix tables.
+Diagnose and fix the common failure modes for the Chatwoot API, CLI, and webhooks.
 
-1. **Env vars present?**
-   ```bash
-   for v in CHATWOOT_BASE_URL CHATWOOT_API_KEY CHATWOOT_ACCOUNT_ID; do
-     [ -n "${!v}" ] && echo "$v: set" || echo "$v: MISSING"
-   done
-   ```
-   If any are missing, stop and point the user to the `setup` skill.
+## Quick diagnostics
 
-2. **Base URL reachable?**
-   ```bash
-   curl -sI "${CHATWOOT_BASE_URL}" | head -1
-   ```
+```bash
+# 1. Is the base URL reachable?
+curl -sI "${CHATWOOT_BASE_URL}" | head -1
 
-3. **Token valid + identity?** (401 ⇒ bad token or wrong header; remember it's
-   `api_access_token`, not `Authorization: Bearer`)
-   ```bash
-   curl -s -o /dev/null -w "profile HTTP %{http_code}\n" \
-     -H "api_access_token: ${CHATWOOT_API_KEY}" "${CHATWOOT_BASE_URL}/api/v1/profile"
-   curl -s -H "api_access_token: ${CHATWOOT_API_KEY}" \
-     "${CHATWOOT_BASE_URL}/api/v1/profile" | jq '{id, name, role}' 2>/dev/null
-   ```
+# 2. Is the token valid and which identity is it?
+curl -s -H "api_access_token: ${CHATWOOT_API_KEY}" \
+  "${CHATWOOT_BASE_URL}/api/v1/profile" | jq '{id, name, role}'
 
-4. **Account scope resolves?** (404 ⇒ wrong `account_id` or base URL)
-   ```bash
-   curl -s -o /dev/null -w "conversations HTTP %{http_code}\n" \
-     -H "api_access_token: ${CHATWOOT_API_KEY}" \
-     "${CHATWOOT_BASE_URL}/api/v1/accounts/${CHATWOOT_ACCOUNT_ID}/conversations"
-   ```
+# 3. Does the account scope resolve?
+curl -s -o /dev/null -w "%{http_code}\n" -H "api_access_token: ${CHATWOOT_API_KEY}" \
+  "${CHATWOOT_BASE_URL}/api/v1/accounts/${CHATWOOT_ACCOUNT_ID}/conversations"
+```
 
-5. **CLI installed/authenticated?** (optional)
-   ```bash
-   command -v chatwoot >/dev/null && chatwoot auth status 2>&1 | head -5 || echo "chatwoot CLI not installed"
-   ```
+## Authentication & authorization
 
-6. Map the observed status codes to the fix using the `troubleshoot` skill:
-   401 → token/header or wrong API family · 403 → insufficient role · 404 → account_id/base
-   URL · 422 → request body · 429 → rate limit/backoff. For webhook signature mismatches,
-   verify the HMAC is computed over the **raw** body as `"{timestamp}.{raw_body}"`.
+| Symptom | Cause | Fix |
+|---------|-------|-----|
+| `401 Unauthorized` | Missing/typo'd `api_access_token` header | Send `-H "api_access_token: ${CHATWOOT_API_KEY}"` — not `Authorization: Bearer` |
+| `401` with a valid token | Right token, **wrong API family** | User token works on `/api/v1/...`, not `/platform/...`. Use the platform app token for Platform endpoints |
+| `403 Forbidden` | Token role too low | The action needs admin/agent permission the token lacks — use a token with the right role |
+| Platform calls all `401` | Platform API not enabled / wrong token | Platform token comes from the installation Super Admin, not Profile Settings |
 
-Report what passed, what failed, and the single most likely fix.
+## Wrong scope / not found
+
+| Symptom | Cause | Fix |
+|---------|-------|-----|
+| `404` on every account call | Wrong `account_id` | Read it from the dashboard URL `.../app/accounts/{id}/...` |
+| `404` / HTML instead of JSON | Wrong base URL or trailing slash | Set `CHATWOOT_BASE_URL` to the origin only (e.g. `https://app.chatwoot.com`), no trailing `/` |
+| Self-hosted `404`/`502` | Reverse proxy or path prefix | Confirm the instance origin and that `/api/v1` is exposed |
+
+## Request body errors
+
+| Symptom | Cause | Fix |
+|---------|-------|-----|
+| `422 Unprocessable` | Missing/invalid fields | Compare the body to the schema: `jq '.paths["<path>"].post.requestBody' openapi/application_swagger.json` |
+| Message sends but is empty/wrong type | Wrong `message_type`/`content_type` | Use `message_type: "outgoing"` (or `"incoming"`), `private: true` for notes |
+| Attachment ignored | Sent as JSON | Use `multipart/form-data` with `attachments[]` (see `pagination-errors.md`) |
+
+## CLI issues
+
+| Symptom | Cause | Fix |
+|---------|-------|-----|
+| `auth login` hangs/fails | Run in a non-TTY (CI/agent) | Don't script `auth login`; export `CHATWOOT_API_KEY` and keep `~/.chatwoot/config.yaml` (or pass `-a`) |
+| Agent can't parse output | Default text format | Pass `-o json` (or `-q`); never grep text output |
+| `convs` returns "too few" | Defaults to your open queue | Add `--assignee all` and the right `-s` status |
+| Labels got wiped | `label` replaces the set | Fetch existing first and merge; use `set -o pipefail` (see `cli-recipes`) |
+| Keyring error on login | No system keyring (headless Linux) | Use the `CHATWOOT_API_KEY` env var instead of the keyring |
+| Want to see the HTTP call | Debugging an odd result | Re-run with `-v` to print request/response |
+
+## Webhook problems
+
+| Symptom | Cause | Fix |
+|---------|-------|-----|
+| Signature never matches | HMAC over parsed JSON | Compute HMAC-SHA256 over the **raw** body as `"{timestamp}.{raw_body}"`, compare to `X-Chatwoot-Signature` (`sha256=...`) |
+| No deliveries arrive | URL unreachable / not subscribed | Verify the endpoint is public + returns `2xx`; check `subscriptions` includes the event |
+| Bot replies in a loop | Reacting to its own messages | Only act on `message_type == "incoming"` |
+| Duplicate handling | Retried deliveries | De-duplicate on `X-Chatwoot-Delivery` |
+
+## Rate limiting
+
+`429 Too Many Requests` → add exponential backoff, reduce concurrency, and batch reads with
+pagination instead of firing unbounded parallel requests. Limits differ between Cloud and
+self-hosted.
+
+## When to escalate
+
+- Consistent `5xx` on Cloud → check https://status.chatwoot.com; on self-hosted check the
+  Rails/Sidekiq logs.
+- Suspected token compromise → rotate the access token in Profile Settings immediately.
