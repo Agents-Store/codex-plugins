@@ -4,23 +4,7 @@
 
 Canonical source: https://github.com/agents-store/claude-public-plugins/tree/main/plugins/nocodb-ops
 
-## MCP servers
-
-Add to `~/.codex/config.toml`:
-
-```toml
-[mcp_servers.nocodb]
-url = "${NOCODB_MCP_URL}"
-type = "http"
-
-[mcp_servers.nocodb.headers]
-"xc-mcp-token" = "${NOCODB_MCP_TOKEN}"
-
-```
-
 ## Skills
-
-This plugin ships the following skills under `skills/`. Codex loads them contextually:
 
 - **cli-reference** — NocoDB CLI commands and nc command reference from the official NocoDB agent-skills package. Use when:
 - "NocoDB CLI commands"
@@ -102,10 +86,21 @@ This plugin ships the following skills under `skills/`. Codex loads them context
 - "count by category"
 - "average order value"
 
+- **build-report** — Build an aggregation report from NocoDB table data
+- **create-record** — Create a new record in a NocoDB table
+- **create-view** — Create a new view for a NocoDB table
+- **list-records** — List records from a NocoDB table with optional filtering
+- **list-tables** — List all tables in the NocoDB base
+- **search-records** — Search records in a NocoDB table by keyword
 
 ## Subagents
 
-Defined under `.codex/agents/` as TOML files:
+Codex does not install plugin subagents automatically — copy them manually before use:
+
+```bash
+cp agents/*.toml ~/.codex/agents/        # personal
+cp agents/*.toml <repo>/.codex/agents/    # project-local
+```
 
 - **data-assistant** — Use this agent when the user needs help with NocoDB data operations — finding records, building reports, creating views, importing/exporting data, or performing day-to-day business tasks.
 
@@ -137,212 +132,16 @@ Business user needs data operations — agent validates and batch-creates record
 </example>
 
 
-## Workflows (canonical slash commands)
+## MCP servers
 
-Codex CLI doesn't support custom slash commands — invoke these workflows via natural language. Each entry below is a prompt template you can adapt:
+Add to `~/.codex/config.toml`:
 
-### `build-report`
+```toml
+[mcp_servers.nocodb]
+url = "${NOCODB_MCP_URL}"
+type = "http"
 
-Build an aggregation report from NocoDB table data
-
-Arguments: `<table-name> [aggregation-type] [field]`
-
-<details><summary>Prompt template</summary>
-
-# Build Report
-
-Build an aggregation report from a NocoDB table.
-
-## Arguments
-
-Parse from "$ARGUMENTS":
-- `table-name` (required): Name or ID of the table
-- `aggregation-type` (optional): sum, count, avg, min, max, median (default: count)
-- `field` (optional): Field to aggregate on
-
-## Process
-
-1. Run `getTablesList` to resolve the table name to an ID.
-2. Run `getTableSchema` to discover numeric and countable fields.
-3. Run `aggregate` with appropriate aggregation type and field.
-4. If no field specified, run count aggregation on the whole table.
-5. Present results in a clear summary format.
-6. Suggest additional aggregations or filters for deeper analysis.
-
-## Example Usage
+[mcp_servers.nocodb.headers]
+"xc-mcp-token" = "${NOCODB_MCP_TOKEN}"
 
 ```
-/build-report Orders sum Amount
-/build-report Contacts count
-/build-report Products avg Price
-/build-report Deals max Value
-```
-
-</details>
-
-### `create-record`
-
-Create a new record in a NocoDB table
-
-Arguments: `<table-name> <field=value pairs>`
-
-<details><summary>Prompt template</summary>
-
-# Create Record
-
-Create a new record in a NocoDB table.
-
-## Arguments
-
-Parse from "$ARGUMENTS":
-- `table-name` (required): Name or ID of the table
-- Field values: key=value pairs or JSON object
-
-## Process
-
-1. Run `getTablesList` to resolve the table name to an ID.
-2. Run `getTableSchema` to discover required fields and types.
-3. Map the provided field values to the table schema.
-4. Run `createRecords` with the mapped data.
-5. Confirm creation and display the new record.
-
-## Example Usage
-
-```
-/create-record Contacts Name="Jane Smith" Email="jane@example.com" Status=Active
-/create-record Orders Product="Widget A" Quantity=10 Status=Pending
-```
-
-</details>
-
-### `create-view`
-
-Create a new view for a NocoDB table
-
-Arguments: `<table-name> <view-type> [title]`
-
-<details><summary>Prompt template</summary>
-
-# Create View
-
-Describe how to create a new view for a NocoDB table. Since NocoDB MCP does not expose view management tools directly, guide the user through the NocoDB web interface or CLI.
-
-## Arguments
-
-Parse from "$ARGUMENTS":
-- `table-name` (required): Name or ID of the table
-- `view-type` (required): grid, kanban, gallery, form, or calendar
-- `title` (optional): Name for the new view
-
-## Process
-
-1. Run `getTablesList` to resolve the table name.
-2. Run `getTableSchema` to list existing views and columns.
-3. Based on view type, recommend:
-   - **Grid**: default working view, suggest useful filters and sorts
-   - **Kanban**: identify SingleSelect columns suitable for grouping
-   - **Gallery**: identify Attachment columns for cover images
-   - **Form**: suggest which fields to include as required
-   - **Calendar**: identify Date/DateTime columns
-4. Provide step-by-step instructions for creating the view in the NocoDB UI.
-5. If CLI is available, show the `nc view:create` command.
-
-## Example Usage
-
-```
-/create-view Deals kanban "Deal Pipeline"
-/create-view Contacts form "New Contact Form"
-/create-view Events calendar "Event Schedule"
-```
-
-</details>
-
-### `list-records`
-
-List records from a NocoDB table with optional filtering
-
-Arguments: `<table-name> [where-filter]`
-
-<details><summary>Prompt template</summary>
-
-# List Records
-
-Query records from a NocoDB table with optional filtering and sorting.
-
-## Arguments
-
-Parse from "$ARGUMENTS":
-- `table-name` (required): Name or ID of the table
-- `where-filter` (optional): Filter in NocoDB syntax, e.g. `(Status,eq,Active)`
-
-## Process
-
-1. Run `getTablesList` to resolve the table name to an ID.
-2. Run `getTableSchema` to discover field names and types.
-3. Run `queryRecords` with the table ID and optional where filter.
-4. Display results in a formatted table showing key fields.
-5. Report total count and pagination info if more records exist.
-
-## Example Usage
-
-```
-/list-records Contacts
-/list-records Orders (Status,eq,Pending)
-/list-records Deals (Amount,gt,5000)~and(Stage,eq,Negotiation)
-```
-
-</details>
-
-### `list-tables`
-
-List all tables in the NocoDB base
-
-<details><summary>Prompt template</summary>
-
-# List Tables
-
-List all tables in the current NocoDB base.
-
-## Process
-
-1. Run `getTablesList` to fetch all accessible tables.
-2. Display results in a table with ID, name, and description.
-3. If no tables found, suggest checking the connection with the setup skill.
-
-</details>
-
-### `search-records`
-
-Search records in a NocoDB table by keyword
-
-Arguments: `<table-name> <query>`
-
-<details><summary>Prompt template</summary>
-
-# Search Records
-
-Search for records containing a keyword across text fields.
-
-## Arguments
-
-Parse from "$ARGUMENTS":
-- `table-name` (required): Name or ID of the table
-- `query` (required): Search text to find
-
-## Process
-
-1. Run `getTablesList` to resolve the table name to an ID.
-2. Run `getTableSchema` to identify text fields (SingleLineText, LongText, Email, URL, PhoneNumber).
-3. Build a `where` filter using `like` operator across text fields combined with `~or`.
-4. Run `queryRecords` with the constructed filter.
-5. Display matching records in a formatted table.
-
-## Example Usage
-
-```
-/search-records Contacts "john doe"
-/search-records Orders "pending"
-/search-records Products "widget"
-```
-
-</details>

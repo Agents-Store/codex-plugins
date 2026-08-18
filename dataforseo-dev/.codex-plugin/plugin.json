@@ -18,5 +18,18 @@
     "dev",
     "agents-store"
   ],
-  "skills": "./skills/"
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Dataforseo Dev",
+    "shortDescription": "Dat\n\n<!-- truncated: content exceeds the target's size limit -->",
+    "longDescription": "DataForSEO data analysis plugin. Keyword research, competitor analysis, backlink auditing, SERP monitoring, on-page audits, content analysis, and AI optimization via 70+ MCP tools.",
+    "developerName": "AGENTS.STORE",
+    "category": "marketing",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://agents.store"
+  }
 }

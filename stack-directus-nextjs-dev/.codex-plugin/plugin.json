@@ -16,5 +16,18 @@
     "headless-cms",
     "app-router"
   ],
-  "skills": "./skills/"
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Stack Directus Nextjs Dev",
+    "shortDescription": "Dir\n\n<!-- truncated: content exceeds the target's size limit -->",
+    "longDescription": "Directus + Next.js stack dev plugin. Integrates Directus headless CMS with Next.js App Router for content-driven applications.",
+    "developerName": "Agents Store",
+    "category": "development",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://agents.store"
+  }
 }

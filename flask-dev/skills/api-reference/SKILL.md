@@ -1,11 +1,7 @@
 ---
 name: api-reference
-description: >
-  Use when the user asks for "Flask API reference", "Flask decorators",
-  "Flask request object", "Flask response", "Flask config options",
-  "Flask url_for", "Flask flash messages", or needs specific Flask
-  framework API details.
-disable-model-invocation: true
+description: |
+  Use when the user asks for "Flask API reference", "Flask decorators", "Flask request object", "Flask response", "Flask config options", "Flask url_for", "Flask flash messages", or needs specific Flask framework API details.
 ---
 
 # Flask API Reference

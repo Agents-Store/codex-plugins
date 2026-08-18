@@ -1,19 +1,6 @@
 ---
 name: persona-event-coordinator
-description: "Plan and manage events — scheduling, invitations, and logistics."
-metadata:
-  version: 0.22.5
-  openclaw:
-    category: "persona"
-    requires:
-      bins:
-        - gws
-      skills:
-        - gws-calendar
-        - gws-gmail
-        - gws-drive
-        - gws-chat
-        - gws-sheets
+description: Plan and manage events — scheduling, invitations, and logistics.
 ---
 
 # Event Coordinator
@@ -38,4 +25,3 @@ Plan and manage events — scheduling, invitations, and logistics.
 - Use `gws calendar +agenda --days 30` for long-range event planning.
 - Create a dedicated calendar for each major event series.
 - Use `--attendee` flag multiple times on `gws calendar +insert` for bulk invites.
-

@@ -6,8 +6,6 @@ Canonical source: https://github.com/agents-store/claude-public-plugins/tree/mai
 
 ## Skills
 
-This plugin ships the following skills under `skills/`. Codex loads them contextually:
-
 - **api-reference** — This skill should be used when the user asks for "Taiga API endpoints", "Taiga REST API", "Taiga curl examples", "Taiga API documentation", the exact path/method for any Taiga resource, or needs HTTP details for projects, epics, user stories, tasks, issues, milestones, wiki, webhooks, custom attributes, search, or import/export. Index into the full per-domain endpoint catalog.
 - **common-operations** — This skill should be used when the user wants to do project-management work in Taiga — "create a user story / task / issue / epic in Taiga", "start a new sprint", "move a story to In Progress", "assign a task", "comment on an issue", "add members to a Taiga project", "build a sprint report", or any everyday Taiga operation. Provides plain-language workflows that drive the REST API and route to the exact endpoints.
 - **examples** — This skill should be used when the user wants a worked end-to-end Taiga example or walkthrough — "show me a full Taiga workflow", "example of setting up a project in Taiga", "how do I run sprint planning via the API", "end-to-end bug triage example", or wants to see several Taiga API calls chained together for a real scenario.
@@ -16,7 +14,12 @@ This plugin ships the following skills under `skills/`. Codex loads them context
 
 ## Subagents
 
-Defined under `.codex/agents/` as TOML files:
+Codex does not install plugin subagents automatically — copy them manually before use:
+
+```bash
+cp agents/*.toml ~/.codex/agents/        # personal
+cp agents/*.toml <repo>/.codex/agents/    # project-local
+```
 
 - **taiga-assistant** — Use this agent when the user needs help running project-management operations in Taiga — managing projects, sprints, user stories, tasks, issues, epics, the wiki, members, custom attributes, webhooks, search, or reports — by driving the Taiga REST API.
 

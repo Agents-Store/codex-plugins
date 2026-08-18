@@ -18,5 +18,18 @@
     "trigger-dev",
     "nocobase"
   ],
-  "skills": "./skills/"
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Stack Composable Stack V1",
+    "shortDescription": "Com\n\n<!-- truncated: content exceeds the target's size limit -->",
+    "longDescription": "Composable Stack v1 dev plugin. Integrates PostgreSQL (direct MCP + PostgREST API), NocoDB, n8n, Trigger.dev, and NocoBase (prod + dev sandbox via nc-mcp) for building data-driven applications with low-code interfaces.",
+    "developerName": "Agents Store",
+    "category": "stack",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://agents.store"
+  }
 }

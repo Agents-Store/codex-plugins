@@ -1,7 +1,6 @@
 ---
 name: api-reference
 description: Use this skill on explicit request when the user asks for "Teams SDK API reference", "@microsoft/teams.* packages", "Teams App class options", "TS activity types", or needs precise signatures for `App`, `ChatPrompt`, `AdaptiveCard`, or other SDK types. Reference-only — does not auto-load.
-disable-model-invocation: true
 ---
 
 # Microsoft Teams SDK — API Reference (TypeScript)

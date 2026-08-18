@@ -15,5 +15,17 @@
     "env-sync",
     "llm-platform"
   ],
-  "skills": "./skills/"
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Dify Ops",
+    "shortDescription": "Dif\n\n<!-- truncated: content exceeds the target's size limit -->",
+    "longDescription": "Dify self-hosted update operations plugin. Pull upstream changes, merge into local dev branch, sync .env variables, detect Docker project names, and rebuild containers for Dify Docker deployments.",
+    "developerName": "AGENTS.STORE",
+    "category": "operations",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://agents.store"
+  }
 }

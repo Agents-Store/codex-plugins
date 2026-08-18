@@ -4,24 +4,7 @@
 
 Canonical source: https://github.com/agents-store/claude-public-plugins/tree/main/plugins/codemap-dev
 
-## MCP servers
-
-Add to `~/.codex/config.toml`:
-
-```toml
-[mcp_servers.drawio]
-url = "https://mcp.draw.io/mcp"
-type = "http"
-
-[mcp_servers.playwright]
-command = "npx"
-args = ["@playwright/mcp@latest","--headless"]
-
-```
-
 ## Skills
-
-This plugin ships the following skills under `skills/`. Codex loads them contextually:
 
 - **codemap-diagram** — This skill should be used when the user asks to "draw a diagram", "visualize architecture", "show me the database schema", "create an ERD", "sequence diagram", "flow diagram", "dependency graph", "architecture diagram", "C4 diagram", or needs any visual representation of code structure, data flow, or system architecture. All diagrams are generated as native mxGraph XML and rendered via drawio-mcp. Also triggers when a code explanation would benefit from a visual aid.
 
@@ -33,10 +16,22 @@ This plugin ships the following skills under `skills/`. Codex loads them context
 
 - **frontend-test** — This skill should be used when the user asks to "test the frontend", "check the UI", "explore the app in a browser", "test my admin panel", "find frontend bugs", "check for console errors", "verify the app works in a browser", "test user flows", "check the website", or wants a comprehensive frontend health report for a running application. Also triggers when the user says "open my app and test it", "browse my app", "check if the UI is working", or "give me a frontend report". Uses Playwright MCP to navigate, interact, and diagnose.
 
+- **db** — Parse models, migrations, or schema and generate an ERD diagram + DB documentation
+- **diagram** — Generate a specific diagram — architecture, flow, db, sequence, deps
+- **explain** — Step-by-step explanation of a file, function, or module with mini-diagram if appropriate
+- **flows** — Find main user flows (entry points → services → DB) and visualize them
+- **onboard** — Generate a full onboarding report — README summary, stack, folder structure, entry points, how to run locally, and 3 main diagrams (architecture, main flow, DB)
+- **review** — Review a file, directory, or PR diff in beginner-friendly mode — structured feedback with "why" explanations
+- **test-frontend** — Test a running app's frontend — navigate pages, check UI, find errors, generate report
 
 ## Subagents
 
-Defined under `.codex/agents/` as TOML files:
+Codex does not install plugin subagents automatically — copy them manually before use:
+
+```bash
+cp agents/*.toml ~/.codex/agents/        # personal
+cp agents/*.toml <repo>/.codex/agents/    # project-local
+```
 
 - **architect-explainer** — Use this agent when the user wants to understand project architecture, how components connect, what a module does, or needs a guided tour of a codebase.
 
@@ -155,227 +150,17 @@ Developer wants a structured report covering pages, flows, errors, and UI health
 </example>
 
 
-## Workflows (canonical slash commands)
+## MCP servers
 
-Codex CLI doesn't support custom slash commands — invoke these workflows via natural language. Each entry below is a prompt template you can adapt:
+Add to `~/.codex/config.toml`:
 
-### `db`
+```toml
+[mcp_servers.drawio]
+url = "https://mcp.draw.io/mcp"
+type = "http"
 
-Parse models, migrations, or schema and generate an ERD diagram + DB documentation
+[mcp_servers.playwright]
+command = "npx"
+args = ["@playwright/mcp@latest","--headless"]
 
-Arguments: `(no arguments — auto-detects models)`
-
-<details><summary>Prompt template</summary>
-
-# Database Schema ERD
-
-Analyze the database schema and generate an Entity-Relationship Diagram + documentation.
-
-## Instructions
-
-1. Read the primary skill:
-   - `${CLAUDE_PLUGIN_ROOT}/skills/codemap-diagram/SKILL.md` — ERD generation rules
-2. Read ERD-specific guidance from `${CLAUDE_PLUGIN_ROOT}/skills/codemap-diagram/references/diagram-types.md`
-
-3. Ensure output directories exist: `docs/codemap/diagrams/` — create if missing.
-
-4. Launch the **diagrammer** agent with a prompt to:
-   - Auto-detect the ORM (SQLAlchemy, Prisma, TypeORM, Django, raw SQL migrations)
-   - Parse all model definitions — tables, columns, types, foreign keys, relationships
-   - Review schema quality (missing indexes, naming inconsistencies, missing constraints)
-   - Generate ERD as mxGraph XML → save to `docs/codemap/diagrams/erd.drawio` → call drawio-mcp
-   - Generate `docs/codemap/DB.md` with table details, relationships, and quality notes
-
-</details>
-
-### `diagram`
-
-Generate a specific diagram — architecture, flow, db, sequence, deps
-
-Arguments: `<type> [scope] — types: architecture, flow <feature>, db, sequence <endpoint>, deps <module>`
-
-<details><summary>Prompt template</summary>
-
-# Generate Diagram
-
-Create a visual diagram for the specified aspect of the codebase. Request: $ARGUMENTS
-
-## Instructions
-
-1. Read the primary skill:
-   - `${CLAUDE_PLUGIN_ROOT}/skills/codemap-diagram/SKILL.md` — diagram generation rules and types
-
-2. Parse `$ARGUMENTS` for diagram type and optional scope:
-   - `architecture` → C4 container diagram of the entire system
-   - `flow <feature>` → flowchart of a specific feature
-   - `db` → ERD of all database tables
-   - `sequence <endpoint>` → sequence diagram for a request
-   - `deps <module>` → dependency graph for a module
-   - If no argument or unrecognized → ask user which type they want
-
-3. Launch the **diagrammer** agent with the diagram type, scope, and any additional context from the user's message.
-
-The agent analyzes code, builds mxGraph XML using templates, saves .drawio files, and calls drawio-mcp for interactive preview.
-
-</details>
-
-### `explain`
-
-Step-by-step explanation of a file, function, or module with mini-diagram if appropriate
-
-Arguments: `<file-path|module-path|symbol-name>`
-
-<details><summary>Prompt template</summary>
-
-# Explain Code for Beginners
-
-Provide a structured, beginner-friendly explanation. Target: $ARGUMENTS
-
-## Instructions
-
-1. Read the primary skill:
-   - `${CLAUDE_PLUGIN_ROOT}/skills/codemap-explain/SKILL.md` — 4-layer explanation model
-
-2. Parse `$ARGUMENTS` to determine scope:
-   - If it's a file path → pass the file path to the agent
-   - If it's a directory → pass the directory path to the agent
-   - If it's a symbol (function/class name) → pass the symbol name to the agent
-   - If no argument → ask user what to explain
-
-3. Launch the **architect-explainer** agent with a prompt describing the target and any additional context from the user's message.
-
-The agent applies the 4-layer model (Context → Data Flow → Details → Pitfalls), adjusts depth by scope, and generates mini-diagrams when 3+ components interact.
-
-</details>
-
-### `flows`
-
-Find main user flows (entry points → services → DB) and visualize them
-
-Arguments: `(no arguments — auto-discovers flows)`
-
-<details><summary>Prompt template</summary>
-
-# Discover and Visualize User Flows
-
-Find the main user flows in the project and generate visual diagrams for each.
-
-## Instructions
-
-1. Read the primary skill:
-   - `${CLAUDE_PLUGIN_ROOT}/skills/codemap-explain/SKILL.md` — for understanding and tracing flows
-
-2. Ensure output directories exist: `docs/codemap/diagrams/` — create if missing.
-
-3. Launch the **architect-explainer** agent with a prompt to:
-   - Discover all route definitions / API endpoints / CLI commands
-   - Group them into logical user flows (auth, CRUD, key features)
-   - For each major flow (max 5-6): trace the call chain, identify decision points, note DB operations
-   - Generate a flowchart diagram for each flow via the codemap-diagram skill
-   - Save diagrams to `docs/codemap/diagrams/flow-{name}.drawio`
-   - Write `docs/codemap/FLOWS.md` with flow descriptions and diagram links
-
-</details>
-
-### `onboard`
-
-Generate a full onboarding report — README summary, stack, folder structure, entry points, how to run locally, and 3 main diagrams (architecture, main flow, DB)
-
-Arguments: `(no arguments — analyzes current project)`
-
-<details><summary>Prompt template</summary>
-
-# Onboard to Current Project
-
-Generate a comprehensive onboarding package for a developer joining this project.
-
-## Instructions
-
-1. Read the primary skill:
-   - `${CLAUDE_PLUGIN_ROOT}/skills/codemap-explain/SKILL.md` — explanation methodology
-
-2. Ensure output directories exist: `docs/codemap/diagrams/` — create if missing.
-
-3. Launch the **architect-explainer** agent with a prompt to perform the full onboarding:
-
-   **Phase 1 — Project Analysis:**
-   - Read root files (README.md, CLAUDE.md, package.json/requirements.txt, docker-compose, .env.example)
-   - Scan directory structure, identify tech stack, find entry points
-   - Read model definitions and key configuration
-
-   **Phase 2 — Generate Documentation:**
-   - Create `docs/codemap/ONBOARDING.md` (overview, stack, directory structure, entry points, how to run, key concepts)
-   - Create `docs/codemap/ARCHITECTURE.md` (components, data flow, layers, external dependencies)
-
-   **Phase 3 — Generate 3 Diagrams** (via codemap-diagram skill):
-   - `docs/codemap/diagrams/architecture.drawio` — C4 container diagram
-   - `docs/codemap/diagrams/main-flow.drawio` — primary user flow
-   - `docs/codemap/diagrams/erd.drawio` — database ERD
-
-   **Phase 4 — Verification (MANDATORY):**
-   - Verify all 3 diagrams were created: architecture.drawio, main-flow.drawio, erd.drawio
-   - If any diagram is missing, generate it before proceeding
-   - Verify all files are `.drawio` (not `.mmd` or any other format)
-
-   **Phase 5 — Summary:**
-   - List all generated files with descriptions
-   - Show diagram preview URLs
-   - Suggest next steps
-
-</details>
-
-### `review`
-
-Review a file, directory, or PR diff in beginner-friendly mode — structured feedback with "why" explanations
-
-Arguments: `<file-path|directory|PR#>`
-
-<details><summary>Prompt template</summary>
-
-# Beginner-Friendly Code Review
-
-Review code with educational explanations. Target: $ARGUMENTS
-
-## Instructions
-
-1. Read the primary skill:
-   - `${CLAUDE_PLUGIN_ROOT}/skills/codemap-review/SKILL.md` — review methodology and output format
-
-2. Parse `$ARGUMENTS` to determine what to review:
-   - If it's a file path → pass the file path to the agent
-   - If it's a directory → pass the directory path to the agent
-   - If it's a PR number (e.g., `#15` or `15`) → pass the PR number to the agent
-   - If no argument → ask user what to review
-
-3. Launch the **code-reviewer** agent with a prompt describing the target and any additional context from the user's message.
-
-The agent applies 5-dimension analysis (Security, Correctness, Readability, Patterns, Beginner Pitfalls), generates educational findings, and uses codemap-explain/codemap-diagram skills when needed.
-
-</details>
-
-### `test-frontend`
-
-Test a running app's frontend — navigate pages, check UI, find errors, generate report
-
-Arguments: `[url] — e.g. localhost:3000, http://localhost:8080/admin`
-
-<details><summary>Prompt template</summary>
-
-# Frontend Testing
-
-Test the frontend of a running application via Playwright MCP. Target: $ARGUMENTS
-
-## Instructions
-
-1. Read the primary skill:
-   - `${CLAUDE_PLUGIN_ROOT}/skills/frontend-test/SKILL.md` — frontend testing methodology and report format
-
-2. Parse `$ARGUMENTS` for the target URL:
-   - If a URL is provided (e.g., `localhost:3000`, `http://localhost:8080/admin`) → pass it to the agent
-   - If no argument → the agent will attempt to detect the dev server from project config (package.json, docker-compose, etc.), or ask the user
-
-3. Launch the **frontend-tester** agent with the target URL and any additional context from the user's message (e.g., specific pages to test, credentials for auth, areas of concern).
-
-The agent navigates the app via Playwright MCP, explores pages, tests interactions, checks console/network errors, takes screenshots, and generates a structured report at `docs/codemap/FRONTEND.md`.
-
-</details>
+```

@@ -5,5 +5,34 @@
   "author": {
     "name": "AGENTS.STORE"
   },
-  "skills": "./skills/"
+  "keywords": [
+    "multi-bank",
+    "monobank",
+    "privatbank",
+    "banking",
+    "finance",
+    "broadcast",
+    "balances",
+    "transactions",
+    "payments",
+    "salary",
+    "budget",
+    "reports",
+    "ukrainian-banks",
+    "mcp"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Multi Bank",
+    "shortDescription": "Mul\n\n<!-- truncated: content exceeds the target's size limit -->",
+    "longDescription": "Multi-Bank Account Manager with broadcast architecture pattern. Aggregates financial data from Monobank and PrivatBank via MCP tools, broadcasts balance updates and budget alerts to subscribed components, categorizes transactions, and exports financial reports in CSV/PDF.",
+    "developerName": "AGENTS.STORE",
+    "category": "finance",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://agents.store"
+  }
 }

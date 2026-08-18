@@ -1,10 +1,7 @@
 ---
 name: auth-integration
-description: >
-  Use when the user asks about "Flask-Login with SQLAlchemy", "user authentication",
-  "login registration flow", "password hashing", "protect routes",
-  "current_user with database", "session management Flask",
-  or needs patterns for integrating Flask-Login authentication with SQLAlchemy user models.
+description: |
+  Use when the user asks about "Flask-Login with SQLAlchemy", "user authentication", "login registration flow", "password hashing", "protect routes", "current_user with database", "session management Flask", or needs patterns for integrating Flask-Login authentication with SQLAlchemy user models.
 ---
 
 # Flask-Login + SQLAlchemy Auth Integration

@@ -1,25 +1,6 @@
 ---
 name: knowledge-update
 description: Corrects outdated LLM knowledge about the Vercel platform and introduces new products. Injected at session start.
-metadata:
-  priority: 10
-  sessionStart: true
-  docs:
-    - "https://vercel.com/docs"
-  pathPatterns:
-    - 'vercel.ts'
-  bashPatterns: []
-  importPatterns: []
-  promptSignals:
-    phrases:
-      - "knowledge update"
-      - "outdated knowledge"
-      - "fluid compute"
-      - "vercel.ts"
-    allOf: []
-    anyOf: []
-    noneOf: []
-    minScore: 6
 ---
 
 # Vercel Knowledge Updates (2026-02-27)

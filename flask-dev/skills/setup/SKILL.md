@@ -1,9 +1,7 @@
 ---
 name: setup
-description: >
-  Use when the user asks to "verify Flask project setup", "check Flask structure",
-  "is my Flask app set up correctly", "validate Flask project", or needs to confirm
-  that a Flask project follows recommended patterns and has correct file structure.
+description: |
+  Use when the user asks to "verify Flask project setup", "check Flask structure", "is my Flask app set up correctly", "validate Flask project", or needs to confirm that a Flask project follows recommended patterns and has correct file structure.
 ---
 
 # Flask Project Setup Verification

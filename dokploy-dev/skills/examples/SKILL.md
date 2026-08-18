@@ -1,6 +1,6 @@
 ---
 name: examples
-description: "This skill should be used when learning how to deploy apps, provision databases, set up Docker Compose stacks, or debug a failed deployment on Dokploy. Provides end-to-end workflow walkthroughs. Triggers: \"dokploy example\", \"how to deploy on dokploy\", \"dokploy tutorial\", \"dokploy walkthrough\", \"show me how to use dokploy\", \"dokploy debug example\"."
+description: 'This skill should be used when learning how to deploy apps, provision databases, set up Docker Compose stacks, or debug a failed deployment on Dokploy. Provides end-to-end workflow walkthroughs. Triggers: "dokploy example", "how to deploy on dokploy", "dokploy tutorial", "dokploy walkthrough", "show me how to use dokploy", "dokploy debug example".'
 ---
 
 # Dokploy Examples

@@ -1,18 +1,6 @@
 ---
 name: persona-sales-ops
-description: "Manage sales workflows — track deals, schedule calls, client comms."
-metadata:
-  version: 0.22.5
-  openclaw:
-    category: "persona"
-    requires:
-      bins:
-        - gws
-      skills:
-        - gws-gmail
-        - gws-calendar
-        - gws-sheets
-        - gws-drive
+description: Manage sales workflows — track deals, schedule calls, client comms.
 ---
 
 # Sales Operations
@@ -37,4 +25,3 @@ Manage sales workflows — track deals, schedule calls, client comms.
 - Use `gws gmail +triage --query 'from:client-domain.com'` to filter client emails.
 - Schedule follow-up calls immediately after meetings to maintain momentum.
 - Keep all client-facing documents in a dedicated shared Drive folder.
-

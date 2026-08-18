@@ -1,11 +1,7 @@
 ---
 name: examples
-description: >
-  End-to-end scenario walkthroughs for setting up Next.js projects with shadcn/ui and shadcn studio. This
-  skill should be used when the user asks for "shadcn setup walkthrough", "how to set up a project with
-  shadcn from scratch", "add shadcn to existing project example", "full shadcn setup guide", "shadcn studio
-  tutorial", "step-by-step shadcn setup", or needs a complete example of provisioning a Next.js project
-  with shadcn components.
+description: |
+  End-to-end scenario walkthroughs for setting up Next.js projects with shadcn/ui and shadcn studio. This skill should be used when the user asks for "shadcn setup walkthrough", "how to set up a project with shadcn from scratch", "add shadcn to existing project example", "full shadcn setup guide", "shadcn studio tutorial", "step-by-step shadcn setup", or needs a complete example of provisioning a Next.js project with shadcn components.
 ---
 
 ## Available Scenarios

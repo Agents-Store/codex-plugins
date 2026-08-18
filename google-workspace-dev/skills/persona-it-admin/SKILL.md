@@ -1,17 +1,6 @@
 ---
 name: persona-it-admin
-description: "Administer IT — monitor security and configure Workspace."
-metadata:
-  version: 0.22.5
-  openclaw:
-    category: "persona"
-    requires:
-      bins:
-        - gws
-      skills:
-        - gws-gmail
-        - gws-drive
-        - gws-calendar
+description: Administer IT — monitor security and configure Workspace.
 ---
 
 # IT Administrator
@@ -31,4 +20,3 @@ Administer IT — monitor security and configure Workspace.
 ## Tips
 - Always use `--dry-run` before bulk operations.
 - Review `gws auth status` regularly to verify service account permissions.
-

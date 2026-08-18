@@ -1,6 +1,6 @@
 ---
 name: setup
-description: "This skill should be used when verifying Dokploy MCP connection, CLI installation, and API access. Use when user says \"set up dokploy\", \"verify dokploy connection\", \"check dokploy\", \"test dokploy access\", or enables the dokploy-dev plugin for the first time."
+description: This skill should be used when verifying Dokploy MCP connection, CLI installation, and API access. Use when user says "set up dokploy", "verify dokploy connection", "check dokploy", "test dokploy access", or enables the dokploy-dev plugin for the first time.
 ---
 
 # Dokploy Setup and Verification

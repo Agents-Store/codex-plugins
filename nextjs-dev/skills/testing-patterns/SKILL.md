@@ -1,11 +1,7 @@
 ---
 name: testing-patterns
-description: >
-  Next.js testing patterns with Vitest and Playwright. Use when the user asks about
-  "testing Next.js", "unit tests", "integration tests", "E2E tests", "Vitest with Next.js",
-  "Playwright", "testing Server Components", "testing Server Actions", "testing Route Handlers",
-  "mocking next/navigation", "mocking next/headers", or needs guidance on test setup and
-  patterns for App Router applications.
+description: |
+  Next.js testing patterns with Vitest and Playwright. Use when the user asks about "testing Next.js", "unit tests", "integration tests", "E2E tests", "Vitest with Next.js", "Playwright", "testing Server Components", "testing Server Actions", "testing Route Handlers", "mocking next/navigation", "mocking next/headers", or needs guidance on test setup and patterns for App Router applications.
 ---
 
 # Testing Patterns

@@ -15,5 +15,17 @@
     "sqlalchemy",
     "python"
   ],
-  "skills": "./skills/"
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Stack Flask Sqlalchemy Dev",
+    "shortDescription": "Fla\n\n<!-- truncated: content exceeds the target's size limit -->",
+    "longDescription": "Flask + SQLAlchemy stack dev plugin for Agents Store. Integration patterns for app factory wiring, blueprint-model coordination, Flask-Login + SQLAlchemy auth, Jinja2 + query data, and full-feature recipes.",
+    "developerName": "Agents Store",
+    "category": "development",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://agents.store"
+  }
 }

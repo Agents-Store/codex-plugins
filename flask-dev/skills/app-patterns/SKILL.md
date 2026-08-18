@@ -1,10 +1,7 @@
 ---
 name: app-patterns
-description: >
-  Use when the user asks about "Flask application factory", "Flask blueprints",
-  "Flask config management", "Flask extensions", "organize Flask project",
-  "Flask app structure", "register Flask blueprint", "Flask context processors",
-  or needs patterns for structuring a Flask application.
+description: |
+  Use when the user asks about "Flask application factory", "Flask blueprints", "Flask config management", "Flask extensions", "organize Flask project", "Flask app structure", "register Flask blueprint", "Flask context processors", or needs patterns for structuring a Flask application.
 ---
 
 # Flask Application Patterns

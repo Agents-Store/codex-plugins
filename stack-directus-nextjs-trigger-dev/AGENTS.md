@@ -4,31 +4,7 @@
 
 Canonical source: https://github.com/agents-store/claude-public-plugins/tree/main/plugins/stack-directus-nextjs-trigger-dev
 
-## MCP servers
-
-Add to `~/.codex/config.toml`:
-
-```toml
-[mcp_servers.directus]
-url = "${NEXT_PUBLIC_DIRECTUS_URL}/mcp"
-type = "http"
-
-[mcp_servers.directus.headers]
-"Authorization" = "Bearer ${DIRECTUS_ADMIN_TOKEN}"
-
-[mcp_servers.trigger-dev]
-command = "npx"
-args = ["trigger.dev@latest","mcp"]
-
-[mcp_servers.trigger-dev.env]
-"TRIGGER_ACCESS_TOKEN" = "${TRIGGER_SECRET_KEY}"
-"TRIGGER_API_URL" = "${TRIGGER_API_URL}"
-
-```
-
 ## Skills
-
-This plugin ships the following skills under `skills/`. Codex loads them contextually:
 
 - **authentication** — This skill should be used when the user wants to "add authentication to Directus + Next.js", "implement Directus login in Next.js", "use NextAuth with Directus", "protect Next.js pages with Directus auth", "set up cookie-based auth for Directus SSR", or needs patterns for authenticating users across Directus and Next.js.
 - **background-tasks** — This skill should be used when the user wants to "offload work to trigger.dev from next.js", "run background job from a server action", "trigger a task from a route handler", "call tasks.trigger from next.js app router", "delegate slow work to trigger.dev", "show realtime task status in next.js", "fix force-dynamic error with trigger.dev", "handle onclick trigger.dev server action", or needs the integration patterns between Next.js (App Router) and Trigger.dev for event-driven background work.
@@ -42,7 +18,12 @@ This plugin ships the following skills under `skills/`. Codex loads them context
 
 ## Subagents
 
-Defined under `.codex/agents/` as TOML files:
+Codex does not install plugin subagents automatically — copy them manually before use:
+
+```bash
+cp agents/*.toml ~/.codex/agents/        # personal
+cp agents/*.toml <repo>/.codex/agents/    # project-local
+```
 
 - **stack-orchestrator** — Use this agent when the user needs help coordinating work across Directus, Next.js, and Trigger.dev — building pages that display Directus content, setting up authentication, offloading slow work to background tasks, defining scheduled jobs, or implementing features that span all three services.
 
@@ -109,3 +90,25 @@ Cross-service debugging requires understanding Directus CORS, next.config.ts rem
 </commentary>
 </example>
 
+
+## MCP servers
+
+Add to `~/.codex/config.toml`:
+
+```toml
+[mcp_servers.directus]
+url = "${NEXT_PUBLIC_DIRECTUS_URL}/mcp"
+type = "http"
+
+[mcp_servers.directus.headers]
+"Authorization" = "Bearer ${DIRECTUS_ADMIN_TOKEN}"
+
+[mcp_servers.trigger-dev]
+command = "npx"
+args = ["trigger.dev@latest","mcp"]
+
+[mcp_servers.trigger-dev.env]
+"TRIGGER_ACCESS_TOKEN" = "${TRIGGER_SECRET_KEY}"
+"TRIGGER_API_URL" = "${TRIGGER_API_URL}"
+
+```

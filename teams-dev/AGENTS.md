@@ -6,8 +6,6 @@ Canonical source: https://github.com/agents-store/claude-public-plugins/tree/mai
 
 ## Skills
 
-This plugin ships the following skills under `skills/`. Codex loads them contextually:
-
 - **adaptive-cards** — Use this skill when the user is building or sending Adaptive Cards from a Microsoft Teams bot in TypeScript — using `AdaptiveCard`, `TextBlock`, `TextInput`, `ActionSet`, `Action.Submit`, `Action.Execute`, attaching cards via `cardAttachment`, or pasting JSON from the Adaptive Card Designer into TS builders. Triggers on "Teams card", "Adaptive Card", "Action.Submit", "card form".
 - **ai-agents** — Use this skill when the user is adding LLM-powered behavior to a Microsoft Teams bot — building a `ChatPrompt`, attaching `OpenAIChatModel` (OpenAI or Azure OpenAI), registering function tools, streaming responses, or composing multi-agent flows with `A2AClientPlugin`. Triggers on "AI Teams bot", "ChatPrompt", "OpenAI Teams", "function calling Teams", "streaming Teams response", "A2A agent".
 - **api-reference** — Use this skill on explicit request when the user asks for "Teams SDK API reference", "@microsoft/teams.* packages", "Teams App class options", "TS activity types", or needs precise signatures for `App`, `ChatPrompt`, `AdaptiveCard`, or other SDK types. Reference-only — does not auto-load.
@@ -26,10 +24,17 @@ This plugin ships the following skills under `skills/`. Codex loads them context
 - **setup** — Use this skill when the user is preparing a development environment for Microsoft Teams app development — installing the Teams Developer CLI, verifying Node version, confirming a Teams sideloading-enabled tenant, or troubleshooting "command not found" / "teams CLI not installed" / "no Microsoft 365 dev tenant" errors before any other Teams work begins.
 - **tabs** — Use this skill when the user is building a static-hosted tab inside a Microsoft Teams app — serving a web page from the bot's server via `app.tab()`, using the `@microsoft/teams.client` SDK to call back into Teams, configuring tab context, or wiring a personal / channel / dialog tab. Triggers on "Teams tab", "static tab", "configurable tab", "Teams client SDK".
 - **troubleshoot** — Use this skill when the user is debugging a Microsoft Teams app problem — sideload failures, "bot did not reply", SSO `signin.token-exchange` errors, manifest validation, endpoint mismatches, Adaptive Card rendering issues, or any "why isn't my Teams bot working" question. Triggers on "Teams bot not responding", "sideload error", "Teams 401", "Teams 403", "Teams app manifest invalid".
+- **add-feature** — Add a feature (message handler, Adaptive Card, dialog, message extension, tab, AI agent, MCP plugin, SSO, Graph call) to an existing Microsoft Teams app
+- **scaffold** — Scaffold a new Microsoft Teams bot, tab, AI agent, or Graph app with the Teams Developer CLI
 
 ## Subagents
 
-Defined under `.codex/agents/` as TOML files:
+Codex does not install plugin subagents automatically — copy them manually before use:
+
+```bash
+cp agents/*.toml ~/.codex/agents/        # personal
+cp agents/*.toml <repo>/.codex/agents/    # project-local
+```
 
 - **teams-developer** — Use this agent when the user needs help building a Microsoft Teams application in TypeScript or JavaScript with the official `@microsoft/teams.*` SDK — bots, message extensions, tabs, dialogs, Adaptive Cards, AI agents, MCP/A2A integrations, Microsoft Graph calls, SSO, sideloading, sovereign-cloud configuration, or debugging the `teams` CLI / DevTools workflow.
 
@@ -60,86 +65,3 @@ AI integration spans the ai-agents skill (prompt/model) and messaging skill (str
 </commentary>
 </example>
 
-
-## Workflows (canonical slash commands)
-
-Codex CLI doesn't support custom slash commands — invoke these workflows via natural language. Each entry below is a prompt template you can adapt:
-
-### `add-feature`
-
-Add a feature (message handler, Adaptive Card, dialog, message extension, tab, AI agent, MCP plugin, SSO, Graph call) to an existing Microsoft Teams app
-
-Arguments: `<feature>`
-
-<details><summary>Prompt template</summary>
-
-# /teams-dev:add-feature
-
-Adds an incremental feature to an existing Microsoft Teams app built on `@microsoft/teams.*`. The argument selects the feature to add.
-
-## Feature router
-
-Match `$ARGUMENTS` (case-insensitive, hyphens and spaces interchangeable):
-
-| Argument | Skill to invoke | Outcome |
-|---|---|---|
-| `message`, `message-handler`, `bot` | `messaging` | New `app.on('message', …)` handler with reply/typing patterns |
-| `card`, `adaptive-card` | `adaptive-cards` | Build a card with `AdaptiveCard` + `cardAttachment('adaptive', card)` |
-| `dialog`, `task-module` | `dialogs` | `dialog.open.<id>` + `dialog.submit.<id>` handlers |
-| `message-extension`, `compose-extension`, `me` | `message-extensions` | `message.ext.query` and/or `submit` handlers + manifest changes |
-| `tab`, `static-tab` | `tabs` | `app.tab('name', path)` and client-side SDK wiring |
-| `ai`, `ai-agent`, `chat-prompt` | `ai-agents` | `ChatPrompt` + `OpenAIChatModel` and message-handler integration |
-| `mcp`, `mcp-server`, `mcp-client` | `mcp-plugin` | `@microsoft/teams.mcp` server registration or client config |
-| `sso`, `auth`, `signin` | `authentication` | Token-exchange + verify-state handlers, manifest scope update |
-| `graph`, `microsoft-graph` | `graph-integration` | `api.graph.*` call with user-or-app token |
-
-If no argument matches, ask the user which of these to add — do not guess.
-
-## Steps
-
-1. Glob the project: `Read` `package.json`, `src/index.ts` (or `src/main.ts`), and `appPackage/manifest.json`.
-2. Invoke the matching skill from the table.
-3. Propose a minimal diff. Do not refactor untouched code.
-4. After applying the diff, run `npx tsc --noEmit` to catch type errors before suggesting `npm run dev`.
-
-## Notes
-
-- Always re-read `src/index.ts` before editing — the user may have customised `new App({ … })` options.
-- For features that touch the manifest (`bot`, `message-extension`, `tab`, `sso`), update `appPackage/manifest.json` and remind the user that sideloading must be re-run with `teams app update`.
-- Streaming responses only work in 1:1 chats; in channels/groups, emit the full response at the end. Flag this when adding `ai-agent`.
-
-</details>
-
-### `scaffold`
-
-Scaffold a new Microsoft Teams bot, tab, AI agent, or Graph app with the Teams Developer CLI
-
-Arguments: `<project-name> [template?]`
-
-<details><summary>Prompt template</summary>
-
-# /teams-dev:scaffold
-
-Bootstraps a new Microsoft Teams application in the current working directory using `@microsoft/teams.cli`. Args:
-
-- `$ARG1` — project folder name (required), e.g. `quote-agent`
-- `$ARG2` — template (optional, default `echo`). Allowed: `echo`, `ai`, `graph`, `tab`.
-
-## Steps
-
-1. Invoke `Skill: setup` to confirm Node 18+ and a Teams developer account.
-2. If `teams --version` fails, run `npm i -g @microsoft/teams.cli@preview`.
-3. Run `teams project new typescript "$ARG1" --template "${ARG2:-echo}"`.
-4. Cd into the new directory and `npm install`.
-5. Open `src/index.ts`, `appPackage/manifest.json`, and `.env` to confirm scaffolding.
-6. Read `Skill: getting-started` for next steps (run `npm run dev`, set up a devtunnel, sideload into Teams).
-
-## Notes
-
-- Template `echo` is the simplest message-echo bot; pick it unless the user asked otherwise.
-- Template `ai` wires up `@microsoft/teams.ai` with a `ChatPrompt` + `OpenAIChatModel` — needs `OPENAI_API_KEY` in `.env`.
-- Template `graph` wires up `api.graph` calls with user-token auth — needs SSO setup; route through `Skill: authentication` before testing.
-- Template `tab` scaffolds a static-hosted React tab — pair with `Skill: tabs` for client-side SDK usage.
-- Do not commit `.env` or `appPackage/manifest.json` rewrites that contain real `botId` values.
-
-</details>

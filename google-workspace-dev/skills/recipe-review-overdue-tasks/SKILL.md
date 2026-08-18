@@ -1,16 +1,6 @@
 ---
 name: recipe-review-overdue-tasks
-description: "Find Google Tasks that are past due and need attention."
-metadata:
-  version: 0.22.5
-  openclaw:
-    category: "recipe"
-    domain: "productivity"
-    requires:
-      bins:
-        - gws
-      skills:
-        - gws-tasks
+description: Find Google Tasks that are past due and need attention.
 ---
 
 # Review Overdue Tasks
@@ -24,4 +14,3 @@ Find Google Tasks that are past due and need attention.
 1. List task lists: `gws tasks tasklists list --format table`
 2. List tasks with status: `gws tasks tasks list --params '{"tasklist": "TASKLIST_ID", "showCompleted": false}' --format table`
 3. Review due dates and prioritize overdue items
-

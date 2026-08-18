@@ -1,10 +1,7 @@
 ---
 name: create-tables
-description: >
-  This skill should be used when the user asks to "create a table", "design a schema",
-  "set up a database", "create PostgreSQL tables for NocoDB", "create tables for NocoBase
-  external DB", "what PK type to use", or needs to understand how NocoDB and NocoBase
-  interact with the same PostgreSQL database.
+description: |
+  This skill should be used when the user asks to "create a table", "design a schema", "set up a database", "create PostgreSQL tables for NocoDB", "create tables for NocoBase external DB", "what PK type to use", or needs to understand how NocoDB and NocoBase interact with the same PostgreSQL database.
 ---
 
 # Create Tables — PostgreSQL External Database

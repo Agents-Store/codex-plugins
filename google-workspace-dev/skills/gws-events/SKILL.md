@@ -1,14 +1,6 @@
 ---
 name: gws-events
-description: "Subscribe to Google Workspace events."
-metadata:
-  version: 0.22.5
-  openclaw:
-    category: "productivity"
-    requires:
-      bins:
-        - gws
-    cliHelp: "gws events --help"
+description: Subscribe to Google Workspace events.
 ---
 
 # events (v1)
@@ -65,4 +57,3 @@ gws schema events.<resource>.<method>
 ```
 
 Use `gws schema` output to build your `--params` and `--json` flags.
-

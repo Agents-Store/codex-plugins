@@ -6,8 +6,6 @@ Canonical source: https://github.com/agents-store/claude-public-plugins/tree/mai
 
 ## Skills
 
-This plugin ships the following skills under `skills/`. Codex loads them contextually:
-
 - **examples** — Use when the user wants a worked end-to-end example of combining Google Workspace services with the gws CLI — e.g. "show me an example", "how do I turn emails into tasks", "build a report from a sheet and email it", "prep for my next meeting", "create events from a spreadsheet". Walks through multi-step scenarios that chain several gws-*/recipe-* skills.
 - **google-workspace-setup** — Use when installing or troubleshooting the gws (Google Workspace CLI) that powers every google-workspace-dev skill. Triggers on "install gws", "gws auth setup", "gws auth login", "set up Google Workspace CLI", "connect Gmail/Drive/Calendar", or errors like "command not found: gws", "Access blocked", "403 accessNotConfigured", "redirect_uri_mismatch", or "too many scopes".
 - **gws-admin-reports** — Google Workspace Admin SDK: Audit logs and usage reports.

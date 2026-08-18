@@ -1,14 +1,6 @@
 ---
 name: gws-forms
-description: "Read and write Google Forms."
-metadata:
-  version: 0.22.5
-  openclaw:
-    category: "productivity"
-    requires:
-      bins:
-        - gws
-    cliHelp: "gws forms --help"
+description: Read and write Google Forms.
 ---
 
 # forms (v1)
@@ -43,4 +35,3 @@ gws schema forms.<resource>.<method>
 ```
 
 Use `gws schema` output to build your `--params` and `--json` flags.
-

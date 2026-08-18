@@ -6,10 +6,10 @@
         "-y",
         "@dokploy/mcp"
       ],
-      "env": {
-        "DOKPLOY_URL": "${DOKPLOY_URL}",
-        "DOKPLOY_API_KEY": "${DOKPLOY_API_KEY}"
-      }
+      "env_vars": [
+        "DOKPLOY_URL",
+        "DOKPLOY_API_KEY"
+      ]
     }
   }
 }

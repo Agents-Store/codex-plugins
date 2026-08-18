@@ -1,18 +1,6 @@
 ---
 name: persona-hr-coordinator
-description: "Handle HR workflows — onboarding, announcements, and employee comms."
-metadata:
-  version: 0.22.5
-  openclaw:
-    category: "persona"
-    requires:
-      bins:
-        - gws
-      skills:
-        - gws-gmail
-        - gws-calendar
-        - gws-drive
-        - gws-chat
+description: Handle HR workflows — onboarding, announcements, and employee comms.
 ---
 
 # HR Coordinator
@@ -35,4 +23,3 @@ Handle HR workflows — onboarding, announcements, and employee comms.
 ## Tips
 - Always use `--sanitize` for PII-sensitive operations.
 - Create a dedicated 'HR Onboarding' calendar for tracking orientation schedules.
-

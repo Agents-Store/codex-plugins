@@ -1,10 +1,7 @@
 ---
 name: troubleshoot
-description: >
-  This skill should be used when the user asks about "incompatible types", "what to avoid",
-  "schema checklist", "NocoDB doesn't recognize", "NocoBase can't read", "ARRAY not working",
-  "ENUM alternative", "naming conventions", "validation checklist", or encounters issues
-  with a PostgreSQL schema connected to NocoDB or NocoBase.
+description: |
+  This skill should be used when the user asks about "incompatible types", "what to avoid", "schema checklist", "NocoDB doesn't recognize", "NocoBase can't read", "ARRAY not working", "ENUM alternative", "naming conventions", "validation checklist", or encounters issues with a PostgreSQL schema connected to NocoDB or NocoBase.
 ---
 
 # Troubleshoot — Anti-Patterns and Verification

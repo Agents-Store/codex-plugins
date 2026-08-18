@@ -1,11 +1,7 @@
 ---
 name: setup
-description: >
-  This skill should be used when the user asks how to "connect to the Dify API",
-  "authenticate with Dify", "get a Dify API key", "what is the Dify base URL",
-  "blocking vs streaming in Dify", "the Dify user field", "send files to a Dify app",
-  or needs the app metadata endpoints (/info, /parameters, /meta, /site). Foundation
-  for every other Dify API call.
+description: |
+  This skill should be used when the user asks how to "connect to the Dify API", "authenticate with Dify", "get a Dify API key", "what is the Dify base URL", "blocking vs streaming in Dify", "the Dify user field", "send files to a Dify app", or needs the app metadata endpoints (/info, /parameters, /meta, /site). Foundation for every other Dify API call.
 ---
 
 # Dify API — Setup & Fundamentals

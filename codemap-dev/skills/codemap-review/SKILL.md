@@ -1,11 +1,7 @@
 ---
 name: codemap-review
-description: >
-  This skill should be used when the user asks to "review code", "check this file", "what's wrong with this code",
-  "review my PR", "code quality check", "find issues in this code", or wants feedback on
-  readability, style, security, or common beginner mistakes. Provides structured review
-  with "why" explanations, not just "what" fixes. Also triggers when a developer asks
-  "is this code okay", "what can I improve", or "check my work".
+description: |
+  This skill should be used when the user asks to "review code", "check this file", "what's wrong with this code", "review my PR", "code quality check", "find issues in this code", or wants feedback on readability, style, security, or common beginner mistakes. Provides structured review with "why" explanations, not just "what" fixes. Also triggers when a developer asks "is this code okay", "what can I improve", or "check my work".
 ---
 
 # Code Review for Beginners

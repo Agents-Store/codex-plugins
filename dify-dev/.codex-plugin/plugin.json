@@ -17,5 +17,17 @@
     "agents-store",
     "llm-platform"
   ],
-  "skills": "./skills/"
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Dify Dev",
+    "shortDescription": "Dif\n\n<!-- truncated: content exceeds the target's size limit -->",
+    "longDescription": "Dify API dev plugin for Agents Store. Complete coverage of the Dify App Service API (chat, completion, workflows, conversations, files, audio, annotations) and the Knowledge Base / Datasets API — auth, endpoints, streaming events, curl examples, and troubleshooting.",
+    "developerName": "AGENTS.STORE",
+    "category": "development",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://agents.store"
+  }
 }

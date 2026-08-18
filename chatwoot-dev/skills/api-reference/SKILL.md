@@ -1,7 +1,6 @@
 ---
 name: api-reference
 description: This skill should be used when the user asks for "Chatwoot API endpoints", "Chatwoot REST API", "Chatwoot curl examples", "Chatwoot Application/Platform/Public API", "Chatwoot API documentation", or needs specific HTTP endpoint, request, or response details for Chatwoot.
-disable-model-invocation: true
 ---
 
 # Chatwoot API Reference

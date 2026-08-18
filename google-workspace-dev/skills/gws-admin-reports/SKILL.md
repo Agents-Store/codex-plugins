@@ -1,14 +1,6 @@
 ---
 name: gws-admin-reports
-description: "Google Workspace Admin SDK: Audit logs and usage reports."
-metadata:
-  version: 0.22.5
-  openclaw:
-    category: "productivity"
-    requires:
-      bins:
-        - gws
-    cliHelp: "gws admin-reports --help"
+description: 'Google Workspace Admin SDK: Audit logs and usage reports.'
 ---
 
 # admin-reports (reports_v1)
@@ -55,4 +47,3 @@ gws schema admin-reports.<resource>.<method>
 ```
 
 Use `gws schema` output to build your `--params` and `--json` flags.
-

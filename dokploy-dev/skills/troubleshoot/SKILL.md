@@ -1,6 +1,6 @@
 ---
 name: troubleshoot
-description: "This skill is the symptom-to-cause lookup reference for Dokploy problems — domains, databases, Docker, Traefik, MCP connection. Use for known-symptom diagnosis. For an end-to-end failed-deploy workflow, the canonical entry point is the `debug-deploy` skill and the `/dokploy-dev:debug` command. Triggers: \"dokploy 502\", \"domain not resolving\", \"database connection refused\", \"mcp tools not found\", \"dokploy api 401\", \"traefik dashboard\"."
+description: 'This skill is the symptom-to-cause lookup reference for Dokploy problems — domains, databases, Docker, Traefik, MCP connection. Use for known-symptom diagnosis. For an end-to-end failed-deploy workflow, the canonical entry point is the `debug-deploy` skill and the `/dokploy-dev:debug` command. Triggers: "dokploy 502", "domain not resolving", "database connection refused", "mcp tools not found", "dokploy api 401", "traefik dashboard".'
 ---
 
 # Dokploy Troubleshooting Reference

@@ -1,7 +1,6 @@
 ---
 name: api-reference
 description: This skill should be used when the user asks for "Jira API endpoints", "Confluence API endpoints", "Jira/Confluence REST API", "Atlassian curl examples", "the exact method/parameters" for any Jira or Confluence resource, or needs HTTP details for issues, JQL search, comments, worklogs, attachments, links, projects, versions, components, fields, screens, workflows, statuses, users, groups, permissions, schemes, dashboards, filters, plans; or Confluence pages, blog posts, spaces, comments, attachments, labels, content properties. Indexes the full per-domain endpoint catalog plus the bundled OpenAPI specs.
-disable-model-invocation: true
 ---
 
 # Atlassian REST API Reference (Jira v3 + Confluence v2)

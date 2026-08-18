@@ -1,8 +1,6 @@
 ---
 name: nocobase-workflow-manage
 description: Use when users need to inspect, create, revise, enable, or diagnose NocoBase workflows through the `nb` CLI, including trigger selection, node-chain changes, version safety checks, and execution troubleshooting.
-argument-hint: "[action: inspect|create|update|enable|diagnose|delete-node|delete-branch|build-approval-ui] [target: workflow|node|execution|approval-surface] [workflow-id|workflow-key|node-id|title] [options]"
-allowed-tools: "shell, Read(local skill references only), nb(workflows:list|get|create|update|revision|execute, workflows/<workflowId>/nodes:create, flow_nodes:get|update|destroy|destroyBranch|move|duplicate|test, executions:list|get, jobs:get, flowSurfaces:get|catalog|applyApprovalBlueprint|addBlock|addField|addAction|compose|configure|setLayout)"
 ---
 
 # Goal

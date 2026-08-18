@@ -1,7 +1,6 @@
 ---
 name: api-reference
 description: This skill should be used when the user asks for "DataForSEO API endpoints", "DataForSEO REST API", "DataForSEO curl examples", "DataForSEO API documentation", "DataForSEO HTTP requests", or needs specific HTTP endpoint details for DataForSEO.
-disable-model-invocation: true
 ---
 
 # DataForSEO REST API Reference

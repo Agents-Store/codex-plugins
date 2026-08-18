@@ -1,10 +1,7 @@
 ---
 name: docker-patterns
-description: >
-  Docker configuration patterns for Next.js applications. This skill should be used when the user asks
-  to "dockerize Next.js", "create a Dockerfile for Next.js", "set up Docker for Next.js", "docker compose
-  for Next.js", "build Next.js with Docker", "deploy Next.js in Docker", "Next.js standalone Docker",
-  or needs to containerize a Next.js application for development or production.
+description: |
+  Docker configuration patterns for Next.js applications. This skill should be used when the user asks to "dockerize Next.js", "create a Dockerfile for Next.js", "set up Docker for Next.js", "docker compose for Next.js", "build Next.js with Docker", "deploy Next.js in Docker", "Next.js standalone Docker", or needs to containerize a Next.js application for development or production.
 ---
 
 # Docker Patterns for Next.js

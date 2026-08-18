@@ -1,14 +1,6 @@
 ---
 name: gws-calendar-insert
-description: "Google Calendar: Create a new event."
-metadata:
-  version: 0.22.5
-  openclaw:
-    category: "productivity"
-    requires:
-      bins:
-        - gws
-    cliHelp: "gws calendar +insert --help"
+description: 'Google Calendar: Create a new event.'
 ---
 
 # calendar +insert

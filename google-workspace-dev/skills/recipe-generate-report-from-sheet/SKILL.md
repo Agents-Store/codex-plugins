@@ -1,18 +1,6 @@
 ---
 name: recipe-generate-report-from-sheet
-description: "Read data from a Google Sheet and create a formatted Google Docs report."
-metadata:
-  version: 0.22.5
-  openclaw:
-    category: "recipe"
-    domain: "productivity"
-    requires:
-      bins:
-        - gws
-      skills:
-        - gws-sheets
-        - gws-docs
-        - gws-drive
+description: Read data from a Google Sheet and create a formatted Google Docs report.
 ---
 
 # Generate a Google Docs Report from Sheet Data
@@ -35,4 +23,3 @@ Revenue: $125,000
 1. Acme Corp - $25,000
 2. Widget Inc - $18,000'`
 4. Share with stakeholders: `gws drive permissions create --params '{"fileId": "DOC_ID"}' --json '{"role": "reader", "type": "user", "emailAddress": "cfo@company.com"}'`
-

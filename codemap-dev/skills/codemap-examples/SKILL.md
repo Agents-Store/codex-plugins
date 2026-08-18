@@ -1,10 +1,7 @@
 ---
 name: codemap-examples
-description: >
-  This skill should be used when the user asks for "codemap examples", "how to use codemap",
-  "show me what codemap can do", "codemap walkthrough", or wants to see end-to-end usage
-  scenarios for the codemap plugin.
-disable-model-invocation: true
+description: |
+  This skill should be used when the user asks for "codemap examples", "how to use codemap", "show me what codemap can do", "codemap walkthrough", or wants to see end-to-end usage scenarios for the codemap plugin.
 ---
 
 # Codemap Usage Examples

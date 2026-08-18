@@ -1,10 +1,7 @@
 ---
 name: conversations
-description: >
-  This skill should be used when the user asks to "list Dify conversations",
-  "get conversation history", "list messages in a Dify conversation", "rename a Dify
-  conversation", "delete a conversation", or "get/update Dify conversation variables".
-  Covers chat-history management for chat/agent/chatflow apps.
+description: |
+  This skill should be used when the user asks to "list Dify conversations", "get conversation history", "list messages in a Dify conversation", "rename a Dify conversation", "delete a conversation", or "get/update Dify conversation variables". Covers chat-history management for chat/agent/chatflow apps.
 ---
 
 # Dify — Conversations & Messages

@@ -1,375 +1,145 @@
 ---
 name: marketplace
-description: Vercel Marketplace expert guidance — discovering, installing, and building integrations, auto-provisioned environment variables, unified billing, and the vercel integration CLI. Use when consuming third-party services, building custom integrations, or managing marketplace resources on Vercel.
-metadata:
-  priority: 3
-  docs:
-    - "https://vercel.com/docs/integrations"
-  sitemap: "https://vercel.com/sitemap/docs.xml"
-  pathPatterns:
-    - "integration.json"
-  bashPatterns:
-    - '\bvercel\s+integration\b'
-    - '\bvercel\s+integration\s+add\b'
-    - '\bvercel\s+integration\s+discover\b'
-retrieval:
-  aliases:
-    - vercel integrations
-    - marketplace
-    - third party services
-    - add ons
-  intents:
-    - install integration
-    - build integration
-    - manage marketplace
-    - add third party service
-  entities:
-    - Vercel Marketplace
-    - integration
-    - vercel integration
-    - unified billing
-chainTo:
-  -
-    pattern: 'NEON_|POSTGRES_|DATABASE_URL|@neondatabase|@vercel/postgres'
-    targetSkill: vercel-storage
-    message: 'Database integration detected — loading Storage guidance for Neon Postgres setup, connection pooling, and serverless patterns.'
-  -
-    pattern: 'CLERK_|@clerk/|clerkMiddleware'
-    targetSkill: auth
-    message: 'Clerk integration detected — loading Auth guidance for middleware setup, route protection, and organization flows.'
-
+description: Discover and install Vercel Marketplace integrations. Use to find databases, CMS, auth providers, and other services available on the Vercel Marketplace.
 ---
 
 # Vercel Marketplace
 
-You are an expert in the Vercel Marketplace — the integration platform that connects third-party services to Vercel projects with unified billing, auto-provisioned environment variables, and one-click setup.
+Discover, install, and apply Vercel Marketplace integrations with guided setup and local verification.
 
-## Consuming Integrations
+## Preflight
 
-### Linked Project Preflight
+1. **Project linked?** — Check for `.vercel/project.json` in the current directory or nearest parent.
+   - If not found: run `vercel link` interactively, then re-run `/marketplace`.
+   - Do not attempt provisioning until the project is linked.
+2. **CLI available?** — Confirm `vercel` is on PATH.
+   - If missing: `npm i -g vercel` (or `pnpm add -g vercel` / `bun add -g vercel`).
+3. **Repo state** — Note uncommitted changes so the user can diff integration-related code changes later.
+4. **Scope** — Detect monorepo (`turbo.json` or `pnpm-workspace.yaml`). If detected, confirm which package is targeted.
 
-Integration provisioning is project-scoped. Verify the repository is linked before running `integration add`.
+## Plan
+
+The marketplace command follows an **apply-guide loop**:
+
+1. **Discover** — Search the Marketplace catalog via `vercel integration discover`.
+2. **Select** — User picks an integration (or specifies one in "$ARGUMENTS").
+3. **Guide** — Fetch the agent-friendly setup guide via `vercel integration guide <name> --framework <fw>`.
+4. **Install** — Run `vercel integration add <name>` for the automated happy path.
+5. **Confirm env vars provisioned** — Explicitly verify required environment variables are set after provisioning.
+6. **Apply code changes** — Install SDK packages and scaffold configuration code.
+7. **Verify drain** — For observability integrations, confirm drain was auto-created and data is flowing.
+8. **Run local health check** — Verify the integration works locally before deploying.
+
+If "$ARGUMENTS" specifies an integration name, skip directly to the **Guide** step.
+
+For observability integrations (Datadog, Sentry, Axiom, etc.), the flow extends with drain verification — see Step 7.
+
+No destructive operations unless the user explicitly confirms. Package installs and code scaffolding are additive.
+
+## Commands
+
+### 1. Discover — Search the Marketplace Catalog
 
 ```bash
-# Check whether this directory is linked to a Vercel project
-test -f .vercel/project.json && echo "Linked" || echo "Not linked"
-
-# Link if needed
-vercel link
-```
-
-If the project is not linked, do not continue with provisioning commands until linking completes.
-
-### Discovering Integrations
-
-```bash
-# Search the Marketplace catalog from CLI
+# Search all available integrations
 vercel integration discover
 
 # Filter by category
 vercel integration discover --category databases
 vercel integration discover --category monitoring
+vercel integration discover --category auth
 
 # List integrations already installed on this project
 vercel integration list
 ```
 
-For browsing the full catalog interactively, use the [Vercel Marketplace](https://vercel.com/marketplace) dashboard.
+Present integrations organized by category:
 
-### Getting Setup Guidance
+| Category   | Examples                          |
+| ---------- | --------------------------------- |
+| Database   | Neon, PlanetScale, Supabase       |
+| Cache      | Upstash Redis, Upstash KV         |
+| Auth       | Clerk, Auth0                      |
+| CMS        | Sanity, Contentful, Prismic       |
+| Payments   | Stripe, LemonSqueezy              |
+| Monitoring | Datadog, Sentry, Axiom, Honeycomb |
 
-```bash
-# Get agent-friendly setup guide for a specific integration
-vercel integration guide <name>
+Common replacements for sunset packages:
 
-# Include framework-specific steps when available
-vercel integration guide <name> --framework <fw>
+- **Neon** — Serverless Postgres (replaces `@vercel/postgres`)
+- **Upstash** — Serverless Redis (replaces `@vercel/kv`)
 
-# Examples
-vercel integration guide neon
-vercel integration guide datadog --framework nextjs
-```
+### 2. Select — User Picks an Integration
 
-Use `--framework <fw>` as the default discovery flow when framework-specific setup matters. The guide returns structured setup steps including required environment variables, SDK packages, and code snippets — ideal for agentic workflows.
+If the user hasn't specified one in "$ARGUMENTS", ask which integration to set up. Accept the integration name or slug.
 
-### Installing an Integration
-
-```bash
-# Install from CLI
-vercel integration add <integration-name>
-
-# Examples
-vercel integration add neon          # Postgres database
-vercel integration add upstash       # Redis / Kafka
-vercel integration add clerk         # Authentication
-vercel integration add sentry        # Error monitoring
-vercel integration add sanity        # CMS
-vercel integration add datadog       # Observability (auto-configures drain)
-```
-
-`vercel integration add` is the primary scripted/AI path. It installs to the currently linked project, auto-connects the integration, and auto-runs environment sync locally unless disabled.
-
-If the CLI hands off to the dashboard for provider-specific completion, treat that as fallback:
+### 3. Guide — Fetch Setup Steps
 
 ```bash
-vercel integration open <integration-name>
-```
-
-Complete the web step, then return to CLI verification (`vercel env ls` and local env sync check).
-
-### Auto-Provisioned Environment Variables
-
-When you install a Marketplace integration from a linked project, Vercel automatically provisions the required environment variables for that project.
-
-**IMPORTANT: Provisioning delay after install.** After installing a database integration (especially Neon), the resource may take **1–3 minutes** to fully provision. During this window, connection attempts return HTTP 500 errors. Do NOT debug the connection string or code — just wait and retry. If local env sync was disabled or skipped, run `vercel env pull .env.local --yes` after a brief wait to get the finalized credentials.
-
-```bash
-# View environment variables added by integrations
-vercel env ls
-
-# Example: after installing Neon, these are auto-provisioned:
-# POSTGRES_URL          — connection string
-# POSTGRES_URL_NON_POOLING — direct connection
-# POSTGRES_USER         — database user
-# POSTGRES_PASSWORD     — database password
-# POSTGRES_DATABASE     — database name
-# POSTGRES_HOST         — database host
-```
-
-No manual `.env` file management is needed — the variables are injected into all environments (Development, Preview, Production) automatically.
-
-### Using Provisioned Resources
-
-```ts
-// app/api/users/route.ts — using Neon auto-provisioned env vars
-import { neon } from "@neondatabase/serverless";
-
-// POSTGRES_URL is auto-injected by the Neon integration
-const sql = neon(process.env.POSTGRES_URL!);
-
-export async function GET() {
-  const users = await sql`SELECT * FROM users LIMIT 10`;
-  return Response.json(users);
-}
-```
-
-```ts
-// app/api/cache/route.ts — using Upstash auto-provisioned env vars
-import { Redis } from "@upstash/redis";
-
-// KV_REST_API_URL and KV_REST_API_TOKEN are auto-injected
-const redis = Redis.fromEnv();
-
-export async function GET() {
-  const cached = await redis.get("featured-products");
-  return Response.json(cached);
-}
-```
-
-### Managing Integrations
-
-```bash
-# List installed integrations
-vercel integration ls
-
-# Check usage and billing for an integration
-vercel integration balance <name>
-
-# Remove an integration
-vercel integration remove <integration-name>
-```
-
-## Unified Billing
-
-Marketplace integrations use Vercel's unified billing system:
-
-- **Single invoice**: All integration charges appear on your Vercel bill
-- **Usage-based**: Pay for what you use, scaled per integration's pricing model
-- **Team-level billing**: Charges roll up to the Vercel team account
-- **No separate accounts**: No need to manage billing with each provider individually
-
-```bash
-# Check current usage balance for an integration
-vercel integration balance datadog
-vercel integration balance neon
-```
-
-## Building Integrations
-
-### Integration Architecture
-
-Vercel integrations consist of:
-
-1. **Integration manifest** — declares capabilities, required scopes, and UI surfaces
-2. **Webhook handlers** — respond to Vercel lifecycle events
-3. **UI components** — optional dashboard panels rendered within Vercel
-4. **Resource provisioning** — create and manage resources for users
-
-### Scaffold an Integration
-
-```bash
-# Create a new integration project
-npx create-vercel-integration my-integration
-
-# Or start from the template
-npx create-next-app my-integration --example vercel-integration
-```
-
-### Integration Manifest
-
-```json
-// vercel-integration.json
-{
-  "name": "my-integration",
-  "slug": "my-integration",
-  "description": "Provides X for Vercel projects",
-  "logo": "public/logo.svg",
-  "website": "https://my-service.com",
-  "categories": ["databases"],
-  "scopes": {
-    "project": ["env-vars:read-write"],
-    "team": ["integrations:read-write"]
-  },
-  "installationType": "marketplace",
-  "resourceTypes": [
-    {
-      "name": "database",
-      "displayName": "Database",
-      "description": "A managed database instance"
-    }
-  ]
-}
-```
-
-### Handling Lifecycle Webhooks
-
-```ts
-// app/api/webhook/route.ts
-import { verifyVercelSignature } from "@vercel/integration-utils";
-
-export async function POST(req: Request) {
-  const body = await req.json();
-
-  // Verify the webhook is from Vercel
-  const isValid = await verifyVercelSignature(req, body);
-  if (!isValid) {
-    return Response.json({ error: "Invalid signature" }, { status: 401 });
-  }
-
-  switch (body.type) {
-    case "integration.installed":
-      // Provision resources for the new installation
-      await provisionDatabase(body.payload);
-      break;
-
-    case "integration.uninstalled":
-      // Clean up resources
-      await deprovisionDatabase(body.payload);
-      break;
-
-    case "integration.configuration-updated":
-      // Handle config changes
-      await updateConfiguration(body.payload);
-      break;
-  }
-
-  return Response.json({ received: true });
-}
-```
-
-### Provisioning Environment Variables
-
-```ts
-// lib/provision.ts
-async function provisionEnvVars(
-  installationId: string,
-  projectId: string,
-  credentials: { url: string; token: string },
-) {
-  const response = await fetch(
-    `https://api.vercel.com/v1/integrations/installations/${installationId}/env`,
-    {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${process.env.VERCEL_INTEGRATION_TOKEN}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        projectId,
-        envVars: [
-          {
-            key: "MY_SERVICE_URL",
-            value: credentials.url,
-            target: ["production", "preview", "development"],
-            type: "encrypted",
-          },
-          {
-            key: "MY_SERVICE_TOKEN",
-            value: credentials.token,
-            target: ["production", "preview", "development"],
-            type: "secret",
-          },
-        ],
-      }),
-    },
-  );
-
-  return response.json();
-}
-```
-
-### Integration CLI Commands
-
-The `vercel integration` CLI supports these subcommands:
-
-```bash
-# Discover integrations in the Marketplace catalog
-vercel integration discover
-vercel integration discover --category <category>
-
 # Get agent-friendly setup guide
-vercel integration guide <name>
-vercel integration guide <name> --framework <framework>
-
-# Add (install) an integration
-vercel integration add <name>
-
-# List installed integrations
-vercel integration list    # alias: vercel integration ls
-
-# Check usage / billing balance
-vercel integration balance <name>
-
-# Open integration dashboard in browser (fallback when add redirects)
-vercel integration open <name>
-
-# Remove an integration
-vercel integration remove <name>
+vercel integration guide <name> --framework <fw>
 ```
 
-> **Building integrations?** Use `npx create-vercel-integration` to scaffold, then deploy your
-> integration app to Vercel normally with `vercel --prod`. Publish to the Marketplace via the
-> [Vercel Partner Dashboard](https://vercel.com/docs/integrations).
+Use framework-specific guides by default when framework is known. If unknown, infer from the repo and confirm with the user.
 
-## Common Integration Categories
+The guide returns structured setup steps: required env vars, SDK packages, code snippets, and framework-specific notes. Present these to the user.
 
-| Category              | Popular Integrations                          | Auto-Provisioned Env Vars               |
-| --------------------- | --------------------------------------------- | --------------------------------------- |
-| Databases             | Neon, Supabase, PlanetScale, MongoDB, Turso   | `POSTGRES_URL`, `DATABASE_URL`          |
-| Cache/KV              | Upstash Redis                                 | `KV_REST_API_URL`, `KV_REST_API_TOKEN`  |
-| Auth                  | Clerk, Auth0, Descope                         | `CLERK_SECRET_KEY`, `AUTH0_SECRET`      |
-| CMS                   | Sanity, Contentful, Storyblok, DatoCMS        | `SANITY_PROJECT_ID`, `CONTENTFUL_TOKEN` |
-| Monitoring            | Datadog, Sentry, Checkly, New Relic           | `SENTRY_DSN`, `DD_API_KEY`             |
-| Payments              | Stripe                                        | `STRIPE_SECRET_KEY`                     |
-| Feature Flags         | LaunchDarkly, Statsig, Hypertune              | `LAUNCHDARKLY_SDK_KEY`                  |
-| AI Agents & Services  | CodeRabbit, Braintrust, Sourcery, Chatbase    | varies by integration                   |
-| Video                 | Mux                                           | `MUX_TOKEN_ID`, `MUX_TOKEN_SECRET`     |
-| Messaging             | Resend, Knock, Novu                           | `RESEND_API_KEY`                        |
-| Searching             | Algolia, Meilisearch                          | `ALGOLIA_APP_ID`, `ALGOLIA_API_KEY`    |
-| Commerce              | Shopify, Swell, BigCommerce                   | `SHOPIFY_ACCESS_TOKEN`                  |
+### 4. Install — Add the Integration
 
-## Observability Integration Path
+```bash
+vercel integration add <name>
+```
 
+`vercel integration add` is the primary scripted/AI flow. It installs against the linked project, auto-connects the integration, and auto-runs local env sync unless disabled.
+
+If the CLI bounces to the dashboard for provider-specific completion, treat it as fallback and open the integration page directly:
+
+```bash
+vercel integration open <name>
+```
+
+Complete the web step, then continue with env verification.
+
+After installation, the integration auto-provisions environment variables. For observability vendors (Datadog, Sentry, Axiom), this also auto-creates **log and trace drains**.
+
+### 5. Confirm Env Vars Provisioned
+
+Before applying code changes, verify the integration's required environment variables exist:
+
+```bash
+vercel env ls
+```
+
+Check that each variable name listed in the guide appears in the output. **Never echo variable values — check names only.**
+
+- If local env sync was disabled or `.env.local` is stale, run:
+
+```bash
+vercel env pull .env.local --yes
+```
+
+- **All present** → Proceed to code changes.
+- **Missing vars** → Tell the user which variables are missing. The integration install via `vercel integration add <name>` typically provisions these automatically. Guide the user to provision them before continuing.
+
+### 6. Apply Code Changes
+
+Install the SDK package:
+
+```bash
+npm install <sdk-package>   # or pnpm add / bun add
+```
+
+Then apply the code scaffolding from the guide:
+
+- Create or update configuration files (e.g., `db.ts`, `redis.ts`, `auth.ts`)
+- Add initialization code following the guide's patterns
+- Respect the project's existing conventions (TypeScript vs JavaScript, import style, directory structure)
+
+Ask the user for confirmation before writing files.
+
+### 7. Verify Drain (Observability Integrations)
+
+<!-- Sourced from marketplace skill: Observability Integration Path -->
 Marketplace observability integrations (Datadog, Sentry, Axiom, Honeycomb, etc.) connect to Vercel's **Drains** system to receive telemetry. Understanding the data-type split is critical for correct setup.
 
 ### Data-Type Split
@@ -457,35 +227,67 @@ curl -X POST -H "Authorization: Bearer $VERCEL_TOKEN" \
 
 > **Payload schema reference:** See `⤳ skill: observability` for Web Analytics drain payload formats (JSON array of `{type, url, referrer, timestamp, geo, device}` events).
 
-## Decision Matrix
+- **Drain present** → Proceed to health check.
+- **No drain found** → Integration may not auto-configure drains. Create one manually via Dashboard or REST API.
+- **Drain errored** → Check the drain status in the Vercel Dashboard. Common fixes: endpoint URL typo, auth header missing, endpoint not accepting POST.
 
-| Need                                      | Use                                                | Why                                            |
-| ----------------------------------------- | -------------------------------------------------- | ---------------------------------------------- |
-| Add a database to your project            | `vercel integration add neon`                      | Auto-provisioned, unified billing              |
-| Browse available services                 | `vercel integration discover`                      | CLI-native catalog search                      |
-| Get setup steps for an integration        | `vercel integration guide <name> --framework <fw>` | Framework-specific, agent-friendly setup guide |
-| CLI redirects to dashboard during install | `vercel integration open <name>`                   | Fallback to complete provider web flow         |
-| Check integration usage/cost              | `vercel integration balance <name>`                | Billing visibility per integration             |
-| Build a SaaS integration                  | Integration SDK + manifest                         | Full lifecycle management                      |
-| Centralize billing                        | Marketplace integrations                           | Single Vercel invoice                          |
-| Auto-inject credentials                   | Marketplace auto-provisioning                      | No manual env var management                   |
-| Add observability vendor                  | `vercel integration add <vendor>`                  | Auto-creates log/trace drains                  |
-| Export Speed Insights / Web Analytics     | Manual drain via REST API                          | Not auto-configured by vendor install          |
-| Manage integrations programmatically      | Vercel REST API                                    | `/v1/integrations` endpoints                   |
-| Test integration locally                  | `vercel dev`                                       | Local development server with Vercel features  |
+### 8. Run Local Health Check
 
-## Cross-References
+Verify the integration works locally:
 
-- **Drain configuration, payload formats, signature verification** → `⤳ skill: observability`
-- **Drains REST API endpoints** → `⤳ skill: vercel-api`
-- **CLI log streaming (`--follow`, `--since`, `--level`)** → `⤳ skill: vercel-cli`
-- **Safe project setup sequencing (link, env pull, then run db/dev)** → `⤳ skill:bootstrap`
-## Official Documentation
+```bash
+vercel dev
+```
 
-- [Vercel Marketplace](https://vercel.com/marketplace)
-- [Building Integrations](https://vercel.com/docs/integrations)
-- [Integration CLI](https://vercel.com/docs/cli/integration)
-- [Integration Webhooks](https://vercel.com/docs/integrations#webhooks)
-- [Environment Variables](https://vercel.com/docs/environment-variables)
-- [Drains Overview](https://vercel.com/docs/drains)
-- [Drains Security](https://vercel.com/docs/drains/security)
+Or run the project's dev server and test the integration endpoint/connection:
+
+- **Database** → Confirm connection by running a simple query (e.g., `SELECT 1`)
+- **Auth** → Confirm the auth provider redirects correctly
+- **Cache** → Confirm a set/get round-trip succeeds
+- **CMS** → Confirm content fetch returns data
+- **Observability** → Run `vercel logs <deployment-url> --follow --since 5m` and confirm logs appear in the vendor dashboard
+
+If the health check fails, review the error output and guide the user through fixes (common: missing env vars in `.env.local`, wrong SDK version, network issues).
+
+## Verification
+
+After completing the apply-guide loop, confirm:
+
+- [ ] Integration guide was retrieved via `vercel integration guide <name> --framework <fw>`
+- [ ] Project was linked before provisioning started
+- [ ] All required environment variables are provisioned on Vercel
+- [ ] Local env sync is up to date (auto-sync succeeded or `vercel env pull .env.local --yes` ran)
+- [ ] SDK package installed without errors
+- [ ] Code changes applied and match the guide's patterns
+- [ ] For observability integrations: drain verified and test payload received
+- [ ] Local health check passed (dev server starts, integration responds)
+
+If any step fails, report the specific error and suggest remediation before continuing.
+
+## Summary
+
+Present a structured result block:
+
+```
+## Marketplace Result
+- **Integration**: <name>
+- **Status**: installed | partially configured | failed
+- **Package**: <sdk-package>@<version>
+- **Env Vars**: <count> provisioned / <count> required
+- **Drain**: configured | not applicable | manual setup needed
+- **Health Check**: passed | failed | skipped
+- **Files Changed**: <list of created/modified files>
+```
+
+## Next Steps
+
+Based on the outcome:
+
+- **Installed successfully** → "Run `/deploy` to deploy with the new integration. Your environment variables are already configured on Vercel."
+- **Env vars missing** → "Provision the missing variables via the Vercel dashboard or `vercel integration add <name>`, then re-run `/marketplace <name>` to continue setup."
+- **CLI handed off to dashboard** → "Run `vercel integration open <name>` to complete the provider web step, then resume from env verification."
+- **Drain not auto-created** → "Create a drain manually via the REST API (`POST /v1/drains`) or the Dashboard."
+- **Need Speed Insights / Web Analytics export** → "These data types require manual drain setup — they are not auto-configured by vendor installs. Configure via Dashboard or REST API."
+- **Health check failed** → "Review the error above. Common fixes: copy env vars to `.env.local` with `vercel env pull`, check SDK version compatibility, verify network access."
+- **Want another integration?** → "Run `/marketplace` again to browse available integrations."
+- **Review changes** → "Run `git diff` to review all integration-related code changes before committing."

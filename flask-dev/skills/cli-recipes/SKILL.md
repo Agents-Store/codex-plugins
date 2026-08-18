@@ -1,9 +1,7 @@
 ---
 name: cli-recipes
-description: >
-  Use when the user asks about "Flask CLI", "flask run", "flask shell",
-  "flask routes", "Flask command line", "custom Flask CLI command",
-  "run Flask from terminal", or needs ready-to-use Flask CLI commands.
+description: |
+  Use when the user asks about "Flask CLI", "flask run", "flask shell", "flask routes", "Flask command line", "custom Flask CLI command", "run Flask from terminal", or needs ready-to-use Flask CLI commands.
 ---
 
 # Flask CLI Recipes

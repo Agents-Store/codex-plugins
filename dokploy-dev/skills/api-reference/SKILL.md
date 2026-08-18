@@ -1,7 +1,6 @@
 ---
 name: api-reference
-description: "This skill should be used when making direct HTTP/curl calls to the Dokploy API, looking up endpoint parameters, or building integrations that bypass the MCP server. Triggers: \"dokploy API\", \"curl dokploy\", \"REST endpoint\", \"HTTP request to dokploy\"."
-disable-model-invocation: true
+description: 'This skill should be used when making direct HTTP/curl calls to the Dokploy API, looking up endpoint parameters, or building integrations that bypass the MCP server. Triggers: "dokploy API", "curl dokploy", "REST endpoint", "HTTP request to dokploy".'
 ---
 
 # Dokploy REST API Reference

@@ -3,7 +3,7 @@
     "nocodb": {
       "type": "http",
       "url": "${NOCODB_MCP_URL}",
-      "headers": {
+      "http_headers": {
         "xc-mcp-token": "${NOCODB_MCP_TOKEN}"
       }
     }

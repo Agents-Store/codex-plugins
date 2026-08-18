@@ -1,12 +1,7 @@
 ---
 name: component-search
-description: >
-  Search and install UI components from 260+ registries in the official shadcn directory. This skill should be used when
-  the user asks to "search for shadcn components", "find a calendar component", "browse community registries",
-  "install from magicui", "what shadcn registries are available", "add animated components", "search for a
-  date picker", "find UI blocks for landing page", "install from aceternity", "what community components
-  exist", or needs to discover and install components from community registries beyond the standard shadcn/ui
-  and shadcn studio registries.
+description: |
+  Search and install UI components from 260+ registries in the official shadcn directory. This skill should be used when the user asks to "search for shadcn components", "find a calendar component", "browse community registries", "install from magicui", "what shadcn registries are available", "add animated components", "search for a date picker", "find UI blocks for landing page", "install from aceternity", "what community components exist", or needs to discover and install components from community registries beyond the standard shadcn/ui and shadcn studio registries.
 ---
 
 ## How Community Registries Work

@@ -1,7 +1,6 @@
 ---
 name: api-reference
 description: This skill should be used when the user asks for "grammY API reference", "Bot API method", "ctx.api signature", "sendMessage parameters", "answerCallbackQuery", "editMessageText", "getChat", "specific Telegram Bot API endpoint", or needs precise method signatures and parameter details for the grammY Bot API client.
-disable-model-invocation: true
 ---
 
 # grammY — Bot API Reference

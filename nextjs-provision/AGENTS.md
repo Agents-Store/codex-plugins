@@ -4,24 +4,7 @@
 
 Canonical source: https://github.com/agents-store/claude-public-plugins/tree/main/plugins/nextjs-provision
 
-## MCP servers
-
-Add to `~/.codex/config.toml`:
-
-```toml
-[mcp_servers.shadcn]
-command = "npx"
-args = ["shadcn@latest","mcp"]
-
-[mcp_servers.shadcn-community]
-command = "npx"
-args = ["-y","@jpisnice/shadcn-ui-mcp-server"]
-
-```
-
 ## Skills
-
-This plugin ships the following skills under `skills/`. Codex loads them contextually:
 
 - **component-registry** — Browse, search, install, and use shadcn/ui and shadcn studio components, blocks, and templates. This skill should be used when the user asks to "install a shadcn component", "add a button", "list shadcn blocks", "find a form block", "browse shadcn studio components", "add a card component", "install a navigation block", "what components are available", "write code with shadcn components", "use Button component", "render shadcn component as link", "Button as a link", "shadcn component patterns", or needs to discover, install, or use UI components from shadcn registries correctly.
 
@@ -39,10 +22,18 @@ This plugin ships the following skills under `skills/`. Codex loads them context
 
 - **troubleshoot** — Diagnose and fix common shadcn/ui and shadcn studio setup issues, dependency conflicts, and configuration problems. This skill should be used when the user encounters "shadcn install error", "components.json error", "tailwind not working with shadcn", "shadcn component not rendering", "CSS variables not applied", "shadcn studio registry error", "dependency conflict", "cn() not found", or needs to debug problems with their shadcn/ui setup.
 
+- **add-registries** — Fetch all 260+ shadcn registries from the official endpoint and add them to components.json
+- **search-components** — Search across 260+ shadcn registries for UI components, blocks, and templates
+- **setup-registries** — Set up community shadcn registries, MCP servers, and CLAUDE.md section for a project
 
 ## Subagents
 
-Defined under `.codex/agents/` as TOML files:
+Codex does not install plugin subagents automatically — copy them manually before use:
+
+```bash
+cp agents/*.toml ~/.codex/agents/        # personal
+cp agents/*.toml <repo>/.codex/agents/    # project-local
+```
 
 - **nextjs-provisioner** — Next.js UI provisioner for setting up component libraries, themes, and project architecture with shadcn/ui and shadcn studio.
 
@@ -83,155 +74,17 @@ User needs specialty components not in the standard shadcn/ui registry — agent
 </example>
 
 
-## Workflows (canonical slash commands)
+## MCP servers
 
-Codex CLI doesn't support custom slash commands — invoke these workflows via natural language. Each entry below is a prompt template you can adapt:
+Add to `~/.codex/config.toml`:
 
-### `add-registries`
+```toml
+[mcp_servers.shadcn]
+command = "npx"
+args = ["shadcn@latest","mcp"]
 
-Fetch all 260+ shadcn registries from the official endpoint and add them to components.json
-
-Arguments: `--filter <keyword>`
-
-<details><summary>Prompt template</summary>
-
-# Add Registries
-
-Fetch the complete list of shadcn-compatible registries from the official endpoint and populate the project's `components.json`.
-
-## Instructions
-
-1. Verify `components.json` exists in the project root. If not, ask whether to run `npx shadcn@latest init` first.
-
-2. Fetch the official registry list:
-   ```bash
-   curl -s https://ui.shadcn.com/r/registries.json
-   ```
-   Or use WebFetch on `https://ui.shadcn.com/r/registries.json`.
-
-2b. For a handful of registries, the native CLI command is an alternative to the fetch-and-merge flow:
-   ```bash
-   npx shadcn registry add @name=https://domain.com/r/{name}.json @name2=https://other.com/r/{name}.json
-   ```
-   The fetch-and-merge flow below remains the way to add all 260+ in bulk.
-
-3. Parse the JSON response. Each entry has:
-   - `name` — e.g. `"@magicui"`
-   - `url` — e.g. `"https://magicui.design/r/{name}.json"`
-   - `description` — brief text
-
-4. If `$ARGUMENTS` contains `--filter <keyword>`, only include registries whose `name` or `description` contains the keyword (case-insensitive).
-
-5. Read the current `components.json` and extract the existing `"registries"` object (may be empty or missing).
-
-6. Build the new registries object by merging existing entries with the fetched ones. For each fetched registry:
-   - Key: the `name` field (e.g. `"@magicui"`)
-   - Value: the `url` field (e.g. `"https://magicui.design/r/{name}"`)
-   - Do NOT clobber existing **object-valued** entries (registries with `headers`/`params` auth, e.g. shadcn studio premium) — the merge must preserve those objects as-is.
-
-7. Write the merged `"registries"` back to `components.json`. Preserve all other fields.
-
-8. Report: how many registries were added (new) vs already present (skipped).
-
-## Example Output
+[mcp_servers.shadcn-community]
+command = "npx"
+args = ["-y","@jpisnice/shadcn-ui-mcp-server"]
 
 ```
-Fetched 267 registries from https://ui.shadcn.com/r/registries.json
-Added 262 new registries to components.json
-Skipped 5 already configured
-Total registries in components.json: 265
-```
-
-</details>
-
-### `search-components`
-
-Search across 260+ shadcn registries for UI components, blocks, and templates
-
-Arguments: `<what-you-need>`
-
-<details><summary>Prompt template</summary>
-
-# Search Components
-
-Search for shadcn-compatible components across the 260+ registries in the official directory.
-
-## Instructions
-
-1. Read the skill at `${CLAUDE_PLUGIN_ROOT}/skills/component-search/SKILL.md`
-2. Read the registry reference at `${CLAUDE_PLUGIN_ROOT}/skills/component-search/references/community-registries.md`
-3. Parse the user's search query from "$ARGUMENTS" (e.g., "animated button", "date range picker", "chat component", "pricing section")
-4. Identify the most relevant category: animation, extended UI, blocks, e-commerce, AI, file upload, other
-5. Present matching registries and components with install commands:
-
-```
-## Results for "$ARGUMENTS"
-
-### Recommended registries:
-- **@registryname** — description
-  Install: `npx shadcn@latest add @registryname/component`
-
-### Also check:
-- **@registryname2** — description
-```
-
-6. Check if the user's project has `components.json` — if registries are not configured, suggest running `/setup-registries` first
-7. If MCP servers are available, use them for more specific matches:
-   - `shadcn` (official) — searches across all registries configured in `components.json`
-   - `shadcn-community` (Jpisnice) — use `list_components` / `get_component` / `get_component_demo` / `list_blocks` / `get_block` for GitHub-based browsing
-8. Without MCP, suggest the CLI's server-side search as a fallback: `npx shadcn@latest search @registry -q "<term>"`
-
-</details>
-
-### `setup-registries`
-
-Set up community shadcn registries, MCP servers, and CLAUDE.md section for a project
-
-Arguments: `--mcp | --claudemd | --skill`
-
-<details><summary>Prompt template</summary>
-
-# Setup Registries
-
-Full project setup for shadcn community registry search — registries, MCP, CLAUDE.md section, and official skill.
-
-## Instructions
-
-1. Read the skill at `${CLAUDE_PLUGIN_ROOT}/skills/component-search/SKILL.md`
-
-2. Verify `components.json` exists in the project root. If not:
-   - Ask the user if they want to initialize shadcn/ui first
-   - Run `npx shadcn@latest init` if approved
-
-3. Parse arguments from "$ARGUMENTS":
-   - (no args) — full setup: registries + MCP + CLAUDE.md + skill
-   - `--mcp` — only configure MCP servers
-   - `--claudemd` — only add CLAUDE.md section
-   - `--skill` — only install official shadcn skill
-
-4. **Add registries** — Run `/add-registries` to fetch all 260+ registries from `https://ui.shadcn.com/r/registries.json` and add them to `components.json`
-
-4b. **shadcn studio registries** — If the project uses shadcn studio, write the `@`-prefixed studio registries (not legacy `ss-*` keys):
-   ```json
-   "registries": {
-     "@shadcn-studio": "https://shadcnstudio.com/r/{style}/{name}.json",
-     "@ss-components": "https://shadcnstudio.com/r/components/{style}/{name}.json",
-     "@ss-blocks": "https://shadcnstudio.com/r/blocks/{style}/{name}.json",
-     "@ss-pages": "https://shadcnstudio.com/r/pages/{style}/{name}.json",
-     "@ss-themes": "https://shadcnstudio.com/r/themes/{name}.json"
-   }
-   ```
-   For premium, convert entries to objects with `"params": { "email": "${EMAIL}", "license_key": "${LICENSE_KEY}" }`.
-
-5. **Configure MCP servers** — Show the template from `${CLAUDE_PLUGIN_ROOT}/skills/component-search/references/mcp-config-template.json` and create/update the project's `.mcp.json`
-
-6. **Install the official shadcn skill**:
-   ```bash
-   pnpm dlx skills add shadcn/ui
-   ```
-
-7. **Add CLAUDE.md section** — Append the content from `${CLAUDE_PLUGIN_ROOT}/skills/component-search/references/claude-md-section.md` to the project's CLAUDE.md
-
-8. Test by installing one component from a community registry to verify it works
-
-</details>

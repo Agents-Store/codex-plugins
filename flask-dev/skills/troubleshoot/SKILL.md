@@ -1,9 +1,7 @@
 ---
 name: troubleshoot
-description: >
-  Use when the user encounters "Flask errors", "Flask not working",
-  "Flask import error", "Flask 500 error", "debug Flask", "Flask template not found",
-  "Flask circular import", or needs to diagnose and fix common Flask problems.
+description: |
+  Use when the user encounters "Flask errors", "Flask not working", "Flask import error", "Flask 500 error", "debug Flask", "Flask template not found", "Flask circular import", or needs to diagnose and fix common Flask problems.
 ---
 
 # Flask Troubleshooting

@@ -1,6 +1,6 @@
 ---
 name: overview
-description: "Use when the user asks anything about NocoBase v2 — \"build app on NocoBase v2\", \"manage NocoBase\", \"how do I X in NocoBase\", \"NocoBase API or CLI\". Establishes the cardinal rule (REST API or `nb` CLI — pick whichever is convenient) and routes to the right specialist skill in this plugin."
+description: Use when the user asks anything about NocoBase v2 — "build app on NocoBase v2", "manage NocoBase", "how do I X in NocoBase", "NocoBase API or CLI". Establishes the cardinal rule (REST API or `nb` CLI — pick whichever is convenient) and routes to the right specialist skill in this plugin.
 ---
 
 # NocoBase v2 — overview and skill router

@@ -1,6 +1,6 @@
 ---
 name: sdk-patterns
-description: "@directus/sdk patterns \u2014 composable client, TypeScript types, CRUD operations, authentication, real-time subscriptions. This skill should be used when the user asks about \"Directus SDK\", \"@directus/sdk\", \"Directus client library\", \"Directus TypeScript\", or needs code patterns for integrating Directus into a JavaScript/TypeScript project."
+description: '@directus/sdk patterns — composable client, TypeScript types, CRUD operations, authentication, real-time subscriptions. This skill should be used when the user asks about "Directus SDK", "@directus/sdk", "Directus client library", "Directus TypeScript", or needs code patterns for integrating Directus into a JavaScript/TypeScript project.'
 ---
 
 # @directus/sdk Patterns

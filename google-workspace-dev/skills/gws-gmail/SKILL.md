@@ -1,14 +1,6 @@
 ---
 name: gws-gmail
-description: "Gmail: Send, read, and manage email."
-metadata:
-  version: 0.22.5
-  openclaw:
-    category: "productivity"
-    requires:
-      bins:
-        - gws
-    cliHelp: "gws gmail --help"
+description: 'Gmail: Send, read, and manage email.'
 ---
 
 # gmail (v1)
@@ -58,4 +50,3 @@ gws schema gmail.<resource>.<method>
 ```
 
 Use `gws schema` output to build your `--params` and `--json` flags.
-

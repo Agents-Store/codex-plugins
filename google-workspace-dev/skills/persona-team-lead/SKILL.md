@@ -1,19 +1,6 @@
 ---
 name: persona-team-lead
-description: "Lead a team — run standups, coordinate tasks, and communicate."
-metadata:
-  version: 0.22.5
-  openclaw:
-    category: "persona"
-    requires:
-      bins:
-        - gws
-      skills:
-        - gws-calendar
-        - gws-gmail
-        - gws-chat
-        - gws-drive
-        - gws-sheets
+description: Lead a team — run standups, coordinate tasks, and communicate.
 ---
 
 # Team Lead
@@ -39,4 +26,3 @@ Lead a team — run standups, coordinate tasks, and communicate.
 - Use `gws calendar +agenda --week --format table` for weekly team calendar views.
 - Pipe standup reports to Chat with `gws chat spaces messages create`.
 - Use `--sanitize` for any operations involving sensitive team data.
-

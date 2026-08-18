@@ -1,12 +1,6 @@
 ---
 name: nocobase-publish-manage
 description: Use when users need NocoBase backup restore or migration publish operations through nb api backup and nb api migration commands.
-argument-hint: "[action: plan|run|validate] [method: backup|migration] [source-env=dev] [target-env=dev] [file?] [rule-id?]"
-allowed-tools: Bash, Read, Grep, Glob
-owner: platform-tools
-version: 4.0.0
-last-reviewed: 2026-04-30
-risk-level: high
 ---
 
 # Goal

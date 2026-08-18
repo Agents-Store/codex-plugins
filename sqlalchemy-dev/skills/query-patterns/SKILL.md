@@ -1,10 +1,7 @@
 ---
 name: query-patterns
-description: >
-  Use when the user asks about "SQLAlchemy queries", "filter records",
-  "SQLAlchemy select", "join tables", "aggregate query", "order by",
-  "pagination", "N+1 query problem", "eager loading", "SQLAlchemy session",
-  or needs patterns for querying data with SQLAlchemy.
+description: |
+  Use when the user asks about "SQLAlchemy queries", "filter records", "SQLAlchemy select", "join tables", "aggregate query", "order by", "pagination", "N+1 query problem", "eager loading", "SQLAlchemy session", or needs patterns for querying data with SQLAlchemy.
 ---
 
 # SQLAlchemy Query Patterns

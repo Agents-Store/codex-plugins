@@ -1,11 +1,7 @@
 ---
 name: auth-patterns
-description: >
-  Next.js authentication and authorization patterns. Use when the user asks about
-  "authentication in Next.js", "NextAuth.js", "Auth.js", "middleware auth guards",
-  "protected routes", "session management", "role-based access", "login page",
-  "signup form", "JWT sessions", "cookies auth", or needs guidance on implementing
-  auth in App Router applications.
+description: |
+  Next.js authentication and authorization patterns. Use when the user asks about "authentication in Next.js", "NextAuth.js", "Auth.js", "middleware auth guards", "protected routes", "session management", "role-based access", "login page", "signup form", "JWT sessions", "cookies auth", or needs guidance on implementing auth in App Router applications.
 ---
 
 # Authentication Patterns

@@ -6,8 +6,6 @@ Canonical source: https://github.com/agents-store/claude-public-plugins/tree/mai
 
 ## Skills
 
-This plugin ships the following skills under `skills/`. Codex loads them contextually:
-
 - **api-reference** — This skill should be used when the user asks for "Mattermost API endpoints", "Mattermost REST API", "Mattermost curl examples", "Mattermost API documentation", the exact path/method for any Mattermost resource, or needs HTTP details for users, teams, channels, posts, reactions, files, emoji, webhooks, slash commands, bots, OAuth apps, system config, roles, schemes, groups, LDAP/SAML, compliance, or data retention. Index into the full per-domain endpoint catalog.
 - **common-operations** — This skill should be used when the user wants to do collaboration work in Mattermost — "post a message to a channel", "send a DM in Mattermost", "create a channel", "add users to a team/channel", "deactivate a user", "create a team", "set up a webhook", "react to a post", or any everyday Mattermost operation. Provides plain-language workflows that drive the REST API and route to the exact endpoints.
 - **examples** — This skill should be used when the user wants a worked end-to-end Mattermost example or walkthrough — "show me a full Mattermost workflow", "example of onboarding a team in Mattermost", "how do I broadcast a message to several channels via the API", "end-to-end channel management example", or wants to see several Mattermost API calls chained together for a real scenario.
@@ -16,7 +14,12 @@ This plugin ships the following skills under `skills/`. Codex loads them context
 
 ## Subagents
 
-Defined under `.codex/agents/` as TOML files:
+Codex does not install plugin subagents automatically — copy them manually before use:
+
+```bash
+cp agents/*.toml ~/.codex/agents/        # personal
+cp agents/*.toml <repo>/.codex/agents/    # project-local
+```
 
 - **mattermost-assistant** — Use this agent when the user needs help running collaboration operations in Mattermost — managing users, teams, channels, posts & threads, reactions, files, custom emoji, webhooks, slash commands, bots, OAuth apps, or system administration (config, roles, schemes, groups, LDAP/SAML, compliance, data retention, plugins) — by driving the Mattermost REST API.
 

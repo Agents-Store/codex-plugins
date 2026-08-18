@@ -1,11 +1,7 @@
 ---
 name: examples
-description: >
-  End-to-end scenario walkthroughs for n8n workflow provisioning. This skill should be used when
-  the user asks for "n8n provisioning example", "how to import workflows", "n8n provision
-  walkthrough", "batch import tutorial", "template deploy guide", "n8n setup example",
-  "find and import n8n workflow", "deploy automation suite", or needs a complete example of
-  discovering, analyzing, and deploying n8n workflows.
+description: |
+  End-to-end scenario walkthroughs for n8n workflow provisioning. This skill should be used when the user asks for "n8n provisioning example", "how to import workflows", "n8n provision walkthrough", "batch import tutorial", "template deploy guide", "n8n setup example", "find and import n8n workflow", "deploy automation suite", or needs a complete example of discovering, analyzing, and deploying n8n workflows.
 ---
 
 # Provisioning Examples

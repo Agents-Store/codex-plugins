@@ -17,9 +17,8 @@ codex plugin marketplace add .
 ## Components
 
 - 97 skill(s) under `skills/`
-- 0 subagent(s) under `.codex/agents/`
 - No MCP server
-- 0 workflow template(s) — see AGENTS.md
+- No hooks
 
 ## Source
 

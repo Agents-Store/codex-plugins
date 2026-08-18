@@ -1,0 +1,620 @@
+{
+  "name": "agents-store-codex-plugins",
+  "interface": {
+    "displayName": "Agents Store"
+  },
+  "plugins": [
+    {
+      "name": "atlassian-ops",
+      "source": {
+        "source": "local",
+        "path": "./atlassian-ops"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "project-management"
+    },
+    {
+      "name": "chatwoot-dev",
+      "source": {
+        "source": "local",
+        "path": "./chatwoot-dev"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "development"
+    },
+    {
+      "name": "codemap-dev",
+      "source": {
+        "source": "local",
+        "path": "./codemap-dev"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "development"
+    },
+    {
+      "name": "dataforseo-dev",
+      "source": {
+        "source": "local",
+        "path": "./dataforseo-dev"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "marketing"
+    },
+    {
+      "name": "deep-research",
+      "source": {
+        "source": "local",
+        "path": "./deep-research"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "research"
+    },
+    {
+      "name": "dify-dev",
+      "source": {
+        "source": "local",
+        "path": "./dify-dev"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "development"
+    },
+    {
+      "name": "dify-ops",
+      "source": {
+        "source": "local",
+        "path": "./dify-ops"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "operations"
+    },
+    {
+      "name": "directus-dev",
+      "source": {
+        "source": "local",
+        "path": "./directus-dev"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "development"
+    },
+    {
+      "name": "document-generator",
+      "source": {
+        "source": "local",
+        "path": "./document-generator"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "productivity"
+    },
+    {
+      "name": "dokploy-dev",
+      "source": {
+        "source": "local",
+        "path": "./dokploy-dev"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "infrastructure"
+    },
+    {
+      "name": "firecrawl",
+      "source": {
+        "source": "local",
+        "path": "./firecrawl"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "development"
+    },
+    {
+      "name": "flask-dev",
+      "source": {
+        "source": "local",
+        "path": "./flask-dev"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "development"
+    },
+    {
+      "name": "google-workspace-dev",
+      "source": {
+        "source": "local",
+        "path": "./google-workspace-dev"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "productivity"
+    },
+    {
+      "name": "grammy-dev",
+      "source": {
+        "source": "local",
+        "path": "./grammy-dev"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "development"
+    },
+    {
+      "name": "image-search-dev",
+      "source": {
+        "source": "local",
+        "path": "./image-search-dev"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "development"
+    },
+    {
+      "name": "infisical-dev",
+      "source": {
+        "source": "local",
+        "path": "./infisical-dev"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "development"
+    },
+    {
+      "name": "macstack-dev",
+      "source": {
+        "source": "local",
+        "path": "./macstack-dev"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "development"
+    },
+    {
+      "name": "mattermost-ops",
+      "source": {
+        "source": "local",
+        "path": "./mattermost-ops"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "collaboration"
+    },
+    {
+      "name": "media-hosting-ops",
+      "source": {
+        "source": "local",
+        "path": "./media-hosting-ops"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "operations"
+    },
+    {
+      "name": "mem0",
+      "source": {
+        "source": "local",
+        "path": "./mem0"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "development"
+    },
+    {
+      "name": "multi-bank",
+      "source": {
+        "source": "local",
+        "path": "./multi-bank"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "finance"
+    },
+    {
+      "name": "n8n",
+      "source": {
+        "source": "local",
+        "path": "./n8n"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "development"
+    },
+    {
+      "name": "n8n-dev",
+      "source": {
+        "source": "local",
+        "path": "./n8n-dev"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "automation"
+    },
+    {
+      "name": "n8n-provision",
+      "source": {
+        "source": "local",
+        "path": "./n8n-provision"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "automation"
+    },
+    {
+      "name": "nextjs-dev",
+      "source": {
+        "source": "local",
+        "path": "./nextjs-dev"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "development"
+    },
+    {
+      "name": "nextjs-provision",
+      "source": {
+        "source": "local",
+        "path": "./nextjs-provision"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "development"
+    },
+    {
+      "name": "nocobase",
+      "source": {
+        "source": "local",
+        "path": "./nocobase"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "development"
+    },
+    {
+      "name": "nocobase-dev",
+      "source": {
+        "source": "local",
+        "path": "./nocobase-dev"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "development"
+    },
+    {
+      "name": "nocodb",
+      "source": {
+        "source": "local",
+        "path": "./nocodb"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "development"
+    },
+    {
+      "name": "nocodb-dev",
+      "source": {
+        "source": "local",
+        "path": "./nocodb-dev"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "development"
+    },
+    {
+      "name": "nocodb-ops",
+      "source": {
+        "source": "local",
+        "path": "./nocodb-ops"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "operations"
+    },
+    {
+      "name": "openclaw-configurator",
+      "source": {
+        "source": "local",
+        "path": "./openclaw-configurator"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "ai-agents"
+    },
+    {
+      "name": "outline-ops",
+      "source": {
+        "source": "local",
+        "path": "./outline-ops"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "knowledge-base"
+    },
+    {
+      "name": "payloadcms-dev",
+      "source": {
+        "source": "local",
+        "path": "./payloadcms-dev"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "cms"
+    },
+    {
+      "name": "plane-ops",
+      "source": {
+        "source": "local",
+        "path": "./plane-ops"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "project-management"
+    },
+    {
+      "name": "postgresql-external-dev",
+      "source": {
+        "source": "local",
+        "path": "./postgresql-external-dev"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "development"
+    },
+    {
+      "name": "project-template-creator",
+      "source": {
+        "source": "local",
+        "path": "./project-template-creator"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "development"
+    },
+    {
+      "name": "restic-dev",
+      "source": {
+        "source": "local",
+        "path": "./restic-dev"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "infrastructure"
+    },
+    {
+      "name": "sendpulse",
+      "source": {
+        "source": "local",
+        "path": "./sendpulse"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "marketing"
+    },
+    {
+      "name": "seo-dev",
+      "source": {
+        "source": "local",
+        "path": "./seo-dev"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "development"
+    },
+    {
+      "name": "sqlalchemy-dev",
+      "source": {
+        "source": "local",
+        "path": "./sqlalchemy-dev"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "development"
+    },
+    {
+      "name": "stack-composable-stack-v1",
+      "source": {
+        "source": "local",
+        "path": "./stack-composable-stack-v1"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "stack"
+    },
+    {
+      "name": "stack-directus-nextjs-dev",
+      "source": {
+        "source": "local",
+        "path": "./stack-directus-nextjs-dev"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "development"
+    },
+    {
+      "name": "stack-directus-nextjs-trigger-dev",
+      "source": {
+        "source": "local",
+        "path": "./stack-directus-nextjs-trigger-dev"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "development"
+    },
+    {
+      "name": "stack-flask-sqlalchemy-dev",
+      "source": {
+        "source": "local",
+        "path": "./stack-flask-sqlalchemy-dev"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "development"
+    },
+    {
+      "name": "taiga-ops",
+      "source": {
+        "source": "local",
+        "path": "./taiga-ops"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "project-management"
+    },
+    {
+      "name": "teams-dev",
+      "source": {
+        "source": "local",
+        "path": "./teams-dev"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "development"
+    },
+    {
+      "name": "teleshop",
+      "source": {
+        "source": "local",
+        "path": "./teleshop"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "ecommerce"
+    },
+    {
+      "name": "trigger-dev",
+      "source": {
+        "source": "local",
+        "path": "./trigger-dev"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "development"
+    },
+    {
+      "name": "vercel-dev",
+      "source": {
+        "source": "local",
+        "path": "./vercel-dev"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "development"
+    },
+    {
+      "name": "web-search-dev",
+      "source": {
+        "source": "local",
+        "path": "./web-search-dev"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "development"
+    }
+  ]
+}

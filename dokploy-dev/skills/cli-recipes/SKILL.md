@@ -1,6 +1,6 @@
 ---
 name: cli-recipes
-description: "This skill should be used when running Dokploy operations from the terminal with the @dokploy/cli — authenticating, creating projects/apps, deploying, managing environment variables, provisioning databases, or reading logs via command line. Triggers: \"dokploy cli\", \"dokploy command\", \"dokploy auth\", \"dokploy application deploy\", \"dokploy read-logs from terminal\", \"deploy dokploy from terminal\"."
+description: 'This skill should be used when running Dokploy operations from the terminal with the @dokploy/cli — authenticating, creating projects/apps, deploying, managing environment variables, provisioning databases, or reading logs via command line. Triggers: "dokploy cli", "dokploy command", "dokploy auth", "dokploy application deploy", "dokploy read-logs from terminal", "deploy dokploy from terminal".'
 ---
 
 # Dokploy CLI Recipes

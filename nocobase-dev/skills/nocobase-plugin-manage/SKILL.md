@@ -1,12 +1,6 @@
 ---
 name: nocobase-plugin-manage
 description: Use when users need to inspect, enable, or disable NocoBase plugins with direct `nb plugin` commands only.
-argument-hint: "[action: inspect|enable|disable] [plugin...] [env?: name]"
-allowed-tools: Bash, Read, Grep, Write
-owner: platform-tools
-version: 2.0.1
-last-reviewed: 2026-04-29
-risk-level: medium
 ---
 
 # Goal

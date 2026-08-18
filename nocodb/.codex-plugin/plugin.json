@@ -5,5 +5,31 @@
   "author": {
     "name": "AGENTS.STORE"
   },
-  "skills": "./skills/"
+  "keywords": [
+    "nocodb",
+    "database",
+    "tables",
+    "records",
+    "columns",
+    "views",
+    "relations",
+    "formulas",
+    "no-code",
+    "spreadsheet",
+    "airtable-alternative"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Nocodb",
+    "shortDescription": "Noc\n\n<!-- truncated: content exceeds the target's size limit -->",
+    "longDescription": "NocoDB database development plugin. Manage tables, records, columns, views, relations, formulas, rollups, lookups, filtering, sorting, search, aggregation, webhooks, and filter/sort management via MCP tools.",
+    "developerName": "AGENTS.STORE",
+    "category": "development",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://agents.store"
+  }
 }

@@ -6,8 +6,6 @@ Canonical source: https://github.com/agents-store/claude-public-plugins/tree/mai
 
 ## Skills
 
-This plugin ships the following skills under `skills/`. Codex loads them contextually:
-
 - **api-design** — Next.js API design patterns for Route Handlers and Server Actions. Use when the user asks about "Route Handlers", "API routes in App Router", "Server Actions vs API routes", "input validation", "API response patterns", "streaming responses", "SSE", "webhooks in Next.js", "CORS", "API versioning", or needs guidance on building APIs with Next.js.
 
 - **api-reference** — Next.js framework API quick reference — key functions, configuration options, and TypeScript types. This skill should be used when the user asks about "Next.js API", "Next.js functions", "next.config options", "generateMetadata API", "Next.js TypeScript types", or needs a quick lookup of Next.js framework APIs.
@@ -37,7 +35,12 @@ This plugin ships the following skills under `skills/`. Codex loads them context
 
 ## Subagents
 
-Defined under `.codex/agents/` as TOML files:
+Codex does not install plugin subagents automatically — copy them manually before use:
+
+```bash
+cp agents/*.toml ~/.codex/agents/        # personal
+cp agents/*.toml <repo>/.codex/agents/    # project-local
+```
 
 - **nextjs-developer** — Next.js development specialist for building modern applications with App Router, Server/Client Components, data fetching, performance optimization, security, authentication, testing, and API design.
 

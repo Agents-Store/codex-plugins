@@ -20,5 +20,17 @@
     "capture",
     "unified-wrap-up"
   ],
-  "skills": "./skills/"
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Project Template Creator",
+    "shortDescription": "Man\n\n<!-- truncated: content exceeds the target's size limit -->",
+    "longDescription": "Manage project template hierarchy with unified improvement workflow. Route fixes to plugins or parent templates automatically, quick-capture ideas for later, and run unified end-of-session reviews covering both plugins and templates.",
+    "developerName": "AGENTS.STORE",
+    "category": "development",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://agents.store"
+  }
 }

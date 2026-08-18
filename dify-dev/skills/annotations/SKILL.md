@@ -1,10 +1,7 @@
 ---
 name: annotations
-description: >
-  This skill should be used when the user asks to "list/create/update/delete Dify
-  annotations", "call /apps/annotations", "set up Dify annotation reply", "enable
-  annotation reply", "disable annotation reply", or "check annotation reply status".
-  Covers the annotation (curated Q&A) subsystem.
+description: |
+  This skill should be used when the user asks to "list/create/update/delete Dify annotations", "call /apps/annotations", "set up Dify annotation reply", "enable annotation reply", "disable annotation reply", or "check annotation reply status". Covers the annotation (curated Q&A) subsystem.
 ---
 
 # Dify — Annotations

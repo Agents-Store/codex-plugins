@@ -1,14 +1,6 @@
 ---
 name: gws-meet
-description: "Manage Google Meet conferences."
-metadata:
-  version: 0.22.5
-  openclaw:
-    category: "productivity"
-    requires:
-      bins:
-        - gws
-    cliHelp: "gws meet --help"
+description: Manage Google Meet conferences.
 ---
 
 # meet (v2)
@@ -50,4 +42,3 @@ gws schema meet.<resource>.<method>
 ```
 
 Use `gws schema` output to build your `--params` and `--json` flags.
-

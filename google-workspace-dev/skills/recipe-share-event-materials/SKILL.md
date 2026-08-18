@@ -1,17 +1,6 @@
 ---
 name: recipe-share-event-materials
-description: "Share Google Drive files with all attendees of a Google Calendar event."
-metadata:
-  version: 0.22.5
-  openclaw:
-    category: "recipe"
-    domain: "productivity"
-    requires:
-      bins:
-        - gws
-      skills:
-        - gws-calendar
-        - gws-drive
+description: Share Google Drive files with all attendees of a Google Calendar event.
 ---
 
 # Share Files with Meeting Attendees
@@ -25,4 +14,3 @@ Share Google Drive files with all attendees of a Google Calendar event.
 1. Get event attendees: `gws calendar events get --params '{"calendarId": "primary", "eventId": "EVENT_ID"}'`
 2. Share file with each attendee: `gws drive permissions create --params '{"fileId": "FILE_ID"}' --json '{"role": "reader", "type": "user", "emailAddress": "attendee@company.com"}'`
 3. Verify sharing: `gws drive permissions list --params '{"fileId": "FILE_ID"}' --format table`
-

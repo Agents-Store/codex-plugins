@@ -1,7 +1,6 @@
 ---
 name: examples
 description: Scenario walkthroughs for media hosting operations. Use when learning how to upload images or seeing practical usage patterns.
-disable-model-invocation: true
 ---
 
 # Media Hosting Examples

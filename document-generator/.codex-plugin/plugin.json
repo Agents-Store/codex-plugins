@@ -5,5 +5,32 @@
   "author": {
     "name": "AGENTS.STORE"
   },
-  "skills": "./skills/"
+  "keywords": [
+    "document",
+    "pdf",
+    "docx",
+    "pptx",
+    "invoice",
+    "proposal",
+    "report",
+    "presentation",
+    "contract",
+    "generator",
+    "converter",
+    "pandoc",
+    "business-documents"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Document Generator",
+    "shortDescription": "Pro\n\n<!-- truncated: content exceeds the target's size limit -->",
+    "longDescription": "Professional document generator. Creates proposals, invoices, estimates/quotations, reports, presentations, contracts, NDAs, and certificates of completion in PDF, DOCX, and PPTX formats. Supports multi-language documents with embedded fonts (Cyrillic, Latin). First-use onboarding for style preferences, company profiles, and logo management. Converts between MD, DOCX, PDF, HTML, and PPTX.",
+    "developerName": "AGENTS.STORE",
+    "category": "productivity",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://agents.store"
+  }
 }

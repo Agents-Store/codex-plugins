@@ -1,10 +1,7 @@
 ---
 name: troubleshoot
-description: >
-  This skill should be used when a Dify API call fails or behaves unexpectedly — "Dify
-  401 / 404 / 429 error", "Dify conversation not found", "Dify blocking timeout",
-  "Dify rate limit", "why is my Dify conversation empty", "Dify user mismatch", or
-  "Dify file upload not working". Error codes, limits, and common pitfalls.
+description: |
+  This skill should be used when a Dify API call fails or behaves unexpectedly — "Dify 401 / 404 / 429 error", "Dify conversation not found", "Dify blocking timeout", "Dify rate limit", "why is my Dify conversation empty", "Dify user mismatch", or "Dify file upload not working". Error codes, limits, and common pitfalls.
 ---
 
 # Dify API — Troubleshooting

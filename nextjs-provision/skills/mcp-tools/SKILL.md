@@ -1,10 +1,7 @@
 ---
 name: mcp-tools
-description: >
-  Set up and use shadcn MCP servers for AI-assisted component discovery and installation. This skill should
-  be used when the user asks about "shadcn MCP", "shadcn MCP server", "set up shadcn MCP for Claude",
-  "component MCP tools", "Jpisnice shadcn MCP", "shadcn-ui-mcp-server", "AI component installation",
-  or needs to configure MCP servers for shadcn/ui component work.
+description: |
+  Set up and use shadcn MCP servers for AI-assisted component discovery and installation. This skill should be used when the user asks about "shadcn MCP", "shadcn MCP server", "set up shadcn MCP for Claude", "component MCP tools", "Jpisnice shadcn MCP", "shadcn-ui-mcp-server", "AI component installation", or needs to configure MCP servers for shadcn/ui component work.
 ---
 
 Two MCP servers enable AI-assisted shadcn/ui component discovery and installation: the official shadcn MCP and the Jpisnice community MCP server.

@@ -1,11 +1,7 @@
 ---
 name: chat-completion
-description: >
-  This skill should be used when the user asks to "send a chat message to Dify",
-  "call /chat-messages", "use the Dify completion API", "/completion-messages",
-  "stream a Dify chat response", "stop Dify generation", "get suggested questions",
-  or "submit message feedback / like a message". Covers conversational (chat/agent/
-  chatflow) and stateless (completion) message sending.
+description: |
+  This skill should be used when the user asks to "send a chat message to Dify", "call /chat-messages", "use the Dify completion API", "/completion-messages", "stream a Dify chat response", "stop Dify generation", "get suggested questions", or "submit message feedback / like a message". Covers conversational (chat/agent/ chatflow) and stateless (completion) message sending.
 ---
 
 # Dify — Chat & Completion Messages

@@ -6,8 +6,6 @@ Canonical source: https://github.com/agents-store/claude-public-plugins/tree/mai
 
 ## Skills
 
-This plugin ships the following skills under `skills/`. Codex loads them contextually:
-
 - **api-reference** — Use when the user asks for "SQLAlchemy API reference", "SQLAlchemy Column types", "SQLAlchemy session methods", "db.session API", "SQLAlchemy relationship options", or needs specific SQLAlchemy framework API details.
 
 - **cli-recipes** — Use when the user asks about "Alembic commands", "database migrations", "flask db migrate", "flask db upgrade", "create migration", "rollback migration", "SQLAlchemy CLI", or needs ready-to-use database migration commands.
@@ -23,7 +21,12 @@ This plugin ships the following skills under `skills/`. Codex loads them context
 
 ## Subagents
 
-Defined under `.codex/agents/` as TOML files:
+Codex does not install plugin subagents automatically — copy them manually before use:
+
+```bash
+cp agents/*.toml ~/.codex/agents/        # personal
+cp agents/*.toml <repo>/.codex/agents/    # project-local
+```
 
 - **sqlalchemy-developer** — Use this agent when the user needs help building with SQLAlchemy — defining models, writing queries, setting up migrations, debugging database errors, or optimizing query performance.
 

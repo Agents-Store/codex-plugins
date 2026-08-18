@@ -1,14 +1,6 @@
 ---
 name: gws-gmail-forward
-description: "Gmail: Forward a message to new recipients."
-metadata:
-  version: 0.22.5
-  openclaw:
-    category: "productivity"
-    requires:
-      bins:
-        - gws
-    cliHelp: "gws gmail +forward --help"
+description: 'Gmail: Forward a message to new recipients.'
 ---
 
 # gmail +forward

@@ -1,7 +1,6 @@
 ---
 name: api-reference
 description: This skill should be used when the user asks for "Firecrawl API endpoints", "Exa REST API", "Perplexity API reference", "Jina API curl examples", "web search API documentation", or needs specific HTTP endpoint details for any of the web search and scraping services.
-disable-model-invocation: true
 ---
 
 # Web Search Services API Reference

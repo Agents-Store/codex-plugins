@@ -1,11 +1,7 @@
 ---
 name: dify-docker-architecture
-description: >
-  Dify Docker Compose deployment architecture — services, container naming, directory layout,
-  .env.example structure, and Docker project name conventions. Use when working with Dify Docker
-  setup, understanding container services, debugging container issues, or needing to know the
-  Dify directory structure. Triggers on "dify docker", "dify containers", "dify services",
-  "dify architecture", "dify compose".
+description: |
+  Dify Docker Compose deployment architecture — services, container naming, directory layout, .env.example structure, and Docker project name conventions. Use when working with Dify Docker setup, understanding container services, debugging container issues, or needing to know the Dify directory structure. Triggers on "dify docker", "dify containers", "dify services", "dify architecture", "dify compose".
 ---
 
 ## Directory Layout

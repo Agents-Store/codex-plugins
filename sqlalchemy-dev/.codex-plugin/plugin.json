@@ -15,5 +15,17 @@
     "alembic",
     "database"
   ],
-  "skills": "./skills/"
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Sqlalchemy Dev",
+    "shortDescription": "SQL\n\n<!-- truncated: content exceeds the target's size limit -->",
+    "longDescription": "SQLAlchemy dev plugin for Agents Store. Model definition patterns, relationship mapping, query optimization, Alembic migrations, and troubleshooting for developers building with SQLAlchemy 2.0+.",
+    "developerName": "Agents Store",
+    "category": "development",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://agents.store"
+  }
 }

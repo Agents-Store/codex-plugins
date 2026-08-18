@@ -1,12 +1,6 @@
 ---
 name: nocobase-acl-manage
 description: Task-driven ACL governance through nb CLI for role lifecycle, global role mode, permission policy, user-role membership, and risk assessment. Use when users describe business permission outcomes instead of raw command arguments.
-argument-hint: "[task: role.*|global.role-mode.*|permission.*|user.*|risk.*] [target?] [data_source_key?] [strict_mode?]"
-allowed-tools: shell, local file reads
-owner: platform-tools
-version: 2.5.3
-last-reviewed: 2026-04-23
-risk-level: high
 ---
 
 # Goal

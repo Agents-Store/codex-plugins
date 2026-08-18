@@ -1,10 +1,7 @@
 ---
 name: workflows
-description: >
-  This skill should be used when the user asks to "run a Dify workflow",
-  "call /workflows/run", "execute a Dify workflow app via API", "get a workflow run
-  result", "list Dify workflow logs", "stop a Dify workflow task", or work with
-  Chatflow/Workflow node events. Covers Workflow-type apps (no conversation wrapper).
+description: |
+  This skill should be used when the user asks to "run a Dify workflow", "call /workflows/run", "execute a Dify workflow app via API", "get a workflow run result", "list Dify workflow logs", "stop a Dify workflow task", or work with Chatflow/Workflow node events. Covers Workflow-type apps (no conversation wrapper).
 ---
 
 # Dify — Workflows

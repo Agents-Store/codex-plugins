@@ -1,10 +1,7 @@
 ---
 name: modify-schema
-description: >
-  This skill should be used when the user asks to "alter a table", "rename a column",
-  "change column type", "drop a column", "drop a table", "remove a constraint",
-  "delete a junction table", "add default value", "set NOT NULL", or needs to modify
-  an existing PostgreSQL schema that is connected to NocoDB or NocoBase.
+description: |
+  This skill should be used when the user asks to "alter a table", "rename a column", "change column type", "drop a column", "drop a table", "remove a constraint", "delete a junction table", "add default value", "set NOT NULL", or needs to modify an existing PostgreSQL schema that is connected to NocoDB or NocoBase.
 ---
 
 # Modify Schema — ALTER TABLE & DROP Operations

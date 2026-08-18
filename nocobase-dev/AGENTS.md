@@ -6,8 +6,6 @@ Canonical source: https://github.com/agents-store/claude-public-plugins/tree/mai
 
 ## Skills
 
-This plugin ships the following skills under `skills/`. Codex loads them contextually:
-
 - **api-reference** — Reference-only skill (loaded on demand) that maps the NocoBase v2 REST API surface — base URL, authentication, action-style endpoint convention, and pointers into the bundled OpenAPI 3.0.3 specification. Loaded by the model when it needs an exact endpoint path or schema; not auto-triggered.
 - **auth** — Use when the user wants to authenticate to a NocoBase v2 instance, asks "how do I get a token for NocoBase", "how do I log in via API", "why is my request returning 401 from NocoBase", or needs working curl/Node samples that send the bearer token. Covers the upstream login flow (NB_USER + NB_PASSWORD → auth:signIn → token), the long-lived API Key path, and the OAuth IdP path.
 - **cli-recipes** — Use when the user asks how to install or run NocoBase from the terminal — "install nb CLI", "how do I bootstrap NocoBase", "run nb commands", "start/stop NocoBase", "backup NocoBase", "nb pm". Provides install one-liner (`@nocobase/cli@beta`), the bootstrap-and-lifecycle recipes, and a routing table that hands deeper tasks to the upstream `nocobase-env-manage`, `nocobase-plugin-manage`, and `nocobase-publish-manage` skills.

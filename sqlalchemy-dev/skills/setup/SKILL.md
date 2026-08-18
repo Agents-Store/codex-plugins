@@ -1,9 +1,7 @@
 ---
 name: setup
-description: >
-  Use when the user asks to "verify SQLAlchemy setup", "check database connection",
-  "is SQLAlchemy configured correctly", "test database setup", or needs to confirm
-  that SQLAlchemy is properly initialized in their Python project.
+description: |
+  Use when the user asks to "verify SQLAlchemy setup", "check database connection", "is SQLAlchemy configured correctly", "test database setup", or needs to confirm that SQLAlchemy is properly initialized in their Python project.
 ---
 
 # SQLAlchemy Setup Verification

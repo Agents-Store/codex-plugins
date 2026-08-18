@@ -1,6 +1,6 @@
 ---
 name: read-logs
-description: "This skill should be used whenever the user wants to read, tail, stream, or search Dokploy logs — application runtime logs, Docker Compose stack logs (every container), database logs, or deployment build logs — and especially to diagnose why something failed. Triggers: \"read the logs\", \"show me the dokploy logs\", \"tail the logs\", \"compose logs\", \"all containers' logs\", \"container logs\", \"why is my app crashing\", \"why did my deploy fail — check the logs\", \"grep the logs for an error\", \"runtime logs\", \"build logs\". Use it instead of telling the user logs aren't available over the API — since Dokploy v0.29.0 they are."
+description: 'This skill should be used whenever the user wants to read, tail, stream, or search Dokploy logs — application runtime logs, Docker Compose stack logs (every container), database logs, or deployment build logs — and especially to diagnose why something failed. Triggers: "read the logs", "show me the dokploy logs", "tail the logs", "compose logs", "all containers'' logs", "container logs", "why is my app crashing", "why did my deploy fail — check the logs", "grep the logs for an error", "runtime logs", "build logs". Use it instead of telling the user logs aren''t available over the API — since Dokploy v0.29.0 they are.'
 ---
 
 # Read Dokploy Logs (runtime + build, every container)

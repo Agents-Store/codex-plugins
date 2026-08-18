@@ -1,10 +1,7 @@
 ---
 name: examples
-description: >
-  This skill should be used when the user asks for a "full Dify example", "end-to-end
-  Dify integration", "how do I build a chatbot with Dify", "complete workflow example",
-  "Dify RAG example", or wants a working, copy-paste walkthrough that strings multiple
-  Dify API calls together.
+description: |
+  This skill should be used when the user asks for a "full Dify example", "end-to-end Dify integration", "how do I build a chatbot with Dify", "complete workflow example", "Dify RAG example", or wants a working, copy-paste walkthrough that strings multiple Dify API calls together.
 ---
 
 # Dify API — End-to-End Examples

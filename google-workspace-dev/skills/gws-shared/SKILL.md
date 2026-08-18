@@ -1,13 +1,6 @@
 ---
 name: gws-shared
-description: "gws CLI: Shared patterns for authentication, global flags, and output formatting."
-metadata:
-  version: 0.22.5
-  openclaw:
-    category: "productivity"
-    requires:
-      bins:
-        - gws
+description: 'gws CLI: Shared patterns for authentication, global flags, and output formatting.'
 ---
 
 # gws — Shared Reference

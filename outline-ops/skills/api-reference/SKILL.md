@@ -1,7 +1,6 @@
 ---
 name: api-reference
 description: This skill should be used when the user asks for "Outline API endpoints", "Outline REST API", "Outline curl examples", "Outline API documentation", the exact method/parameters for any Outline resource, or needs HTTP details for documents, collections, comments, stars, views, shares, access requests, auth, users, groups, attachments, file operations, revisions, templates, events, OAuth clients, or data attributes. Index into the full per-domain endpoint catalog.
-disable-model-invocation: true
 ---
 
 # Outline REST API Reference

@@ -14,5 +14,17 @@
     "mcp",
     "agents-store"
   ],
-  "skills": "./skills/"
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "N8n Dev",
+    "shortDescription": "n8n\n\n<!-- truncated: content exceeds the target's size limit -->",
+    "longDescription": "n8n workflow automation dev plugin for Agents Store. MCP tools guide (external + native), workflow patterns, expression syntax, validation, node configuration, Code node patterns, REST API reference, CLI recipes, and troubleshooting for developers building n8n workflows.",
+    "developerName": "Agents Store",
+    "category": "automation",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://agents.store"
+  }
 }

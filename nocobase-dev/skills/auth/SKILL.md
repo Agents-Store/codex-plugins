@@ -1,6 +1,6 @@
 ---
 name: auth
-description: "Use when the user wants to authenticate to a NocoBase v2 instance, asks \"how do I get a token for NocoBase\", \"how do I log in via API\", \"why is my request returning 401 from NocoBase\", or needs working curl/Node samples that send the bearer token. Covers the upstream login flow (NB_USER + NB_PASSWORD → auth:signIn → token), the long-lived API Key path, and the OAuth IdP path."
+description: Use when the user wants to authenticate to a NocoBase v2 instance, asks "how do I get a token for NocoBase", "how do I log in via API", "why is my request returning 401 from NocoBase", or needs working curl/Node samples that send the bearer token. Covers the upstream login flow (NB_USER + NB_PASSWORD → auth:signIn → token), the long-lived API Key path, and the OAuth IdP path.
 ---
 
 # Authentication — NocoBase v2

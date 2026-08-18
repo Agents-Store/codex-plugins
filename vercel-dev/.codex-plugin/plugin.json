@@ -14,8 +14,21 @@
     "serverless",
     "turborepo",
     "turbopack",
-    "ai-gateway",
+    "dev",
     "agents-store"
   ],
-  "skills": "./skills/"
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Vercel Dev",
+    "shortDescription": "Ver\n\n<!-- truncated: content exceeds the target's size limit -->",
+    "longDescription": "Vercel ecosystem plugin. Deployment, AI SDK, Edge Functions, storage, routing, performance optimization. Includes CLI deploy troubleshooting for non-Git projects, Hobby plan fixes, standalone output handling. Based on official vercel-plugin v0.25.0 by Vercel Labs.",
+    "developerName": "AGENTS.STORE",
+    "category": "development",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://agents.store"
+  }
 }

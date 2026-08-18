@@ -13,7 +13,23 @@
     "server-components",
     "typescript",
     "dev",
-    "agents-store"
+    "agents-store",
+    "testing",
+    "security",
+    "authentication",
+    "forms"
   ],
-  "skills": "./skills/"
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Nextjs Dev",
+    "shortDescription": "Nex\n\n<!-- truncated: content exceeds the target's size limit -->",
+    "longDescription": "Next.js development plugin. Knowledge base for building modern Next.js 16 applications with App Router, Server/Client Components, data fetching, Cache Components, performance optimization, and the next-devtools-mcp toolchain.",
+    "developerName": "AGENTS.STORE",
+    "category": "development",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://agents.store"
+  }
 }

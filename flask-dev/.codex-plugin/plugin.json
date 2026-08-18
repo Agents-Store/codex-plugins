@@ -9,7 +9,23 @@
   "keywords": [
     "flask",
     "dev",
-    "agents-store"
+    "agents-store",
+    "python",
+    "jinja2",
+    "blueprints",
+    "web-framework"
   ],
-  "skills": "./skills/"
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Flask Dev",
+    "shortDescription": "Fla\n\n<!-- truncated: content exceeds the target's size limit -->",
+    "longDescription": "Flask dev plugin for Agents Store. Application factory patterns, blueprint organization, Jinja2 templates, Flask CLI recipes, and troubleshooting for developers building with Flask.",
+    "developerName": "Agents Store",
+    "category": "development",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://agents.store"
+  }
 }

@@ -17,9 +17,15 @@ codex plugin marketplace add .
 ## Components
 
 - 10 skill(s) under `skills/`
-- 1 subagent(s) under `.codex/agents/`
-- MCP server config in `.mcp.json`
-- 0 workflow template(s) — see AGENTS.md
+- 1 subagent definition(s) under `agents/` — **not installed automatically by Codex**. Copy manually:
+
+```bash
+cp agents/*.toml ~/.codex/agents/        # personal
+cp agents/*.toml <repo>/.codex/agents/    # project-local
+```
+
+- MCP server config pointed to from the manifest (`.mcp.json`) — see AGENTS.md for the `~/.codex/config.toml` snippet
+- No hooks
 
 ## Source
 

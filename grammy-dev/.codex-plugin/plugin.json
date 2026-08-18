@@ -17,5 +17,17 @@
     "dev",
     "agents-store"
   ],
-  "skills": "./skills/"
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Grammy Dev",
+    "shortDescription": "gra\n\n<!-- truncated: content exceeds the target's size limit -->",
+    "longDescription": "grammY (Telegram bot framework) dev plugin for Agents Store. Covers bot core, filter queries, middleware, commands, keyboards, sessions, conversations, files, payments, deployment, scaling, and the full @grammyjs/* plugin catalog for Node.js/Deno/TypeScript bot developers.",
+    "developerName": "AGENTS.STORE",
+    "category": "development",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://agents.store"
+  }
 }

@@ -1,7 +1,6 @@
 ---
 name: api-reference
 description: This skill should be used when the user asks for "PayloadCMS REST endpoint", "Payload curl example", "Payload GraphQL query syntax", "Payload Local API method signature", "Payload login endpoint", "Payload auth headers", or needs the exact HTTP/method signature for a Payload API call.
-disable-model-invocation: true
 ---
 
 # PayloadCMS — API Reference

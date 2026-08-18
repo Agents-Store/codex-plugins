@@ -6,8 +6,6 @@ Canonical source: https://github.com/agents-store/claude-public-plugins/tree/mai
 
 ## Skills
 
-This plugin ships the following skills under `skills/`. Codex loads them contextually:
-
 - **n8n-api-reference** — n8n REST API reference with all endpoints, authentication, and curl examples. Use when making direct API calls, writing scripts that interact with n8n API, or when MCP tools are unavailable. Reference-only skill.
 - **n8n-cli-recipes** — n8n CLI commands for self-hosted instances. Use when executing workflows from command line, exporting/importing workflows and credentials, managing licenses, resetting user accounts, running security audits via CLI, or managing community nodes. Also use when asking about "n8n CLI", "command line", "n8n execute", "export workflow".
 - **n8n-examples** — End-to-end n8n workflow development scenarios with step-by-step walkthroughs. Use when starting a new workflow, looking for real-world examples, wanting to see complete workflow creation from start to finish, or asking about "n8n example", "workflow example", "show me how to build", "sample workflow".
@@ -24,7 +22,12 @@ This plugin ships the following skills under `skills/`. Codex loads them context
 
 ## Subagents
 
-Defined under `.codex/agents/` as TOML files:
+Codex does not install plugin subagents automatically — copy them manually before use:
+
+```bash
+cp agents/*.toml ~/.codex/agents/        # personal
+cp agents/*.toml <repo>/.codex/agents/    # project-local
+```
 
 - **n8n-developer** — Use this agent when the user needs help building n8n workflows — creating automations, debugging workflow issues, configuring nodes, writing Code node logic, or working with n8n MCP tools, API, or CLI.
 

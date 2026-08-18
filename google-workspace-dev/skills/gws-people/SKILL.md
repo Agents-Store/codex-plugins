@@ -1,14 +1,6 @@
 ---
 name: gws-people
-description: "Google People: Manage contacts and profiles."
-metadata:
-  version: 0.22.5
-  openclaw:
-    category: "productivity"
-    requires:
-      bins:
-        - gws
-    cliHelp: "gws people --help"
+description: 'Google People: Manage contacts and profiles.'
 ---
 
 # people (v1)
@@ -65,4 +57,3 @@ gws schema people.<resource>.<method>
 ```
 
 Use `gws schema` output to build your `--params` and `--json` flags.
-

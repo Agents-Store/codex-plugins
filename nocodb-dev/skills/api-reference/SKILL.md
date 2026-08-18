@@ -10,7 +10,6 @@ description: |
   - "field type schemas"
   - "Hook v3 payload"
   - "dashboard / widget API"
-disable-model-invocation: true
 ---
 
 # NocoDB REST API — Schema Reference

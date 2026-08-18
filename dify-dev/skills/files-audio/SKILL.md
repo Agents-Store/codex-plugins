@@ -1,10 +1,7 @@
 ---
 name: files-audio
-description: >
-  This skill should be used when the user asks to "upload a file to Dify", "call
-  /files/upload", "send an image to a Dify app", "transcribe audio with Dify",
-  "/audio-to-text", "Dify text to speech", or "/text-to-audio". Covers file upload for
-  multimodal input and the speech endpoints.
+description: |
+  This skill should be used when the user asks to "upload a file to Dify", "call /files/upload", "send an image to a Dify app", "transcribe audio with Dify", "/audio-to-text", "Dify text to speech", or "/text-to-audio". Covers file upload for multimodal input and the speech endpoints.
 ---
 
 # Dify — Files & Audio

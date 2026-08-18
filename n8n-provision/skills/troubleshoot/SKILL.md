@@ -1,11 +1,7 @@
 ---
 name: troubleshoot
-description: >
-  Diagnose and fix n8n provisioning and import issues. This skill should be used when the user
-  encounters "n8n import error", "template deploy failed", "workflow validation error",
-  "provisioning troubleshoot", "n8n provision problem", "community node missing",
-  "credential not found", "workflow won't activate", "batch deploy failed", or needs help
-  debugging n8n workflow import and deployment issues.
+description: |
+  Diagnose and fix n8n provisioning and import issues. This skill should be used when the user encounters "n8n import error", "template deploy failed", "workflow validation error", "provisioning troubleshoot", "n8n provision problem", "community node missing", "credential not found", "workflow won't activate", "batch deploy failed", or needs help debugging n8n workflow import and deployment issues.
 ---
 
 # Troubleshoot n8n Provisioning

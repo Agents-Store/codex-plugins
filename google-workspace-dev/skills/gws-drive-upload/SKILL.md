@@ -1,14 +1,6 @@
 ---
 name: gws-drive-upload
-description: "Google Drive: Upload a file with automatic metadata."
-metadata:
-  version: 0.22.5
-  openclaw:
-    category: "productivity"
-    requires:
-      bins:
-        - gws
-    cliHelp: "gws drive +upload --help"
+description: 'Google Drive: Upload a file with automatic metadata.'
 ---
 
 # drive +upload

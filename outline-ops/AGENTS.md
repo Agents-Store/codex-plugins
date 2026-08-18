@@ -6,8 +6,6 @@ Canonical source: https://github.com/agents-store/claude-public-plugins/tree/mai
 
 ## Skills
 
-This plugin ships the following skills under `skills/`. Codex loads them contextually:
-
 - **api-reference** — This skill should be used when the user asks for "Outline API endpoints", "Outline REST API", "Outline curl examples", "Outline API documentation", the exact method/parameters for any Outline resource, or needs HTTP details for documents, collections, comments, stars, views, shares, access requests, auth, users, groups, attachments, file operations, revisions, templates, events, OAuth clients, or data attributes. Index into the full per-domain endpoint catalog.
 - **common-operations** — This skill should be used when the user wants to do knowledge-base work in Outline — "create a document", "search Outline", "update a doc", "move a document to a collection", "create a collection", "share a document", "invite users to Outline", "star a document", "comment on a doc", or any everyday Outline operation. Provides plain-language workflows that drive the REST API and route to the exact methods.
 - **examples** — This skill should be used when the user wants a worked end-to-end Outline example or walkthrough — "show me a full Outline workflow", "example of building a knowledge base in Outline", "how do I publish and share a doc via the API", "document lifecycle example", "onboard users to Outline", or wants to see several Outline API calls chained together for a real scenario.
@@ -16,7 +14,12 @@ This plugin ships the following skills under `skills/`. Codex loads them context
 
 ## Subagents
 
-Defined under `.codex/agents/` as TOML files:
+Codex does not install plugin subagents automatically — copy them manually before use:
+
+```bash
+cp agents/*.toml ~/.codex/agents/        # personal
+cp agents/*.toml <repo>/.codex/agents/    # project-local
+```
 
 - **outline-assistant** — Use this agent when the user needs help running knowledge-base operations in Outline — creating, searching, editing, moving, archiving, or sharing documents; organizing collections; managing comments, stars, templates, and revisions; inviting and permissioning users and groups; or pulling usage reports and audit logs — by driving the Outline REST API.
 

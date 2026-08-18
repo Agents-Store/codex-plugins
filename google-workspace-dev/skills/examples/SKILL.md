@@ -1,6 +1,6 @@
 ---
 name: examples
-description: "Use when the user wants a worked end-to-end example of combining Google Workspace services with the gws CLI — e.g. \"show me an example\", \"how do I turn emails into tasks\", \"build a report from a sheet and email it\", \"prep for my next meeting\", \"create events from a spreadsheet\". Walks through multi-step scenarios that chain several gws-*/recipe-* skills."
+description: Use when the user wants a worked end-to-end example of combining Google Workspace services with the gws CLI — e.g. "show me an example", "how do I turn emails into tasks", "build a report from a sheet and email it", "prep for my next meeting", "create events from a spreadsheet". Walks through multi-step scenarios that chain several gws-*/recipe-* skills.
 ---
 
 # Google Workspace — Worked Scenarios

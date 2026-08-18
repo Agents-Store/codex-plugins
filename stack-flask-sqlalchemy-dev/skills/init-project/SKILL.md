@@ -1,9 +1,7 @@
 ---
 name: init-project
-description: >
-  Use when the user asks to "set up Flask project", "initialize Flask SQLAlchemy project",
-  "scaffold Flask app", "create Flask project structure", "bootstrap Flask application",
-  or needs to set up a new Flask + SQLAlchemy project from scratch with all integrations wired.
+description: |
+  Use when the user asks to "set up Flask project", "initialize Flask SQLAlchemy project", "scaffold Flask app", "create Flask project structure", "bootstrap Flask application", or needs to set up a new Flask + SQLAlchemy project from scratch with all integrations wired.
 ---
 
 # Initialize Flask + SQLAlchemy Project

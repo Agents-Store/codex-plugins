@@ -1,6 +1,6 @@
 ---
 name: cli-recipes
-description: "Use when the user asks how to install or run NocoBase from the terminal — \"install nb CLI\", \"how do I bootstrap NocoBase\", \"run nb commands\", \"start/stop NocoBase\", \"backup NocoBase\", \"nb pm\". Provides install one-liner (`@nocobase/cli@beta`), the bootstrap-and-lifecycle recipes, and a routing table that hands deeper tasks to the upstream `nocobase-env-manage`, `nocobase-plugin-manage`, and `nocobase-publish-manage` skills."
+description: Use when the user asks how to install or run NocoBase from the terminal — "install nb CLI", "how do I bootstrap NocoBase", "run nb commands", "start/stop NocoBase", "backup NocoBase", "nb pm". Provides install one-liner (`@nocobase/cli@beta`), the bootstrap-and-lifecycle recipes, and a routing table that hands deeper tasks to the upstream `nocobase-env-manage`, `nocobase-plugin-manage`, and `nocobase-publish-manage` skills.
 ---
 
 # nb CLI — install and recipes

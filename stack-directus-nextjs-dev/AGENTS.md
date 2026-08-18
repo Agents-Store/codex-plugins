@@ -4,23 +4,7 @@
 
 Canonical source: https://github.com/agents-store/claude-public-plugins/tree/main/plugins/stack-directus-nextjs-dev
 
-## MCP servers
-
-Add to `~/.codex/config.toml`:
-
-```toml
-[mcp_servers.directus]
-url = "${NEXT_PUBLIC_DIRECTUS_URL}/mcp"
-type = "http"
-
-[mcp_servers.directus.headers]
-"Authorization" = "Bearer ${DIRECTUS_ADMIN_TOKEN}"
-
-```
-
 ## Skills
-
-This plugin ships the following skills under `skills/`. Codex loads them contextually:
 
 - **authentication** — This skill should be used when the user wants to "add authentication to Directus + Next.js", "implement Directus login in Next.js", "use NextAuth with Directus", "protect Next.js pages with Directus auth", "set up cookie-based auth for Directus SSR", or needs patterns for authenticating users across Directus and Next.js.
 - **deployment** — This skill should be used when the user wants to "set up Docker for Directus", "run Directus locally with Docker", "configure content-change webhooks", "set up ISR revalidation with Directus", "auto-rebuild on content change", "production checklist for Directus + Next.js", or needs local dev and integration patterns for the Directus + Next.js stack. For platform-specific deployment (Vercel, Dokploy, etc.), see the respective deployment plugin.
@@ -31,7 +15,12 @@ This plugin ships the following skills under `skills/`. Codex loads them context
 
 ## Subagents
 
-Defined under `.codex/agents/` as TOML files:
+Codex does not install plugin subagents automatically — copy them manually before use:
+
+```bash
+cp agents/*.toml ~/.codex/agents/        # personal
+cp agents/*.toml <repo>/.codex/agents/    # project-local
+```
 
 - **stack-orchestrator** — Use this agent when the user needs help coordinating work across Directus and Next.js — building pages that display Directus content, setting up authentication, configuring ISR revalidation, or implementing features that span both services.
 
@@ -71,3 +60,17 @@ Cross-service debugging requires understanding Directus CORS, next.config.ts rem
 </commentary>
 </example>
 
+
+## MCP servers
+
+Add to `~/.codex/config.toml`:
+
+```toml
+[mcp_servers.directus]
+url = "${NEXT_PUBLIC_DIRECTUS_URL}/mcp"
+type = "http"
+
+[mcp_servers.directus.headers]
+"Authorization" = "Bearer ${DIRECTUS_ADMIN_TOKEN}"
+
+```

@@ -1,10 +1,7 @@
 ---
 name: security-patterns
-description: >
-  Next.js security best practices for production applications. Use when the user asks about
-  "Next.js security", "CSRF protection", "CSP headers", "Content Security Policy",
-  "XSS prevention", "environment variable safety", "server-only", "security headers",
-  "CORS", "rate limiting", "input sanitization", or needs guidance on securing a Next.js app.
+description: |
+  Next.js security best practices for production applications. Use when the user asks about "Next.js security", "CSRF protection", "CSP headers", "Content Security Policy", "XSS prevention", "environment variable safety", "server-only", "security headers", "CORS", "rate limiting", "input sanitization", or needs guidance on securing a Next.js app.
 ---
 
 # Security Patterns

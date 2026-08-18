@@ -1,17 +1,6 @@
 ---
 name: nocobase-ui-builder
-description: >-
-  DEFAULT entry point for NocoBase Modern UI authoring or tweaks: new pages,
-  blocks, menu items, and localized edits to blocks, fields, actions, layouts,
-  or reactions on an already-running app via backend flow-surfaces through
-  nb api. Also handles AI employee / AI assistant action placement on UI
-  surfaces. Hand off employee lifecycle work such as discovering, judging,
-  creating, or configuring profile, prompt, model, skills, tools, or knowledge
-  base to nocobase-ai-employee, then return for the UI write. Only hand off to
-  nocobase-dsl-reconciler when the user explicitly asks for DSL, YAML, git, or
-  cli push workflow. Does not handle ACL, data modeling, workflow
-  orchestration, browser reproduction, page error postmortems, or non-Modern
-  page navigation.
+description: 'DEFAULT entry point for NocoBase Modern UI authoring or tweaks: new pages, blocks, menu items, and localized edits to blocks, fields, actions, layouts, or reactions on an already-running app via backend flow-surfaces through nb api. Also handles AI employee / AI assistant action placement on UI surfaces. Hand off employee lifecycle work such as discovering, judging, creating, or configuring profile, prompt, model, skills, tools, or knowledge base to nocobase-ai-employee, then return for the UI write. Only hand off to nocobase-dsl-reconciler when the user explicitly asks for DSL, YAML, git, or cli push workflow. Does not handle ACL, data modeling, workflow orchestration, browser reproduction, page error postmortems, or non-Modern page navigation.'
 ---
 
 # Goal

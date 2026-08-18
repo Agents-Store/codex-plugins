@@ -1,10 +1,7 @@
 ---
 name: update-workflow
-description: >
-  Git workflow for updating self-hosted Dify — fetch upstream, merge main into dev, handle
-  conflicts, checkout specific tags. Use when updating Dify, merging upstream changes, handling
-  merge conflicts in Dify, or switching to a specific Dify version/tag. Triggers on "update dify",
-  "pull dify changes", "merge main into dev", "upgrade dify", "dify version".
+description: |
+  Git workflow for updating self-hosted Dify — fetch upstream, merge main into dev, handle conflicts, checkout specific tags. Use when updating Dify, merging upstream changes, handling merge conflicts in Dify, or switching to a specific Dify version/tag. Triggers on "update dify", "pull dify changes", "merge main into dev", "upgrade dify", "dify version".
 ---
 
 ## Branch Model

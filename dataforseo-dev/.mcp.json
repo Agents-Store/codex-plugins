@@ -6,10 +6,10 @@
         "-y",
         "dataforseo-mcp-server@latest"
       ],
-      "env": {
-        "DATAFORSEO_USERNAME": "${DATAFORSEO_USERNAME}",
-        "DATAFORSEO_PASSWORD": "${DATAFORSEO_PASSWORD}"
-      }
+      "env_vars": [
+        "DATAFORSEO_USERNAME",
+        "DATAFORSEO_PASSWORD"
+      ]
     }
   }
 }

@@ -19,5 +19,17 @@
     "dev",
     "agents-store"
   ],
-  "skills": "./skills/"
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Seo Dev",
+    "shortDescription": "SEO\n\n<!-- truncated: content exceeds the target's size limit -->",
+    "longDescription": "SEO development plugin for Agents Store. Technical SEO, structured data (JSON-LD), metadata API, Core Web Vitals, sitemaps, and content optimization patterns for Next.js App Router.",
+    "developerName": "Agents Store",
+    "category": "development",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://agents.store"
+  }
 }

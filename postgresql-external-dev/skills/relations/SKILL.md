@@ -1,10 +1,7 @@
 ---
 name: relations
-description: >
-  This skill should be used when the user asks to "create a relation", "add foreign key",
-  "set up one-to-many", "many-to-many relation", "one-to-one", "self-referential",
-  "junction table", "composite primary key", "FK constraint", "create index on FK",
-  or needs to connect tables in a PostgreSQL database that works with NocoDB and NocoBase.
+description: |
+  This skill should be used when the user asks to "create a relation", "add foreign key", "set up one-to-many", "many-to-many relation", "one-to-one", "self-referential", "junction table", "composite primary key", "FK constraint", "create index on FK", or needs to connect tables in a PostgreSQL database that works with NocoDB and NocoBase.
 ---
 
 # Relations — FK Constraints, Indexes, and Patterns

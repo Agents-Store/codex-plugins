@@ -1,11 +1,7 @@
 ---
 name: template-reference
-description: >
-  Use this skill when the user asks about "template hierarchy", "template levels",
-  "project template conventions", "what files go in a template", "Level 0 vs Level 1",
-  "template structure", "what belongs in the parent template", or needs reference
-  documentation for the project template system and its 4-level hierarchy.
-disable-model-invocation: true
+description: |
+  Use this skill when the user asks about "template hierarchy", "template levels", "project template conventions", "what files go in a template", "Level 0 vs Level 1", "template structure", "what belongs in the parent template", or needs reference documentation for the project template system and its 4-level hierarchy.
 ---
 
 # Project Template Hierarchy Reference

@@ -5,5 +5,35 @@
   "author": {
     "name": "AGENTS.STORE"
   },
-  "skills": "./skills/"
+  "keywords": [
+    "sendpulse",
+    "email-marketing",
+    "chatbots",
+    "crm",
+    "smtp",
+    "telegram",
+    "whatsapp",
+    "instagram",
+    "messenger",
+    "viber",
+    "campaigns",
+    "automation",
+    "leads",
+    "deals",
+    "pipelines"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Sendpulse",
+    "shortDescription": "Sen\n\n<!-- truncated: content exceeds the target's size limit -->",
+    "longDescription": "Sendpulse multi-channel marketing plugin. Manage chatbots (Telegram, WhatsApp, Instagram, Messenger, Viber), CRM (contacts, deals, pipelines, boards, tasks), email campaigns, templates, addressbooks, and SMTP transactional email via 133+ MCP tools.",
+    "developerName": "AGENTS.STORE",
+    "category": "marketing",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://agents.store"
+  }
 }

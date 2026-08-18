@@ -6,8 +6,6 @@ Canonical source: https://github.com/agents-store/claude-public-plugins/tree/mai
 
 ## Skills
 
-This plugin ships the following skills under `skills/`. Codex loads them contextually:
-
 - **api-reference** — This skill should be used when the user asks for "grammY API reference", "Bot API method", "ctx.api signature", "sendMessage parameters", "answerCallbackQuery", "editMessageText", "getChat", "specific Telegram Bot API endpoint", or needs precise method signatures and parameter details for the grammY Bot API client.
 - **commands-and-keyboards** — This skill should be used when the user asks about "slash commands in grammY", "bot.command", "setMyCommands", "inline keyboard", "reply keyboard", "callback query", "buttons in Telegram bot", or needs to add interactive commands and keyboards to a grammY bot.
 - **conversations** — This skill should be used when the user asks about "grammY conversations plugin", "@grammyjs/conversations", "multi-step wizard", "ask user for input", "conversation.wait", "conversation.form", "checkpoint and rewind", "conversation menu", or needs to model multi-message dialog flows in a grammY bot.
@@ -27,7 +25,12 @@ This plugin ships the following skills under `skills/`. Codex loads them context
 
 ## Subagents
 
-Defined under `.codex/agents/` as TOML files:
+Codex does not install plugin subagents automatically — copy them manually before use:
+
+```bash
+cp agents/*.toml ~/.codex/agents/        # personal
+cp agents/*.toml <repo>/.codex/agents/    # project-local
+```
 
 - **grammy-developer** — Use this agent when the user needs help writing or modifying Telegram bot code with the grammY framework — implementing handlers, wiring up plugins (sessions, conversations, menu, i18n), building webhook adapters for a hosting platform, or debugging grammY-specific errors.
 

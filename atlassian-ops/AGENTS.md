@@ -6,8 +6,6 @@ Canonical source: https://github.com/agents-store/claude-public-plugins/tree/mai
 
 ## Skills
 
-This plugin ships the following skills under `skills/`. Codex loads them contextually:
-
 - **api-reference** — This skill should be used when the user asks for "Jira API endpoints", "Confluence API endpoints", "Jira/Confluence REST API", "Atlassian curl examples", "the exact method/parameters" for any Jira or Confluence resource, or needs HTTP details for issues, JQL search, comments, worklogs, attachments, links, projects, versions, components, fields, screens, workflows, statuses, users, groups, permissions, schemes, dashboards, filters, plans; or Confluence pages, blog posts, spaces, comments, attachments, labels, content properties. Indexes the full per-domain endpoint catalog plus the bundled OpenAPI specs.
 - **confluence-operations** — This skill should be used when the user wants to do Confluence work — "create a Confluence page", "update a page", "edit a wiki page", "create a child page", "create a space", "list spaces", "comment on a page", "add a label", "attach a file in Confluence", or any everyday Confluence operation. Provides plain-language playbooks that drive the Confluence Cloud REST API v2.
 - **examples** — This skill should be used when the user wants a worked end-to-end Jira/Confluence example or walkthrough — "show me a full Jira workflow", "example of planning an epic with stories", "issue lifecycle example", "build a Confluence space via the API", "generate release notes in Confluence from Jira", or wants to see several Atlassian API calls chained together for a real scenario.
@@ -17,7 +15,12 @@ This plugin ships the following skills under `skills/`. Codex loads them context
 
 ## Subagents
 
-Defined under `.codex/agents/` as TOML files:
+Codex does not install plugin subagents automatically — copy them manually before use:
+
+```bash
+cp agents/*.toml ~/.codex/agents/        # personal
+cp agents/*.toml <repo>/.codex/agents/    # project-local
+```
 
 - **atlassian-assistant** — Use this agent when the user needs to run Jira or Confluence Cloud operations — creating, editing, transitioning, assigning, commenting on, or searching issues (JQL); managing projects, versions, components, fields, workflows, and schemes; logging work; or creating and updating Confluence pages (versioned), spaces, comments, attachments, and labels — by driving the Atlassian Cloud REST APIs (Jira v3 + Confluence v2) with curl.
 

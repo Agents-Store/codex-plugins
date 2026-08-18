@@ -1,10 +1,7 @@
 ---
 name: form-handling
-description: >
-  Next.js form handling with Server Actions and validation. Use when the user asks about
-  "forms in Next.js", "Server Action forms", "useActionState", "form validation",
-  "Zod validation", "useFormStatus", "optimistic updates", "useOptimistic",
-  "progressive enhancement", "file uploads", or needs guidance on building forms in App Router.
+description: |
+  Next.js form handling with Server Actions and validation. Use when the user asks about "forms in Next.js", "Server Action forms", "useActionState", "form validation", "Zod validation", "useFormStatus", "optimistic updates", "useOptimistic", "progressive enhancement", "file uploads", or needs guidance on building forms in App Router.
 ---
 
 # Form Handling

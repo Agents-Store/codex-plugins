@@ -1,10 +1,7 @@
 ---
 name: env-sync
-description: >
-  Synchronize .env with .env.example for Dify Docker deployments — detect new variables, add
-  missing ones with default values, preserve existing customizations. Use when syncing env
-  variables, checking for new Dify configuration variables, comparing .env.example vs .env,
-  "env sync", "new env variables", "missing environment variables", or after pulling Dify updates.
+description: |
+  Synchronize .env with .env.example for Dify Docker deployments — detect new variables, add missing ones with default values, preserve existing customizations. Use when syncing env variables, checking for new Dify configuration variables, comparing .env.example vs .env, "env sync", "new env variables", "missing environment variables", or after pulling Dify updates.
 ---
 
 ## Location

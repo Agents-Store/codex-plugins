@@ -1,7 +1,6 @@
 ---
 name: n8n-api-reference
 description: n8n REST API reference with all endpoints, authentication, and curl examples. Use when making direct API calls, writing scripts that interact with n8n API, or when MCP tools are unavailable. Reference-only skill.
-disable-model-invocation: true
 ---
 
 # n8n REST API Reference

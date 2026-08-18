@@ -1,14 +1,6 @@
 ---
 name: gws-script
-description: "Manage Google Apps Script projects."
-metadata:
-  version: 0.22.5
-  openclaw:
-    category: "productivity"
-    requires:
-      bins:
-        - gws
-    cliHelp: "gws script --help"
+description: Manage Google Apps Script projects.
 ---
 
 # script (v1)
@@ -59,4 +51,3 @@ gws schema script.<resource>.<method>
 ```
 
 Use `gws schema` output to build your `--params` and `--json` flags.
-

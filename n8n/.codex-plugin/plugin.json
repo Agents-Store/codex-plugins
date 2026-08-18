@@ -5,5 +5,30 @@
   "author": {
     "name": "AGENTS.STORE"
   },
-  "skills": "./skills/"
+  "keywords": [
+    "n8n",
+    "workflow",
+    "automation",
+    "nodes",
+    "triggers",
+    "executions",
+    "credentials",
+    "integrations",
+    "webhooks",
+    "scheduling"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "N8n",
+    "shortDescription": "n8n\n\n<!-- truncated: content exceeds the target's size limit -->",
+    "longDescription": "n8n workflow automation plugin. Manage workflows, execute automations, configure nodes, handle credentials, monitor executions, expression syntax, node configuration patterns, and code node best practices via MCP tools.",
+    "developerName": "AGENTS.STORE",
+    "category": "development",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://agents.store"
+  }
 }

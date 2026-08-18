@@ -1,10 +1,7 @@
 ---
 name: examples
-description: >
-  Use this skill when the user asks for "examples", "how does template feedback work",
-  "show me a walkthrough", "demo the template workflow", or needs to see end-to-end
-  scenario walkthroughs for the project-template-creator plugin.
-disable-model-invocation: true
+description: |
+  Use this skill when the user asks for "examples", "how does template feedback work", "show me a walkthrough", "demo the template workflow", or needs to see end-to-end scenario walkthroughs for the project-template-creator plugin.
 ---
 
 # Examples — Project Template Creator Walkthroughs

@@ -1,7 +1,6 @@
 ---
 name: api-reference
 description: Directus REST API endpoints, curl examples, authentication patterns, schema migration pipeline. This skill should be used when the user asks for "Directus API endpoints", "Directus REST API", "Directus curl examples", "Directus API documentation", "Directus HTTP requests", or needs specific endpoint details for scripting.
-disable-model-invocation: true
 ---
 
 # Directus REST API Reference

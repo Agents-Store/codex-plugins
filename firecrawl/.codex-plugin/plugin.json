@@ -5,5 +5,28 @@
   "author": {
     "name": "AGENTS.STORE"
   },
-  "skills": "./skills/"
+  "keywords": [
+    "firecrawl",
+    "web-scraping",
+    "crawling",
+    "search",
+    "data-extraction",
+    "sitemap",
+    "markdown",
+    "content"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Firecrawl",
+    "shortDescription": "Fir\n\n<!-- truncated: content exceeds the target's size limit -->",
+    "longDescription": "Firecrawl web scraping and search plugin. Scrape URLs, crawl sites, search the web, map site structures, extract structured data, batch scraping, autonomous research agents, and cloud browser sessions via MCP tools.",
+    "developerName": "AGENTS.STORE",
+    "category": "development",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://agents.store"
+  }
 }

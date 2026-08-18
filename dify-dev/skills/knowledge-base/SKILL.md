@@ -1,10 +1,7 @@
 ---
 name: knowledge-base
-description: >
-  This skill should be used when the user asks to work with Dify "knowledge base",
-  "datasets API", "create a dataset", "upload a document to Dify", "add documents to a
-  knowledge base", "segments / chunks", "retrieve from a Dify knowledge base", "test
-  retrieval", or RAG ingestion. Covers the standalone Knowledge Base / Datasets API.
+description: |
+  This skill should be used when the user asks to work with Dify "knowledge base", "datasets API", "create a dataset", "upload a document to Dify", "add documents to a knowledge base", "segments / chunks", "retrieve from a Dify knowledge base", "test retrieval", or RAG ingestion. Covers the standalone Knowledge Base / Datasets API.
 ---
 
 # Dify — Knowledge Base / Datasets API

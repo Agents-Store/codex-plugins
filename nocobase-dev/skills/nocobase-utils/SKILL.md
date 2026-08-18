@@ -1,8 +1,6 @@
 ---
 name: nocobase-utils
 description: General-purpose NocoBase reference utilities covering cross-cutting topics such as evaluator engines, expression syntax, UID generation, and more. Use when you need authoritative reference information or reusable snippets that apply across multiple NocoBase features.
-argument-hint: "[topic: evaluators|formulajs|mathjs|string-template|uid]"
-allowed-tools: Read, Glob, Grep
 ---
 
 # Goal

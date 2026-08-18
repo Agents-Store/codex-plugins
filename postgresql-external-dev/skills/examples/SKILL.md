@@ -1,11 +1,7 @@
 ---
 name: examples
-description: >
-  This skill should be used when the user asks for a "full example", "complete schema",
-  "e-commerce schema", "blog schema", "CRM schema", "content management schema",
-  "show me a real schema", "sample database", "end-to-end example", or wants to see
-  a complete working PostgreSQL schema with all tables, constraints, indexes, and relations
-  that is compatible with NocoDB and NocoBase.
+description: |
+  This skill should be used when the user asks for a "full example", "complete schema", "e-commerce schema", "blog schema", "CRM schema", "content management schema", "show me a real schema", "sample database", "end-to-end example", or wants to see a complete working PostgreSQL schema with all tables, constraints, indexes, and relations that is compatible with NocoDB and NocoBase.
 ---
 
 # Examples — Complete Schema Walkthroughs

@@ -5,5 +5,28 @@
   "author": {
     "name": "AGENTS.STORE"
   },
-  "skills": "./skills/"
+  "keywords": [
+    "nocobase",
+    "low-code",
+    "collections",
+    "workflows",
+    "ui-blocks",
+    "plugin-development",
+    "no-code",
+    "application-builder"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Nocobase",
+    "shortDescription": "Noc\n\n<!-- truncated: content exceeds the target's size limit -->",
+    "longDescription": "NocoBase platform development plugin. Expert guidance on collections, fields, relations, workflows, UI blocks, plugin development, MCP-powered page management, data operations, and collection inspection for NocoBase applications.",
+    "developerName": "AGENTS.STORE",
+    "category": "development",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://agents.store"
+  }
 }

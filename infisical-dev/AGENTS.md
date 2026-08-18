@@ -6,8 +6,6 @@ Canonical source: https://github.com/agents-store/claude-public-plugins/tree/mai
 
 ## Skills
 
-This plugin ships the following skills under `skills/`. Codex loads them contextually:
-
 - **ci-cd-auth** — This skill should be used when the user asks to "use Infisical in CI/CD", "Infisical machine identity", "infisical login universal-auth", "authenticate Infisical without a browser", "Infisical in Docker", "inject secrets in a pipeline", "Infisical Kubernetes/AWS/GCP/Azure auth", or "bootstrap a self-hosted Infisical" — non-interactive Infisical CLI authentication and secret injection for automation.
 - **cli-recipes** — This skill should be used when the user asks about "Infisical run", "infisical secrets", "inject secrets into a process", "Infisical export to .env", "infisical CLI commands", "manage secrets from the terminal", "Infisical folders", or "Infisical dynamic secrets lease" — the everyday Infisical CLI workflows for fetching, setting, injecting, and exporting secrets.
 - **cli-reference** — This skill should be used when the user asks for "Infisical CLI reference", "all Infisical commands", "Infisical CLI flags", "Infisical environment variables", "infisical command list", or needs the full command/flag/env-var reference for the Infisical CLI.
@@ -17,7 +15,12 @@ This plugin ships the following skills under `skills/`. Codex loads them context
 
 ## Subagents
 
-Defined under `.codex/agents/` as TOML files:
+Codex does not install plugin subagents automatically — copy them manually before use:
+
+```bash
+cp agents/*.toml ~/.codex/agents/        # personal
+cp agents/*.toml <repo>/.codex/agents/    # project-local
+```
 
 - **infisical-developer** — Use this agent when the user needs help working with the Infisical CLI for secrets management — wiring `infisical run` into a dev or build workflow, setting up machine-identity auth for CI/CD, configuring secret scanning and pre-commit hooks, scripting secret import/export, or debugging Infisical CLI errors.
 

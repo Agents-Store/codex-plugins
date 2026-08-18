@@ -1,10 +1,7 @@
 ---
 name: jinja2-patterns
-description: >
-  Use when the user asks about "Jinja2 templates", "Flask templates",
-  "template inheritance", "Jinja2 macros", "Jinja2 filters",
-  "Flask render_template", "base template", "template blocks",
-  or needs patterns for Jinja2 template engine in Flask.
+description: |
+  Use when the user asks about "Jinja2 templates", "Flask templates", "template inheritance", "Jinja2 macros", "Jinja2 filters", "Flask render_template", "base template", "template blocks", or needs patterns for Jinja2 template engine in Flask.
 ---
 
 # Jinja2 Template Patterns

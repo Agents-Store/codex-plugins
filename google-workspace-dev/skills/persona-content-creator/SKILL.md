@@ -1,19 +1,6 @@
 ---
 name: persona-content-creator
-description: "Create, organize, and distribute content across Workspace."
-metadata:
-  version: 0.22.5
-  openclaw:
-    category: "persona"
-    requires:
-      bins:
-        - gws
-      skills:
-        - gws-docs
-        - gws-drive
-        - gws-gmail
-        - gws-chat
-        - gws-slides
+description: Create, organize, and distribute content across Workspace.
 ---
 
 # Content Creator
@@ -36,4 +23,3 @@ Create, organize, and distribute content across Workspace.
 - Use `gws docs +write` for quick content updates — it handles the Docs API formatting.
 - Keep a 'Content Calendar' in a shared Sheet for tracking publication schedules.
 - Use `--format yaml` for human-readable output when debugging API responses.
-

@@ -1,10 +1,7 @@
 ---
 name: troubleshoot
-description: >
-  Use when the user encounters "SQLAlchemy errors", "database error",
-  "OperationalError", "IntegrityError", "DetachedInstanceError",
-  "SQLAlchemy not working", "migration error", "debug SQLAlchemy",
-  or needs to diagnose and fix common SQLAlchemy problems.
+description: |
+  Use when the user encounters "SQLAlchemy errors", "database error", "OperationalError", "IntegrityError", "DetachedInstanceError", "SQLAlchemy not working", "migration error", "debug SQLAlchemy", or needs to diagnose and fix common SQLAlchemy problems.
 ---
 
 # SQLAlchemy Troubleshooting

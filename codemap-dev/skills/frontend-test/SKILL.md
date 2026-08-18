@@ -1,11 +1,7 @@
 ---
 name: frontend-test
-description: >
-  This skill should be used when the user asks to "test the frontend", "check the UI", "explore the app in a browser",
-  "test my admin panel", "find frontend bugs", "check for console errors", "verify the app works in a browser",
-  "test user flows", "check the website", or wants a comprehensive frontend health report for a running application.
-  Also triggers when the user says "open my app and test it", "browse my app", "check if the UI is working",
-  or "give me a frontend report". Uses Playwright MCP to navigate, interact, and diagnose.
+description: |
+  This skill should be used when the user asks to "test the frontend", "check the UI", "explore the app in a browser", "test my admin panel", "find frontend bugs", "check for console errors", "verify the app works in a browser", "test user flows", "check the website", or wants a comprehensive frontend health report for a running application. Also triggers when the user says "open my app and test it", "browse my app", "check if the UI is working", or "give me a frontend report". Uses Playwright MCP to navigate, interact, and diagnose.
 ---
 
 # Frontend Testing via Playwright MCP

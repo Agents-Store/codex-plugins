@@ -6,8 +6,6 @@ Canonical source: https://github.com/agents-store/claude-public-plugins/tree/mai
 
 ## Skills
 
-This plugin ships the following skills under `skills/`. Codex loads them contextually:
-
 - **auth-integration** — Use when the user asks about "Flask-Login with SQLAlchemy", "user authentication", "login registration flow", "password hashing", "protect routes", "current_user with database", "session management Flask", or needs patterns for integrating Flask-Login authentication with SQLAlchemy user models.
 
 - **flask-sqlalchemy-wiring** — Use when the user asks about "connect Flask to SQLAlchemy", "Flask-SQLAlchemy wiring", "blueprint model integration", "pass query data to template", "form to database", "render database data in template", "Flask model view pattern", or needs patterns for connecting Flask routes, SQLAlchemy models, and Jinja2 templates.
@@ -19,7 +17,12 @@ This plugin ships the following skills under `skills/`. Codex loads them context
 
 ## Subagents
 
-Defined under `.codex/agents/` as TOML files:
+Codex does not install plugin subagents automatically — copy them manually before use:
+
+```bash
+cp agents/*.toml ~/.codex/agents/        # personal
+cp agents/*.toml <repo>/.codex/agents/    # project-local
+```
 
 - **stack-orchestrator** — Use this agent when the user needs help coordinating work across Flask and SQLAlchemy layers — building features that span models, routes, and templates, debugging cross-layer issues, or planning multi-step implementations.
 

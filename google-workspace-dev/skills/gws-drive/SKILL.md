@@ -1,14 +1,6 @@
 ---
 name: gws-drive
-description: "Google Drive: Manage files, folders, and shared drives."
-metadata:
-  version: 0.22.5
-  openclaw:
-    category: "productivity"
-    requires:
-      bins:
-        - gws
-    cliHelp: "gws drive --help"
+description: 'Google Drive: Manage files, folders, and shared drives.'
 ---
 
 # drive (v3)
@@ -135,4 +127,3 @@ gws schema drive.<resource>.<method>
 ```
 
 Use `gws schema` output to build your `--params` and `--json` flags.
-

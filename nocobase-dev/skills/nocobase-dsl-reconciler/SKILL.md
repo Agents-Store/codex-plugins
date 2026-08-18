@@ -1,21 +1,8 @@
 ---
 name: nocobase-dsl-reconciler
-description: >-
-  **Opt-in DSL path** for NocoBase app building. Use ONLY when the user
-  explicitly asks for YAML / DSL / committed-to-git / `cli push` / spec
-  files — e.g. "use the DSL reconciler", "I want YAML I can commit",
-  "build this as a workspaces/ project". For any other UI authoring
-  request (new page, new block, tweak an existing screen), default to
-  `nocobase-ui-builder` instead — this reconciler is still in active
-  development and has rough edges that the live-UI path avoids.
-
-  When the user opts in: produces/changes files under `workspaces/<project>/`,
-  supports new pages, menus, modules, whole systems, collections, tables,
-  sub-tables, popups, dashboards, approval workflows, recordActions, and
-  deploys them via `cli push`.
-argument-hint: "[system-name]"
-allowed-tools: shell, local file reads, local file writes
-version: 0.1.0
+description: |-
+  **Opt-in DSL path** for NocoBase app building. Use ONLY when the user explicitly asks for YAML / DSL / committed-to-git / `cli push` / spec files — e.g. "use the DSL reconciler", "I want YAML I can commit", "build this as a workspaces/ project". For any other UI authoring request (new page, new block, tweak an existing screen), default to `nocobase-ui-builder` instead — this reconciler is still in active development and has rough edges that the live-UI path avoids.
+  When the user opts in: produces/changes files under `workspaces/<project>/`, supports new pages, menus, modules, whole systems, collections, tables, sub-tables, popups, dashboards, approval workflows, recordActions, and deploys them via `cli push`.
 ---
 
 # NocoBase Application Builder (DSL path)

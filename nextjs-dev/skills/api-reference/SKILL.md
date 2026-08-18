@@ -1,7 +1,6 @@
 ---
 name: api-reference
 description: Next.js framework API quick reference — key functions, configuration options, and TypeScript types. This skill should be used when the user asks about "Next.js API", "Next.js functions", "next.config options", "generateMetadata API", "Next.js TypeScript types", or needs a quick lookup of Next.js framework APIs.
-disable-model-invocation: true
 ---
 
 # Next.js API Quick Reference

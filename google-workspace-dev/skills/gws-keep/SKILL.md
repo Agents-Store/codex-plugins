@@ -1,14 +1,6 @@
 ---
 name: gws-keep
-description: "Manage Google Keep notes."
-metadata:
-  version: 0.22.5
-  openclaw:
-    category: "productivity"
-    requires:
-      bins:
-        - gws
-    cliHelp: "gws keep --help"
+description: Manage Google Keep notes.
 ---
 
 # keep (v1)
@@ -46,4 +38,3 @@ gws schema keep.<resource>.<method>
 ```
 
 Use `gws schema` output to build your `--params` and `--json` flags.
-

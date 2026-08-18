@@ -1,10 +1,7 @@
 ---
 name: full-feature
-description: >
-  Use when the user asks to "add a new feature", "create a new page",
-  "build CRUD for a new entity", "add a new section to the app",
-  "implement a full feature end-to-end", or needs a step-by-step
-  recipe for building a complete feature across Flask + SQLAlchemy layers.
+description: |
+  Use when the user asks to "add a new feature", "create a new page", "build CRUD for a new entity", "add a new section to the app", "implement a full feature end-to-end", or needs a step-by-step recipe for building a complete feature across Flask + SQLAlchemy layers.
 ---
 
 # Full Feature Recipe

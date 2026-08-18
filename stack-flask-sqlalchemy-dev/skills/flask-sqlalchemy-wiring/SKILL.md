@@ -1,10 +1,7 @@
 ---
 name: flask-sqlalchemy-wiring
-description: >
-  Use when the user asks about "connect Flask to SQLAlchemy", "Flask-SQLAlchemy wiring",
-  "blueprint model integration", "pass query data to template", "form to database",
-  "render database data in template", "Flask model view pattern",
-  or needs patterns for connecting Flask routes, SQLAlchemy models, and Jinja2 templates.
+description: |
+  Use when the user asks about "connect Flask to SQLAlchemy", "Flask-SQLAlchemy wiring", "blueprint model integration", "pass query data to template", "form to database", "render database data in template", "Flask model view pattern", or needs patterns for connecting Flask routes, SQLAlchemy models, and Jinja2 templates.
 ---
 
 # Flask + SQLAlchemy Wiring Patterns

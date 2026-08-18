@@ -6,8 +6,6 @@ Canonical source: https://github.com/agents-store/claude-public-plugins/tree/mai
 
 ## Skills
 
-This plugin ships the following skills under `skills/`. Codex loads them contextually:
-
 - **column-types** — This skill should be used when the user asks "what SQL type for", "which column type", "NocoDB column types", "NocoBase field types", "type compatibility", "how to store email/url/phone/json/rating", "what type for currency", "decimal vs double", or needs to choose the correct PostgreSQL type that works in both NocoDB and NocoBase.
 
 - **create-tables** — This skill should be used when the user asks to "create a table", "design a schema", "set up a database", "create PostgreSQL tables for NocoDB", "create tables for NocoBase external DB", "what PK type to use", or needs to understand how NocoDB and NocoBase interact with the same PostgreSQL database.
@@ -23,7 +21,12 @@ This plugin ships the following skills under `skills/`. Codex loads them context
 
 ## Subagents
 
-Defined under `.codex/agents/` as TOML files:
+Codex does not install plugin subagents automatically — copy them manually before use:
+
+```bash
+cp agents/*.toml ~/.codex/agents/        # personal
+cp agents/*.toml <repo>/.codex/agents/    # project-local
+```
 
 - **postgresql-schema-designer** — Use this agent when the user needs help designing PostgreSQL database schemas that are compatible with low-code platforms (NocoDB, NocoBase) as external data sources.
 

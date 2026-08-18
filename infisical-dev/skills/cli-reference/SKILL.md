@@ -1,7 +1,6 @@
 ---
 name: cli-reference
 description: This skill should be used when the user asks for "Infisical CLI reference", "all Infisical commands", "Infisical CLI flags", "Infisical environment variables", "infisical command list", or needs the full command/flag/env-var reference for the Infisical CLI.
-disable-model-invocation: true
 ---
 
 # Infisical CLI Reference

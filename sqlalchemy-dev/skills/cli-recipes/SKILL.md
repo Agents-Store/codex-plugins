@@ -1,10 +1,7 @@
 ---
 name: cli-recipes
-description: >
-  Use when the user asks about "Alembic commands", "database migrations",
-  "flask db migrate", "flask db upgrade", "create migration",
-  "rollback migration", "SQLAlchemy CLI", or needs ready-to-use
-  database migration commands.
+description: |
+  Use when the user asks about "Alembic commands", "database migrations", "flask db migrate", "flask db upgrade", "create migration", "rollback migration", "SQLAlchemy CLI", or needs ready-to-use database migration commands.
 ---
 
 # Alembic / Flask-Migrate CLI Recipes

@@ -1,6 +1,6 @@
 ---
 name: examples
-description: "Use when the user asks for an end-to-end example, walkthrough, or sample of doing something in NocoBase v2 — \"show me how to\", \"walk me through\", \"give me a complete example\", \"sample script for NocoBase\". Indexes worked scenarios that mix REST API and `nb` CLI calls."
+description: Use when the user asks for an end-to-end example, walkthrough, or sample of doing something in NocoBase v2 — "show me how to", "walk me through", "give me a complete example", "sample script for NocoBase". Indexes worked scenarios that mix REST API and `nb` CLI calls.
 ---
 
 # NocoBase v2 — worked examples

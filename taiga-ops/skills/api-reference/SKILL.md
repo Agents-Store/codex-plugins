@@ -1,7 +1,6 @@
 ---
 name: api-reference
 description: This skill should be used when the user asks for "Taiga API endpoints", "Taiga REST API", "Taiga curl examples", "Taiga API documentation", the exact path/method for any Taiga resource, or needs HTTP details for projects, epics, user stories, tasks, issues, milestones, wiki, webhooks, custom attributes, search, or import/export. Index into the full per-domain endpoint catalog.
-disable-model-invocation: true
 ---
 
 # Taiga REST API Reference

@@ -1,11 +1,7 @@
 ---
 name: project-scaffolding
-description: >
-  Scaffold Next.js projects with shadcn/ui templates, starter kits, and component architecture patterns.
-  This skill should be used when the user asks to "scaffold a project", "use a shadcn template",
-  "project structure with shadcn", "component organization", "set up a dashboard template", "starter kit
-  for shadcn", "how to organize shadcn components", or needs guidance on organizing a Next.js project with
-  shadcn/ui component architecture.
+description: |
+  Scaffold Next.js projects with shadcn/ui templates, starter kits, and component architecture patterns. This skill should be used when the user asks to "scaffold a project", "use a shadcn template", "project structure with shadcn", "component organization", "set up a dashboard template", "starter kit for shadcn", "how to organize shadcn components", or needs guidance on organizing a Next.js project with shadcn/ui component architecture.
 ---
 
 ## Quick Start: New Project from Scratch

@@ -1,10 +1,7 @@
 ---
 name: setup
-description: >
-  Set up shadcn/ui and shadcn studio in a Next.js project. This skill should be used when the user asks to
-  "set up shadcn", "install shadcn/ui", "initialize shadcn", "configure shadcn studio", "add shadcn to my
-  project", "set up component library", "init shadcn in next.js", or needs to initialize a Next.js project
-  for shadcn/ui component development.
+description: |
+  Set up shadcn/ui and shadcn studio in a Next.js project. This skill should be used when the user asks to "set up shadcn", "install shadcn/ui", "initialize shadcn", "configure shadcn studio", "add shadcn to my project", "set up component library", "init shadcn in next.js", or needs to initialize a Next.js project for shadcn/ui component development.
 ---
 
 ## Prerequisites Check

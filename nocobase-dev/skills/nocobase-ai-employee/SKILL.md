@@ -1,10 +1,6 @@
 ---
 name: nocobase-ai-employee
-description: >-
-  Use when a NocoBase task requires AI employee lifecycle work such as
-  discovering existing employees, judging fit, creating a dedicated employee,
-  or configuring profile, prompt, model, skills, tools, or knowledge base
-  before another skill binds it to a UI surface.
+description: Use when a NocoBase task requires AI employee lifecycle work such as discovering existing employees, judging fit, creating a dedicated employee, or configuring profile, prompt, model, skills, tools, or knowledge base before another skill binds it to a UI surface.
 ---
 
 # NocoBase AI Employee

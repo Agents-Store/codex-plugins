@@ -7,7 +7,6 @@ description: |
   - "NocoDB agent-skills"
   - "what CLI commands are available"
   - "how to use nc command"
-disable-model-invocation: true
 ---
 
 # NocoDB CLI

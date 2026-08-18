@@ -1,85 +1,15 @@
 ---
 name: bootstrap
-description: Project bootstrapping orchestrator for repos that depend on Vercel-linked resources (databases, auth, and managed integrations). Use when setting up or repairing a repository so linking, environment provisioning, env pulls, and first-run db/dev commands happen in the correct safe order.
-metadata:
-  priority: 8
-  docs:
-    - "https://vercel.com/docs/getting-started-with-vercel"
-    - "https://nextjs.org/docs/getting-started/installation"
-  sitemap: "https://vercel.com/sitemap/docs.xml"
-  pathPatterns:
-    - '.env.example'
-    - '.env.sample'
-    - '.env.template'
-    - 'README*'
-    - 'docs/**/setup*'
-    - 'package.json'
-    - 'drizzle.config.*'
-    - 'prisma/schema.prisma'
-    - 'auth.*'
-    - 'src/**/auth.*'
-  bashPatterns:
-    - '\\bcp\\s+\\.env\\.(?:example|sample|template)\\s+\\.env\\.local\\b'
-    - '\\b(?:npm|pnpm|bun|yarn)\\s+run\\s+db:(?:push|seed|migrate|generate)\\b'
-    - '\\b(?:npm|pnpm|bun|yarn)\\s+run\\s+dev\\b'
-    - '\\bvercel\\s+link\\b'
-    - '\\bvercel\\s+integration\\s+(?:add|install)\\b'
-    - '\\bvercel\\s+env\\s+pull\\b'
-  importPatterns:
-    - '@neondatabase/serverless'
-    - 'drizzle-orm'
-    - '@upstash/redis'
-    - '@vercel/blob'
-    - '@vercel/edge-config'
-    - 'next-auth'
-    - '@auth/core'
-    - 'better-auth'
-chainTo:
-  -
-    pattern: '@vercel/(postgres|kv)|\b(KV_REST_API_URL|POSTGRES_URL)\b'
-    targetSkill: vercel-storage
-    message: '@vercel/postgres and @vercel/kv are sunset — loading Vercel Storage guidance for Neon and Upstash migration.'
-  -
-    pattern: 'from\s+[''""](next-auth|@auth/core|@clerk/nextjs|better-auth)[''""]'
-    targetSkill: auth
-    message: 'Auth library detected during bootstrap — loading Auth guidance for Clerk Marketplace setup and middleware patterns.'
-  -
-    pattern: 'OPENAI_API_KEY|ANTHROPIC_API_KEY|AI_GATEWAY'
-    targetSkill: env-vars
-    message: 'AI provider env vars detected — loading Environment Variables guidance for OIDC-based auth via vercel env pull.'
-    skipIfFileContains: 'VERCEL_OIDC|vercel env pull'
-retrieval:
-  aliases:
-    - project setup
-    - repo init
-    - getting started
-    - scaffold
-  intents:
-    - set up project
-    - initialize repo
-    - link vercel project
-    - pull env vars
-  entities:
-    - vercel link
-    - env pull
-    - database setup
-    - first run
-
+description: Bootstrap a repository with Vercel-linked resources by running preflight checks, provisioning integrations, verifying env keys, and then executing db/dev startup commands safely.
 ---
 
-# Project Bootstrap Orchestrator
+# Vercel Project Bootstrap
 
-Execute bootstrap in strict order. Do not run migrations or development server until project linking and environment verification are complete.
-
-## Rules
-
-- Do not run `db:push`, `db:migrate`, `db:seed`, or `dev` until Vercel linking is complete and env keys are verified.
-- Prefer Vercel-managed provisioning (`vercel integration ...`) for shared resources.
-- Use provider CLIs only as fallback when Vercel integration flow is unavailable.
-- Never echo secret values in terminal output, logs, or summaries.
+Run a deterministic bootstrap flow for new or partially configured repositories.
 
 ## Preflight
 
+<!-- Sourced from bootstrap skill: Preflight -->
 1. Confirm Vercel CLI is installed and authenticated.
 
 ```bash
@@ -103,8 +33,41 @@ vercel link --yes --scope <team> --project <project>
 cp .env.example .env.local
 ```
 
-## Resource Setup: Postgres
+6. Detect package manager and available scripts (`db:push`, `db:seed`, `db:migrate`, `db:generate`, `dev`) from `package.json`.
+7. Inspect auth/database signals (`prisma/schema.prisma`, `drizzle.config.*`, `auth.*`, `src/**/auth.*`) to scope bootstrap details.
 
+Stop with clear guidance if CLI auth or linkage fails.
+
+## Plan
+
+Execute in this order:
+
+1. Preflight validation and project linking.
+2. Resource provisioning (prefer Vercel-managed Neon integration).
+3. Secret/bootstrap env setup (`AUTH_SECRET`, env pull, key verification).
+4. Application bootstrap (`db:*` then `dev`) only after env checks pass.
+
+<!-- Sourced from bootstrap skill: Rules -->
+- Do not run `db:push`, `db:migrate`, `db:seed`, or `dev` until Vercel linking is complete and env keys are verified.
+- Prefer Vercel-managed provisioning (`vercel integration ...`) for shared resources.
+- Use provider CLIs only as fallback when Vercel integration flow is unavailable.
+- Never echo secret values in terminal output, logs, or summaries.
+
+## Commands
+
+### 1. Link + local env template
+
+Copy the first matching template file only if `.env.local` does not exist:
+
+```bash
+cp .env.example .env.local
+```
+
+If `.env.example` is absent, use `.env.sample` or `.env.template`.
+
+### 2. Provision Postgres
+
+<!-- Sourced from bootstrap skill: Resource Setup: Postgres -->
 ### Preferred path (Vercel-managed Neon)
 
 1. Read integration setup guidance:
@@ -135,8 +98,9 @@ vercel env pull .env.local --yes
 
 Use Neon CLI only when Vercel-managed provisioning is unavailable. After creating resources, add required env vars in Vercel and pull again.
 
-## AUTH_SECRET Generation
+### 3. Generate and store `AUTH_SECRET`
 
+<!-- Sourced from bootstrap skill: AUTH_SECRET Generation -->
 Generate a high-entropy secret without printing it, then store it in Vercel and refresh local env:
 
 ```bash
@@ -146,8 +110,9 @@ unset AUTH_SECRET
 vercel env pull .env.local --yes
 ```
 
-## Env Verification
+### 4. Verify required env keys
 
+<!-- Sourced from bootstrap skill: Env Verification -->
 Compare required keys from template file against `.env.local` keys (names only, never values):
 
 ```bash
@@ -166,8 +131,11 @@ comm -23 \
 
 Proceed only when missing key list is empty.
 
-## App Setup
+Do not continue if any required keys are missing.
 
+### 5. Run app bootstrap commands (after verification)
+
+<!-- Sourced from bootstrap skill: App Setup -->
 After linkage + env verification:
 
 ```bash
@@ -178,16 +146,9 @@ npm run dev
 
 Use the repository package manager (`npm`, `pnpm`, `bun`, or `yarn`) and run only scripts that exist in `package.json`.
 
-## UI Baseline for Next.js + shadcn Projects
+## Verification
 
-After linkage and env verification, establish the UI foundation before feature work:
-1. Add a baseline primitive set: `npx shadcn@latest add button card input label textarea select switch tabs dialog alert-dialog sheet dropdown-menu badge separator skeleton table`
-2. Apply the Geist font fix in `layout.tsx` and `globals.css`.
-3. Confirm the app shell uses `bg-background text-foreground`.
-4. Default to dark mode for product, admin, and AI apps unless the repo is clearly marketing-first.
-
-## Bootstrap Verification
-
+<!-- Sourced from bootstrap skill: Bootstrap Verification -->
 Confirm each checkpoint:
 
 - `vercel whoami` succeeds.
@@ -200,8 +161,9 @@ Confirm each checkpoint:
 
 If verification fails, stop and report exact failing step plus remediation.
 
-## Summary Format
+## Summary
 
+<!-- Sourced from bootstrap skill: Summary Format -->
 Return a final bootstrap summary in this format:
 
 ```md
@@ -214,20 +176,9 @@ Return a final bootstrap summary in this format:
 - **Dev Result**: not-run | started | failed
 ```
 
-## Bootstrap Next Steps
+## Next Steps
 
+<!-- Sourced from bootstrap skill: Bootstrap Next Steps -->
 - If env keys are still missing, add the missing keys in Vercel and re-run `vercel env pull .env.local --yes`.
 - If DB commands fail, fix connectivity/schema issues and re-run only the failed db step.
 - If `dev` fails, resolve runtime errors, then restart with your package manager's `run dev`.
-
-## next-forge Projects
-
-If the project was scaffolded with `npx next-forge init` (detected by `pnpm-workspace.yaml` + `packages/auth` + `packages/database` + `@repo/*` imports):
-
-1. Env files are per-app (`apps/app/.env.local`, `apps/web/.env.local`, `apps/api/.env.local`) plus `packages/database/.env`.
-2. Run `pnpm migrate` (not `db:push`) — it runs `prisma format` + `prisma generate` + `prisma db push`.
-3. Minimum env vars: `DATABASE_URL`, `CLERK_SECRET_KEY`, `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`, `NEXT_PUBLIC_APP_URL`, `NEXT_PUBLIC_WEB_URL`, `NEXT_PUBLIC_API_URL`.
-4. Optional services (Stripe, Resend, PostHog, etc.) can be skipped initially — but remove their `@repo/*` imports from app `env.ts` files to avoid validation errors.
-5. Deploy as 3 separate Vercel projects with root directories `apps/app`, `apps/api`, `apps/web`.
-
-=> skill: next-forge — Full next-forge monorepo guide

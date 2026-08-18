@@ -1,10 +1,7 @@
 ---
 name: api-design
-description: >
-  Next.js API design patterns for Route Handlers and Server Actions. Use when the user asks about
-  "Route Handlers", "API routes in App Router", "Server Actions vs API routes",
-  "input validation", "API response patterns", "streaming responses", "SSE",
-  "webhooks in Next.js", "CORS", "API versioning", or needs guidance on building APIs with Next.js.
+description: |
+  Next.js API design patterns for Route Handlers and Server Actions. Use when the user asks about "Route Handlers", "API routes in App Router", "Server Actions vs API routes", "input validation", "API response patterns", "streaming responses", "SSE", "webhooks in Next.js", "CORS", "API versioning", or needs guidance on building APIs with Next.js.
 ---
 
 # API Design

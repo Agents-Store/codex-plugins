@@ -1,10 +1,7 @@
 ---
 name: error-handling
-description: >
-  Next.js error handling patterns and error boundaries. Use when the user asks about
-  "error.tsx", "global-error.tsx", "not-found.tsx", "error boundaries", "error handling",
-  "loading.tsx", "loading states", "fallback UI", "error recovery", "catchError",
-  "retry", or needs guidance on graceful error handling in App Router applications.
+description: |
+  Next.js error handling patterns and error boundaries. Use when the user asks about "error.tsx", "global-error.tsx", "not-found.tsx", "error boundaries", "error handling", "loading.tsx", "loading states", "fallback UI", "error recovery", "catchError", "retry", or needs guidance on graceful error handling in App Router applications.
 ---
 
 # Error Handling

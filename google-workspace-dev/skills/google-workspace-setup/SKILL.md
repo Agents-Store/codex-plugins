@@ -1,6 +1,6 @@
 ---
 name: google-workspace-setup
-description: "Use when installing or troubleshooting the gws (Google Workspace CLI) that powers every google-workspace-dev skill. Triggers on \"install gws\", \"gws auth setup\", \"gws auth login\", \"set up Google Workspace CLI\", \"connect Gmail/Drive/Calendar\", or errors like \"command not found: gws\", \"Access blocked\", \"403 accessNotConfigured\", \"redirect_uri_mismatch\", or \"too many scopes\"."
+description: 'Use when installing or troubleshooting the gws (Google Workspace CLI) that powers every google-workspace-dev skill. Triggers on "install gws", "gws auth setup", "gws auth login", "set up Google Workspace CLI", "connect Gmail/Drive/Calendar", or errors like "command not found: gws", "Access blocked", "403 accessNotConfigured", "redirect_uri_mismatch", or "too many scopes".'
 ---
 
 # Google Workspace CLI (gws) — Setup & Auth

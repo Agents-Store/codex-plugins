@@ -1,14 +1,6 @@
 ---
 name: gws-sheets
-description: "Google Sheets: Read and write spreadsheets."
-metadata:
-  version: 0.22.5
-  openclaw:
-    category: "productivity"
-    requires:
-      bins:
-        - gws
-    cliHelp: "gws sheets --help"
+description: 'Google Sheets: Read and write spreadsheets.'
 ---
 
 # sheets (v4)
@@ -51,4 +43,3 @@ gws schema sheets.<resource>.<method>
 ```
 
 Use `gws schema` output to build your `--params` and `--json` flags.
-

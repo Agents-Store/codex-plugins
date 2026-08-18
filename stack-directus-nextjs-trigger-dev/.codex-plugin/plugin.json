@@ -14,11 +14,25 @@
     "directus",
     "nextjs",
     "trigger.dev",
-    "background-jobs",
+    "ai-agents",
+    "workflows",
     "scheduled-tasks",
     "self-hosted",
     "durable-execution",
     "app-router"
   ],
-  "skills": "./skills/"
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Stack Directus Nextjs Trigger Dev",
+    "shortDescription": "Dir\n\n<!-- truncated: content exceeds the target's size limit -->",
+    "longDescription": "Directus + Next.js + Trigger.dev stack dev plugin. Adds self-hosted Trigger.dev as a workflow engine for AI agents, durable async logic, and scheduled jobs on top of the Directus + Next.js App Router stack.",
+    "developerName": "Agents Store",
+    "category": "development",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://agents.store"
+  }
 }

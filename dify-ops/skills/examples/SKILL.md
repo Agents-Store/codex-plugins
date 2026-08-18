@@ -1,9 +1,7 @@
 ---
 name: examples
-description: >
-  End-to-end scenario walkthroughs for updating self-hosted Dify. Use when the user asks for
-  "dify update example", "how to update dify", "show me an update walkthrough", "dify upgrade
-  guide", "step-by-step dify update", or needs a complete example of the update process.
+description: |
+  End-to-end scenario walkthroughs for updating self-hosted Dify. Use when the user asks for "dify update example", "how to update dify", "show me an update walkthrough", "dify upgrade guide", "step-by-step dify update", or needs a complete example of the update process.
 ---
 
 ## Available Scenarios

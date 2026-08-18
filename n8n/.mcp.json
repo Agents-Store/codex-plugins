@@ -3,7 +3,7 @@
     "n8n": {
       "type": "http",
       "url": "${N8N_MCP_URL}",
-      "headers": {
+      "http_headers": {
         "Authorization": "Bearer ${N8N_MCP_TOKEN}"
       }
     }

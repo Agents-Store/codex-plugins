@@ -1,14 +1,6 @@
 ---
 name: gws-classroom
-description: "Google Classroom: Manage classes, rosters, and coursework."
-metadata:
-  version: 0.22.5
-  openclaw:
-    category: "productivity"
-    requires:
-      bins:
-        - gws
-    cliHelp: "gws classroom --help"
+description: 'Google Classroom: Manage classes, rosters, and coursework.'
 ---
 
 # classroom (v1)
@@ -73,4 +65,3 @@ gws schema classroom.<resource>.<method>
 ```
 
 Use `gws schema` output to build your `--params` and `--json` flags.
-

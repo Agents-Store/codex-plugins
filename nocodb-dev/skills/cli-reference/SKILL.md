@@ -7,7 +7,6 @@ description: |
   - "how do I create a table from the CLI"
   - "nc field:create reference"
   - "NocoDB agent-skills CLI"
-disable-model-invocation: true
 ---
 
 # NocoDB CLI — Schema Commands

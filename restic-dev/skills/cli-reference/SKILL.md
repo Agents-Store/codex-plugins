@@ -1,7 +1,6 @@
 ---
 name: cli-reference
 description: This skill should be used when the user asks for the "restic command reference", "all restic commands", "restic flags", "restic environment variables", "restic exit codes", or needs the full command/flag/env-var reference for restic.
-disable-model-invocation: true
 ---
 
 # restic CLI Reference

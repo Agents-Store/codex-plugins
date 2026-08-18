@@ -1,10 +1,7 @@
 ---
 name: api-reference
-description: >
-  Use when the user asks for "SQLAlchemy API reference", "SQLAlchemy Column types",
-  "SQLAlchemy session methods", "db.session API", "SQLAlchemy relationship options",
-  or needs specific SQLAlchemy framework API details.
-disable-model-invocation: true
+description: |
+  Use when the user asks for "SQLAlchemy API reference", "SQLAlchemy Column types", "SQLAlchemy session methods", "db.session API", "SQLAlchemy relationship options", or needs specific SQLAlchemy framework API details.
 ---
 
 # SQLAlchemy API Reference

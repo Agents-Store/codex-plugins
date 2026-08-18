@@ -1,14 +1,6 @@
 ---
 name: gws-chat
-description: "Google Chat: Manage Chat spaces and messages."
-metadata:
-  version: 0.22.5
-  openclaw:
-    category: "productivity"
-    requires:
-      bins:
-        - gws
-    cliHelp: "gws chat --help"
+description: 'Google Chat: Manage Chat spaces and messages.'
 ---
 
 # chat (v1)
@@ -72,4 +64,3 @@ gws schema chat.<resource>.<method>
 ```
 
 Use `gws schema` output to build your `--params` and `--json` flags.
-

@@ -5,5 +5,31 @@
   "author": {
     "name": "AGENTS.STORE"
   },
-  "skills": "./skills/"
+  "keywords": [
+    "teleshop",
+    "telegram",
+    "ecommerce",
+    "store",
+    "products",
+    "orders",
+    "catalog",
+    "webhooks",
+    "addons",
+    "mini-app",
+    "bot-shop"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Teleshop",
+    "shortDescription": "Tel\n\n<!-- truncated: content exceeds the target's size limit -->",
+    "longDescription": "Teleshop store management plugin. Manage products, orders, categories, attributes, customers, webhooks, and addons for your Telegram store via 50 MCP tools.",
+    "developerName": "AGENTS.STORE",
+    "category": "ecommerce",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://agents.store"
+  }
 }

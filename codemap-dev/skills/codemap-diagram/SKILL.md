@@ -1,11 +1,7 @@
 ---
 name: codemap-diagram
-description: >
-  This skill should be used when the user asks to "draw a diagram", "visualize architecture", "show me the database schema",
-  "create an ERD", "sequence diagram", "flow diagram", "dependency graph", "architecture diagram",
-  "C4 diagram", or needs any visual representation of code structure, data flow, or system architecture.
-  All diagrams are generated as native mxGraph XML and rendered via drawio-mcp. Also triggers when
-  a code explanation would benefit from a visual aid.
+description: |
+  This skill should be used when the user asks to "draw a diagram", "visualize architecture", "show me the database schema", "create an ERD", "sequence diagram", "flow diagram", "dependency graph", "architecture diagram", "C4 diagram", or needs any visual representation of code structure, data flow, or system architecture. All diagrams are generated as native mxGraph XML and rendered via drawio-mcp. Also triggers when a code explanation would benefit from a visual aid.
 ---
 
 # Diagram Generation via drawio-mcp

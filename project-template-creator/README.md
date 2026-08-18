@@ -16,10 +16,16 @@ codex plugin marketplace add .
 
 ## Components
 
-- 10 skill(s) under `skills/`
-- 1 subagent(s) under `.codex/agents/`
+- 18 skill(s) under `skills/` (includes 8 command(s) converted to skills — Codex has no custom slash-command system)
+- 1 subagent definition(s) under `agents/` — **not installed automatically by Codex**. Copy manually:
+
+```bash
+cp agents/*.toml ~/.codex/agents/        # personal
+cp agents/*.toml <repo>/.codex/agents/    # project-local
+```
+
 - No MCP server
-- 8 workflow template(s) — see AGENTS.md
+- No hooks
 
 ## Source
 

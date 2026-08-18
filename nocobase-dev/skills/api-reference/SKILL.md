@@ -1,7 +1,6 @@
 ---
 name: api-reference
-description: "Reference-only skill (loaded on demand) that maps the NocoBase v2 REST API surface — base URL, authentication, action-style endpoint convention, and pointers into the bundled OpenAPI 3.0.3 specification. Loaded by the model when it needs an exact endpoint path or schema; not auto-triggered."
-disable-model-invocation: true
+description: Reference-only skill (loaded on demand) that maps the NocoBase v2 REST API surface — base URL, authentication, action-style endpoint convention, and pointers into the bundled OpenAPI 3.0.3 specification. Loaded by the model when it needs an exact endpoint path or schema; not auto-triggered.
 ---
 
 # NocoBase v2 — REST API reference

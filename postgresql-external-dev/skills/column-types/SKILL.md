@@ -1,10 +1,7 @@
 ---
 name: column-types
-description: >
-  This skill should be used when the user asks "what SQL type for", "which column type",
-  "NocoDB column types", "NocoBase field types", "type compatibility", "how to store
-  email/url/phone/json/rating", "what type for currency", "decimal vs double", or needs
-  to choose the correct PostgreSQL type that works in both NocoDB and NocoBase.
+description: |
+  This skill should be used when the user asks "what SQL type for", "which column type", "NocoDB column types", "NocoBase field types", "type compatibility", "how to store email/url/phone/json/rating", "what type for currency", "decimal vs double", or needs to choose the correct PostgreSQL type that works in both NocoDB and NocoBase.
 ---
 
 # Column Types — PostgreSQL ↔ NocoDB ↔ NocoBase Compatibility

@@ -1,6 +1,6 @@
 ---
 name: ai-assist
-description: "This skill should be used when the user wants AI-powered deployment debugging on Dokploy — wiring up an LLM provider (OpenAI, Anthropic, Gemini, Ollama, OpenRouter, etc.), summarising build logs with AI, or asking Dokploy for a next-step suggestion. Triggers: \"analyze my failed deploy with AI\", \"ai analyze logs dokploy\", \"set up dokploy ai\", \"configure ai provider in dokploy\", \"why is dokploy not suggesting fixes\", \"dokploy ai-analyzeLogs\", \"dokploy ai-suggest\"."
+description: 'This skill should be used when the user wants AI-powered deployment debugging on Dokploy — wiring up an LLM provider (OpenAI, Anthropic, Gemini, Ollama, OpenRouter, etc.), summarising build logs with AI, or asking Dokploy for a next-step suggestion. Triggers: "analyze my failed deploy with AI", "ai analyze logs dokploy", "set up dokploy ai", "configure ai provider in dokploy", "why is dokploy not suggesting fixes", "dokploy ai-analyzeLogs", "dokploy ai-suggest".'
 ---
 
 # Dokploy AI Assistant Integration

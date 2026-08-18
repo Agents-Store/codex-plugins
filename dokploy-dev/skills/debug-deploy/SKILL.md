@@ -1,6 +1,6 @@
 ---
 name: debug-deploy
-description: "This skill should be used when a Dokploy deployment fails, gets stuck, or behaves incorrectly after deploying — provides an end-to-end decision tree that locates the failed run, reads the right logs, inspects the container and Traefik state, summarises root cause with AI, and recovers safely. Triggers: \"my dokploy deploy failed\", \"deployment stuck\", \"build error in dokploy\", \"app crashed after deploy\", \"diagnose failed deployment\", \"dokploy deploy not working\", \"why did my deploy fail\", \"recover from broken deploy\"."
+description: 'This skill should be used when a Dokploy deployment fails, gets stuck, or behaves incorrectly after deploying — provides an end-to-end decision tree that locates the failed run, reads the right logs, inspects the container and Traefik state, summarises root cause with AI, and recovers safely. Triggers: "my dokploy deploy failed", "deployment stuck", "build error in dokploy", "app crashed after deploy", "diagnose failed deployment", "dokploy deploy not working", "why did my deploy fail", "recover from broken deploy".'
 ---
 
 # Debug a Failed Dokploy Deployment

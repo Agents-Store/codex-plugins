@@ -1,10 +1,7 @@
 ---
 name: model-patterns
-description: >
-  Use when the user asks about "SQLAlchemy models", "define database model",
-  "SQLAlchemy relationships", "one-to-many relationship", "many-to-many",
-  "SQLAlchemy column types", "model constraints", "Flask-SQLAlchemy model",
-  or needs patterns for defining database models with SQLAlchemy.
+description: |
+  Use when the user asks about "SQLAlchemy models", "define database model", "SQLAlchemy relationships", "one-to-many relationship", "many-to-many", "SQLAlchemy column types", "model constraints", "Flask-SQLAlchemy model", or needs patterns for defining database models with SQLAlchemy.
 ---
 
 # SQLAlchemy Model Patterns

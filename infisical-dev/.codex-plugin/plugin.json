@@ -18,5 +18,17 @@
     "dev",
     "agents-store"
   ],
-  "skills": "./skills/"
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Infisical Dev",
+    "shortDescription": "Inf\n\n<!-- truncated: content exceeds the target's size limit -->",
+    "longDescription": "Infisical CLI dev plugin for Agents Store. Complete command-line coverage for secrets management — install & auth, infisical run/secrets/export, dynamic secrets, secret scanning with pre-commit hooks, machine-identity CI/CD auth, self-hosted, and troubleshooting.",
+    "developerName": "AGENTS.STORE",
+    "category": "development",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://agents.store"
+  }
 }

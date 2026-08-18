@@ -1,10 +1,7 @@
 ---
 name: project-structure
-description: >
-  Next.js project architecture and file organization patterns. Use when the user asks about
-  "Next.js project structure", "folder organization", "feature-based structure", "where to put
-  shared code", "naming conventions", "barrel exports", "modular architecture", "colocation",
-  "route groups for organization", or needs guidance on organizing a scalable Next.js codebase.
+description: |
+  Next.js project architecture and file organization patterns. Use when the user asks about "Next.js project structure", "folder organization", "feature-based structure", "where to put shared code", "naming conventions", "barrel exports", "modular architecture", "colocation", "route groups for organization", or needs guidance on organizing a scalable Next.js codebase.
 ---
 
 # Project Structure & Organization
