@@ -389,6 +389,18 @@
       "category": "ai-agents"
     },
     {
+      "name": "openclaw-ops",
+      "source": {
+        "source": "local",
+        "path": "./openclaw-ops"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "operations"
+    },
+    {
       "name": "outline-ops",
       "source": {
         "source": "local",

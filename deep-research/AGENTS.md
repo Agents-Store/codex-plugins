@@ -24,7 +24,7 @@ Add to `~/.codex/config.toml`:
 
 ```toml
 [mcp_servers.deep-research]
-url = "https://mcp.mcpware.net/mcp/d1ab2e49-a032-4788-9ba5-3125624f2769"
+url = "${MCPWARE_MCP_URL}"
 type = "http"
 
 ```

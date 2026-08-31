@@ -63,7 +63,7 @@ Add to `~/.codex/config.toml`:
 
 ```toml
 [mcp_servers.mem0]
-url = "https://my-mcp.mcpware.net/mcp/mem0-user"
+url = "${MEM0_MCP_URL}"
 type = "http"
 
 ```
