@@ -23,7 +23,7 @@
   "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "Nextjs Provision",
-    "shortDescription": "Nex\n\n<!-- truncated: content exceeds the target's size limit -->",
+    "shortDescription": "Next.js provisioning plugin. Set up shadcn/ui and shadcn…",
     "longDescription": "Next.js provisioning plugin. Set up shadcn/ui and shadcn studio — component installation, theme configuration, MCP server setup, project scaffolding, and multi-registry component search across 260+ registries from the official directory.",
     "developerName": "AGENTS.STORE",
     "category": "development",

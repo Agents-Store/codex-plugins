@@ -19,7 +19,7 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Image Search Dev",
-    "shortDescription": "Sto\n\n<!-- truncated: content exceeds the target's size limit -->",
+    "shortDescription": "Stock image and video search developer toolkit. MCP tool…",
     "longDescription": "Stock image and video search developer toolkit. MCP tool patterns for Pexels (9 tools) and Unsplash (4 tools) from mcpware-dev-tools. Photo search, video search, collections, curated content, and MinIO upload integration.",
     "developerName": "AGENTS.STORE",
     "category": "development",

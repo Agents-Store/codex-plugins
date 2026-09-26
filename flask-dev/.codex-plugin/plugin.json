@@ -18,7 +18,7 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Flask Dev",
-    "shortDescription": "Fla\n\n<!-- truncated: content exceeds the target's size limit -->",
+    "shortDescription": "Flask dev plugin for Agents Store. Application factory…",
     "longDescription": "Flask dev plugin for Agents Store. Application factory patterns, blueprint organization, Jinja2 templates, Flask CLI recipes, and troubleshooting for developers building with Flask.",
     "developerName": "Agents Store",
     "category": "development",

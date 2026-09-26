@@ -20,7 +20,7 @@
   "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "Codemap Dev",
-    "shortDescription": "Cod\n\n<!-- truncated: content exceeds the target's size limit -->",
+    "shortDescription": "Code understanding plugin for developers. Helps onboard to…",
     "longDescription": "Code understanding plugin for developers. Helps onboard to unfamiliar projects through beginner-friendly code review, step-by-step explanations, visual diagrams (architecture, ERD, flows) via drawio-mcp, and frontend testing via Playwright MCP.",
     "developerName": "AGENTS.STORE",
     "category": "development",

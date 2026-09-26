@@ -25,7 +25,7 @@
   "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "Stack Directus Nextjs Trigger Dev",
-    "shortDescription": "Dir\n\n<!-- truncated: content exceeds the target's size limit -->",
+    "shortDescription": "Directus + Next.js + Trigger.dev stack dev plugin. Adds…",
     "longDescription": "Directus + Next.js + Trigger.dev stack dev plugin. Adds self-hosted Trigger.dev as a workflow engine for AI agents, durable async logic, and scheduled jobs on top of the Directus + Next.js App Router stack.",
     "developerName": "Agents Store",
     "category": "development",

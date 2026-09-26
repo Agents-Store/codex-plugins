@@ -1,7 +1,7 @@
 {
   "name": "firecrawl",
-  "version": "1.0.0",
-  "description": "Firecrawl web scraping and search plugin. Scrape URLs, crawl sites, search the web, map site structures, extract structured data, batch scraping, autonomous research agents, and cloud browser sessions via MCP tools.",
+  "version": "1.1.0",
+  "description": "DEPRECATED — superseded by web-search-dev, which covers the current Firecrawl MCP tools and REST API v2 alongside Exa, Perplexity, Jina and Context7; this plugin teaches tool names the official Firecrawl MCP server does not expose. Firecrawl web scraping and search plugin. Scrape URLs, crawl sites, search the web, map site structures, extract structured data, batch scraping, autonomous research agents, and cloud browser sessions via MCP tools.",
   "author": {
     "name": "AGENTS.STORE"
   },
@@ -19,8 +19,8 @@
   "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "Firecrawl",
-    "shortDescription": "Fir\n\n<!-- truncated: content exceeds the target's size limit -->",
-    "longDescription": "Firecrawl web scraping and search plugin. Scrape URLs, crawl sites, search the web, map site structures, extract structured data, batch scraping, autonomous research agents, and cloud browser sessions via MCP tools.",
+    "shortDescription": "DEPRECATED — superseded by web-search-dev, which covers the…",
+    "longDescription": "DEPRECATED — superseded by web-search-dev, which covers the current Firecrawl MCP tools and REST API v2 alongside Exa, Perplexity, Jina and Context7; this plugin teaches tool names the official Firecrawl MCP server does not expose. Firecrawl web scraping and search plugin. Scrape URLs, crawl sites, search the web, map site structures, extract structured data, batch scraping, autonomous research agents, and cloud browser sessions via MCP tools.",
     "developerName": "AGENTS.STORE",
     "category": "development",
     "capabilities": [

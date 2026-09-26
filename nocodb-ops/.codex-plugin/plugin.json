@@ -18,7 +18,7 @@
   "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "Nocodb Ops",
-    "shortDescription": "Noc\n\n<!-- truncated: content exceeds the target's size limit -->",
+    "shortDescription": "NocoDB ops plugin for Agents Store. Record management, views…",
     "longDescription": "NocoDB ops plugin for Agents Store. Record management, views, reports, filtering, search, and data import/export for business users via MCP tools and CLI.",
     "developerName": "AGENTS.STORE",
     "category": "operations",

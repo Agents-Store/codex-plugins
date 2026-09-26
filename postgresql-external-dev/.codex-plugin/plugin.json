@@ -21,7 +21,7 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Postgresql External Dev",
-    "shortDescription": "Pos\n\n<!-- truncated: content exceeds the target's size limit -->",
+    "shortDescription": "PostgreSQL schema design for external database connections…",
     "longDescription": "PostgreSQL schema design for external database connections. Compatible SQL patterns for NocoDB and NocoBase — table creation, column types, relations, indexes, and anti-patterns.",
     "developerName": "AGENTS.STORE",
     "category": "development",

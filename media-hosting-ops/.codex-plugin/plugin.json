@@ -15,7 +15,7 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Media Hosting Ops",
-    "shortDescription": "Med\n\n<!-- truncated: content exceeds the target's size limit -->",
+    "shortDescription": "Media hosting operations plugin. Upload images by public URL…",
     "longDescription": "Media hosting operations plugin. Upload images by public URL to MinIO-based media hosting via the uploadImageToMinio MCP tool.",
     "developerName": "AGENTS.STORE",
     "category": "operations",

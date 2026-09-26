@@ -53,10 +53,10 @@
       "category": "marketing"
     },
     {
-      "name": "deep-research",
+      "name": "deep-research-ops",
       "source": {
         "source": "local",
-        "path": "./deep-research"
+        "path": "./deep-research-ops"
       },
       "policy": {
         "installation": "AVAILABLE",
@@ -101,10 +101,10 @@
       "category": "development"
     },
     {
-      "name": "document-generator",
+      "name": "document-generator-ops",
       "source": {
         "source": "local",
-        "path": "./document-generator"
+        "path": "./document-generator-ops"
       },
       "policy": {
         "installation": "AVAILABLE",
@@ -233,10 +233,10 @@
       "category": "operations"
     },
     {
-      "name": "mem0",
+      "name": "mem0-ops",
       "source": {
         "source": "local",
-        "path": "./mem0"
+        "path": "./mem0-ops"
       },
       "policy": {
         "installation": "AVAILABLE",
@@ -245,10 +245,10 @@
       "category": "development"
     },
     {
-      "name": "multi-bank",
+      "name": "multi-bank-ops",
       "source": {
         "source": "local",
-        "path": "./multi-bank"
+        "path": "./multi-bank-ops"
       },
       "policy": {
         "installation": "AVAILABLE",
@@ -449,10 +449,10 @@
       "category": "development"
     },
     {
-      "name": "project-template-creator",
+      "name": "project-template-dev",
       "source": {
         "source": "local",
-        "path": "./project-template-creator"
+        "path": "./project-template-dev"
       },
       "policy": {
         "installation": "AVAILABLE",
@@ -473,10 +473,10 @@
       "category": "infrastructure"
     },
     {
-      "name": "sendpulse",
+      "name": "sendpulse-ops",
       "source": {
         "source": "local",
-        "path": "./sendpulse"
+        "path": "./sendpulse-ops"
       },
       "policy": {
         "installation": "AVAILABLE",
@@ -581,10 +581,10 @@
       "category": "development"
     },
     {
-      "name": "teleshop",
+      "name": "teleshop-ops",
       "source": {
         "source": "local",
-        "path": "./teleshop"
+        "path": "./teleshop-ops"
       },
       "policy": {
         "installation": "AVAILABLE",
