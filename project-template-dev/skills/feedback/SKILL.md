@@ -12,7 +12,7 @@ Record a problem or improvement found while working in a child project and apply
 
 Template repos are stored in a shared directory:
 
-- **`$PROJECT_TEMPLATES_DIR`** — directory containing all template repos (e.g., `/path/to/STACKMAKERS/`)
+- **`$PROJECT_TEMPLATES_DIR`** — directory containing all template repos (e.g., `/path/to/project-templates/`)
 
 Each template is a separate git repo named by convention: `project-template`, `project-directus-nextjs`, `demo-directus-nextjs`, etc.
 
@@ -55,7 +55,7 @@ Search for the parent template directory using this fallback chain:
 
 1. **`$PROJECT_TEMPLATES_DIR/{parent-name}/`** — primary location
 2. **Sibling of current project** — `../{parent-name}/` relative to current project
-3. **Clone from GitHub** — offer to clone: `git clone git@github.com:stackmakers-ai/{parent-name}.git "$PROJECT_TEMPLATES_DIR/{parent-name}"`
+3. **Clone from GitHub** — offer to clone: `git clone git@github.com:$PROJECT_TEMPLATES_GITHUB_ORG/{parent-name}.git "$PROJECT_TEMPLATES_DIR/{parent-name}"`
 
 ```bash
 PARENT_NAME="project-template"  # from stack.json
@@ -70,7 +70,7 @@ elif [ -d "../$PARENT_NAME" ]; then
 
 else
   echo "Parent template '$PARENT_NAME' not found locally."
-  echo "Clone it? git clone git@github.com:stackmakers-ai/$PARENT_NAME.git"
+  echo "Clone it? git clone git@github.com:$PROJECT_TEMPLATES_GITHUB_ORG/$PARENT_NAME.git"
 fi
 ```
 
@@ -195,7 +195,7 @@ If the parent template cannot be edited directly (permissions, not cloned locall
 
 ```bash
 gh issue create \
-  --repo "stackmakers-ai/$PARENT_NAME" \
+  --repo "$PROJECT_TEMPLATES_GITHUB_ORG/$PARENT_NAME" \
   --title "Template improvement: {brief description}" \
   --label "template-feedback" \
   --body "## Category: {category}
