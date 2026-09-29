@@ -65,18 +65,6 @@
       "category": "research"
     },
     {
-      "name": "dify-dev",
-      "source": {
-        "source": "local",
-        "path": "./dify-dev"
-      },
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_INSTALL"
-      },
-      "category": "development"
-    },
-    {
       "name": "dify-ops",
       "source": {
         "source": "local",
@@ -231,30 +219,6 @@
         "authentication": "ON_INSTALL"
       },
       "category": "operations"
-    },
-    {
-      "name": "mem0-ops",
-      "source": {
-        "source": "local",
-        "path": "./mem0-ops"
-      },
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_INSTALL"
-      },
-      "category": "development"
-    },
-    {
-      "name": "multi-bank-ops",
-      "source": {
-        "source": "local",
-        "path": "./multi-bank-ops"
-      },
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_INSTALL"
-      },
-      "category": "finance"
     },
     {
       "name": "n8n",
