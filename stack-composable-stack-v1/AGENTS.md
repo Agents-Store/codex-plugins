@@ -57,7 +57,7 @@ command = "npx"
 args = ["trigger.dev@latest","mcp"]
 
 [mcp_servers.trigger-dev.env]
-"TRIGGER_ACCESS_TOKEN" = "${TRIGGER_SECRET_KEY}"
+"TRIGGER_ACCESS_TOKEN" = "${TRIGGER_ACCESS_TOKEN}"
 "TRIGGER_API_URL" = "${TRIGGER_API_URL}"
 
 [mcp_servers.n8n-mcp-external]

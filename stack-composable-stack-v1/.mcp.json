@@ -7,7 +7,7 @@
         "mcp"
       ],
       "env_vars": [
-        "TRIGGER_SECRET_KEY",
+        "TRIGGER_ACCESS_TOKEN",
         "TRIGGER_API_URL"
       ]
     },
