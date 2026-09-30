@@ -1,6 +1,6 @@
 # nocobase
 
-> DEPRECATED — superseded by nocobase-dev, which bundles the official nocobase/skills library and works through the nb CLI and REST API. The MCP server this plugin wires has no counterpart in nocobase-dev yet. NocoBase platform development plugin. Expert guidance on collections, fields, relations, workflows, UI blocks, plugin development, MCP-powered page management, data operations, and collection inspection for NocoBase applications.
+> DEPRECATED — superseded by nocobase-dev, which bundles the official nocobase/skills library and works through the nb CLI and REST API. Its MCP server package (@nocobase/mcp-server) was withdrawn from npm and is no longer wired; the MCP commands and agents work only if you register your own server named `nocobase`. NocoBase platform development plugin. Expert guidance on collections, fields, relations, workflows, UI blocks, plugin development, MCP-powered page management, data operations, and collection inspection for NocoBase applications.
 
 Canonical source: https://github.com/agents-store/claude-public-plugins/tree/main/plugins/nocobase
 
@@ -52,19 +52,3 @@ user: "Build a page for the orders collection with a table and form"
 user: "Import 50 sample contacts into NocoBase"
 </example>
 
-
-## MCP servers
-
-Add to `~/.codex/config.toml`:
-
-```toml
-[mcp_servers.nocobase]
-command = "npx"
-args = ["-y","@nocobase/mcp-server"]
-
-[mcp_servers.nocobase.env]
-"NOCOBASE_URL" = "${NOCOBASE_URL}"
-"NOCOBASE_EMAIL" = "${NOCOBASE_EMAIL}"
-"NOCOBASE_PASSWORD" = "${NOCOBASE_PASSWORD}"
-
-```
