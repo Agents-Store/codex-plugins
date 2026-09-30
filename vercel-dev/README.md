@@ -1,6 +1,6 @@
 # vercel-dev (Codex plugin)
 
-Vercel ecosystem plugin. Deployment, AI SDK, Edge Functions, storage, routing, performance optimization. Includes CLI deploy troubleshooting for non-Git projects, Hobby plan fixes, standalone output handling. Based on official vercel-plugin v0.25.0 by Vercel Labs.
+Vercel ecosystem plugin. Deployment, AI SDK, Edge Functions, storage, routing, performance optimization. Includes CLI deploy troubleshooting for non-Git projects, Hobby plan fixes, standalone output handling. Based on official vercel-plugin v0.51.0 by Vercel Labs; telemetry is opt-in (VERCEL_PLUGIN_TELEMETRY=on).
 
 ## Install
 
@@ -16,7 +16,7 @@ codex plugin marketplace add .
 
 ## Components
 
-- 31 skill(s) under `skills/` (includes 6 command(s) converted to skills — Codex has no custom slash-command system)
+- 43 skill(s) under `skills/` (includes 5 command(s) converted to skills — Codex has no custom slash-command system)
 - 3 subagent definition(s) under `agents/` — **not installed automatically by Codex**. Copy manually:
 
 ```bash
