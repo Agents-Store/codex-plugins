@@ -1,6 +1,6 @@
 ---
 name: nocobase-publish-manage
-description: Use when users need NocoBase backup restore or migration publish operations through nb api backup and nb api migration commands.
+description: NocoBase 2 only; never use in a NocoBase 3 project. Use when users need NocoBase backup restore or migration publish operations through nb api backup and nb api migration commands.
 ---
 
 # Goal

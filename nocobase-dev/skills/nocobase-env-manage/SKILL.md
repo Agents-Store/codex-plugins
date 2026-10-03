@@ -1,6 +1,6 @@
 ---
 name: nocobase-env-manage
-description: Use when users need NocoBase bootstrap, runtime lifecycle, CLI maintenance, and skills maintenance with nb CLI only.
+description: NocoBase 2 only; never use in a NocoBase 3 project. Use when users need NocoBase bootstrap, runtime lifecycle, CLI maintenance, and skills maintenance with nb CLI only.
 ---
 
 # Goal

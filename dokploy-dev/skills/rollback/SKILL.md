@@ -42,7 +42,7 @@ Parse from "$ARGUMENTS".
 5. **Execute:**
 
    ```
-   mcp__dokploy__rollback-rollback
+   mcp__plugin_dokploy-dev_dokploy__rollback-rollback
      → { rollbackId: "<chosen rollbackId>" }
    ```
 
@@ -53,7 +53,7 @@ Parse from "$ARGUMENTS".
    - Curl the endpoint to confirm responsive.
 
 7. **Tidy up (optional):**
-   - Offer to delete the failed deployments that triggered the rollback via `deployment-removeDeployment` or `application-dropDeployment`. Confirm before doing so — audit trail matters.
+   - Offer to delete the failed deployments that triggered the rollback via `deployment-removeDeployment`. Confirm before doing so — audit trail matters.
 
 ## Notes
 

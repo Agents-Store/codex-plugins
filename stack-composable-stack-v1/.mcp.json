@@ -35,7 +35,7 @@
       "type": "http",
       "url": "${NOCODB_MCP_URL}",
       "env_http_headers": {
-        "xc-mcp-token": "NOCODB_TOKEN"
+        "xc-mcp-token": "NOCODB_MCP_TOKEN"
       }
     },
     "postgresql-mcp": {

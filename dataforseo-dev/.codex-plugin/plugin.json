@@ -1,7 +1,7 @@
 {
   "name": "dataforseo-dev",
-  "version": "1.0.0",
-  "description": "DataForSEO data analysis plugin. Keyword research, competitor analysis, backlink auditing, SERP monitoring, on-page audits, content analysis, and AI optimization via 70+ MCP tools.",
+  "version": "2.0.0",
+  "description": "DataForSEO data for SEO work — keywords, SERP, backlinks, on-page, AI visibility — through the v3 MCP server. Not a general web-search tool.",
   "author": {
     "name": "AGENTS.STORE"
   },
@@ -22,8 +22,8 @@
   "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "Dataforseo Dev",
-    "shortDescription": "DataForSEO data analysis plugin. Keyword research, competitor…",
-    "longDescription": "DataForSEO data analysis plugin. Keyword research, competitor analysis, backlink auditing, SERP monitoring, on-page audits, content analysis, and AI optimization via 70+ MCP tools.",
+    "shortDescription": "DataForSEO data for SEO work — keywords, SERP, backlinks…",
+    "longDescription": "DataForSEO data for SEO work — keywords, SERP, backlinks, on-page, AI visibility — through the v3 MCP server. Not a general web-search tool.",
     "developerName": "AGENTS.STORE",
     "category": "marketing",
     "capabilities": [

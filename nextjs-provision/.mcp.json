@@ -6,13 +6,6 @@
         "shadcn@latest",
         "mcp"
       ]
-    },
-    "shadcn-community": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@jpisnice/shadcn-ui-mcp-server"
-      ]
     }
   }
 }

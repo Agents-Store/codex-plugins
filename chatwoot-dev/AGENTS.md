@@ -1,6 +1,6 @@
 # chatwoot-dev
 
-> Chatwoot dev plugin for Agents Store. Full REST API coverage (Application, Platform, and Public/Client APIs) with bundled OpenAPI specs, official chatwoot CLI recipes, webhook & agent-bot automation, and troubleshooting for developers building on Chatwoot. Authenticates with the api_access_token header via CHATWOOT_API_KEY against CHATWOOT_BASE_URL.
+> Chatwoot dev plugin for Agents Store. Full REST API coverage (Application, Platform, and Public/Client APIs) with bundled OpenAPI specs, official chatwoot CLI recipes, webhook & agent-bot automation, and troubleshooting for developers building on Chatwoot. Authenticates with the api-access-token header (hyphenated, proxy-safe) via CHATWOOT_API_KEY against CHATWOOT_BASE_URL.
 
 Canonical source: https://github.com/agents-store/claude-public-plugins/tree/main/plugins/chatwoot-dev
 
@@ -24,7 +24,7 @@ cp agents/*.toml ~/.codex/agents/        # personal
 cp agents/*.toml <repo>/.codex/agents/    # project-local
 ```
 
-- **chatwoot-assistant** — Use this agent when the user needs help building with or operating Chatwoot — writing REST API integration code, choosing the right API family (Application / Platform / Public), debugging api_access_token auth, building agent bots and webhook handlers, automating conversation routing, or scripting the chatwoot CLI.
+- **chatwoot-assistant** — Use this agent when the user needs help building with or operating Chatwoot — writing REST API integration code, choosing the right API family (Application / Platform / Public), debugging api-access-token auth, building agent bots and webhook handlers, automating conversation routing, or scripting the chatwoot CLI.
 
 <example>
 Context: User is writing an integration against the Chatwoot API.

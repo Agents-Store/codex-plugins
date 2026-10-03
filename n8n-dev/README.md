@@ -16,7 +16,7 @@ codex plugin marketplace add .
 
 ## Components
 
-- 13 skill(s) under `skills/`
+- 21 skill(s) under `skills/`
 - 1 subagent definition(s) under `agents/` — **not installed automatically by Codex**. Copy manually:
 
 ```bash

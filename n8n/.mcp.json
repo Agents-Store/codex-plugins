@@ -1,9 +1,0 @@
-{
-  "mcpServers": {
-    "n8n": {
-      "type": "http",
-      "url": "${N8N_MCP_URL}",
-      "bearer_token_env_var": "N8N_MCP_TOKEN"
-    }
-  }
-}

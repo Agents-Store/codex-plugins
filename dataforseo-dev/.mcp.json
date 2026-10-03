@@ -4,7 +4,7 @@
       "command": "npx",
       "args": [
         "-y",
-        "dataforseo-mcp-server@latest"
+        "dataforseo-mcp-server@3"
       ],
       "env_vars": [
         "DATAFORSEO_USERNAME",

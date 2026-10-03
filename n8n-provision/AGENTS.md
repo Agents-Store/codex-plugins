@@ -1,6 +1,6 @@
 # n8n-provision
 
-> n8n instance provisioning plugin. Discover workflows from the official template library (9,166+ templates), GitHub repos, and community platforms, then analyze, import, and batch-deploy them to provision an n8n instance.
+> n8n instance provisioning plugin. Discover workflows from the official template library (12,900+ templates), GitHub repos, and community platforms, then analyze, import, and batch-deploy them to provision an n8n instance.
 
 Canonical source: https://github.com/agents-store/claude-public-plugins/tree/main/plugins/n8n-provision
 
@@ -21,8 +21,8 @@ Use when: "check n8n instance", "is n8n ready for provisioning", "n8n health che
 - **single-workflow-import** — Import and deploy a single workflow to an n8n instance from the official template library or community JSON source. Handles validation, auto-fix, credential stripping, and post-import verification.
 Use when: "import n8n workflow", "deploy n8n template", "install n8n automation", "add workflow to n8n", "import template to n8n", "deploy workflow from JSON", "install community workflow"
 
-- **template-discovery** — Search the official n8n template library (9,166+ templates). Use when asked to "search n8n templates", "find n8n workflow", "browse n8n template library", "n8n workflow catalog", "discover n8n automation", or need to find a template by keyword, node type, task, category, or architectural pattern.
-- **troubleshoot** — Diagnose and fix n8n provisioning and import issues. This skill should be used when the user encounters "n8n import error", "template deploy failed", "workflow validation error", "provisioning troubleshoot", "n8n provision problem", "community node missing", "credential not found", "workflow won't activate", "batch deploy failed", or needs help debugging n8n workflow import and deployment issues.
+- **template-discovery** — Search the official n8n template library (12,900+ templates). Use when asked to "search n8n templates", "find n8n workflow", "browse n8n template library", "n8n workflow catalog", "discover n8n automation", or need to find a template by keyword, node type, task, category, or architectural pattern.
+- **troubleshoot** — Diagnose and fix n8n provisioning and import issues. This skill should be used when the user encounters "n8n import error", "template deploy failed", "workflow validation error", "provisioning troubleshoot", "n8n provision problem", "community node missing", "credential not found", "workflow won't activate", "workflow won't publish", "template not found", "batch deploy failed", or needs help debugging n8n workflow import and deployment issues.
 
 - **workflow-analysis** — Analyze an n8n workflow JSON before importing — node inventory, connection topology, credential requirements, security flags, complexity scoring, and compatibility checks. Use when asked to "analyze n8n workflow", "check workflow before import", "workflow compatibility check", "review n8n template", "assess workflow complexity", or before importing any template or community workflow.
 - **analyze-workflow** — Analyze a workflow JSON or template before importing
@@ -40,7 +40,7 @@ cp agents/*.toml ~/.codex/agents/        # personal
 cp agents/*.toml <repo>/.codex/agents/    # project-local
 ```
 
-- **n8n-provisioner** — n8n instance provisioner and workflow sourcing specialist. Discovers existing workflows from the official template library (9,166+ templates), GitHub repositories, and community platforms, then analyzes, imports, and batch-deploys them to provision an n8n instance.
+- **n8n-provisioner** — n8n instance provisioner and workflow sourcing specialist. Discovers existing workflows from the official template library (12,900+ templates), GitHub repositories, and community platforms, then analyzes, imports, and batch-deploys them to provision an n8n instance.
 
 <example>
 Context: User wants to set up a new n8n instance with common automation workflows
@@ -65,7 +65,7 @@ Context: User wants to import a specific template they found
 user: "Deploy template #2947 to my n8n instance and tell me what credentials I need to set up"
 assistant: "I'll use the n8n-provisioner agent to analyze the template, deploy it, and provide credential setup guidance."
 <commentary>
-User has a specific template ID — agent gets template details, analyzes credentials needed, deploys with auto-fix, and guides credential setup.
+User has a specific template ID — agent gets template details (from the n8n-mcp database, or from api.n8n.io when the local database misses it), analyzes credentials needed, deploys as a draft with auto-fix, and guides credential setup.
 </commentary>
 </example>
 

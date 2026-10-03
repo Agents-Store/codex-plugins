@@ -9,10 +9,10 @@ description: |
 Scan a project's source code, classify technologies into Logic/Interface/Data layers, research each technology online, recommend architecture improvements, and generate template and stack.json recommendations.
 
 Read reference files before starting:
-- `@references/technology-signatures.md` — detection signatures for 80+ technologies
-- `@references/layer-classification.md` — canonical tech-to-layer mapping
+- [technology-signatures.md](references/technology-signatures.md) — detection signatures for 80+ technologies
+- [layer-classification.md](references/layer-classification.md) — canonical tech-to-layer mapping
 
-<!-- SYNC NOTE: Phases 1-4 are identical to plugin-creator/skills/audit-stack/SKILL.md — keep in sync -->
+<!-- SYNC NOTE: Phases 1-4 started as a copy of plugin-creator/skills/audit-stack/SKILL.md; the two copies have drifted (reference links, newer signatures), so port a change by hand when it applies to both -->
 
 ---
 
@@ -31,8 +31,9 @@ Read all package manifests found in the project root (and monorepo packages if a
 - `Gemfile` (Ruby)
 - `composer.json` (PHP)
 - `pom.xml` / `build.gradle` (Java/Kotlin)
+- Lockfiles name the package manager: `pnpm-lock.yaml` (pnpm), `bun.lock` / `bun.lockb` (Bun), `uv.lock` (uv), `package-lock.json` (npm), `yarn.lock` (Yarn), `poetry.lock` (Poetry) — record it as tooling, not a layer technology
 
-For each dependency found, match against the package manifest tables in `@references/technology-signatures.md`.
+For each dependency found, match against the package manifest tables in `references/technology-signatures.md`.
 
 ### Step 1.2 — Configuration Files
 
@@ -46,14 +47,15 @@ Use Glob to detect configuration files. Check for:
 **/Dockerfile* , **/.github/workflows/*.yml , **/vercel.json ,
 **/terraform/*.tf , **/k8s/** , **/.storybook/** ,
 **/jest.config.* , **/vitest.config.* , **/playwright.config.* ,
-**/sentry.*.config.*
+**/sentry.*.config.* , **/payload.config.* , **/.infisical.json ,
+**/pnpm-lock.yaml , **/bun.lock , **/bun.lockb , **/uv.lock
 ```
 
-Match each against the configuration file table in `@references/technology-signatures.md`.
+Match each against the configuration file table in `references/technology-signatures.md`.
 
 ### Step 1.3 — Docker Compose Services
 
-If `docker-compose.yml` or `docker-compose.yaml` exists, read it and extract all `image:` values. Match against the Docker Compose service table in `@references/technology-signatures.md`.
+If `docker-compose.yml` or `docker-compose.yaml` exists, read it and extract all `image:` values; also check `networks:` for `dokploy-network` (a Dokploy deployment). Match against the Docker Compose service table in `references/technology-signatures.md`.
 
 ### Step 1.4 — Import Pattern Scanning
 
@@ -63,7 +65,7 @@ Use Grep to search source files for distinctive import patterns. Focus on `src/`
 Glob: src/**/*.{ts,tsx,js,jsx,py,go,rs}
 ```
 
-Search for the import patterns listed in `@references/technology-signatures.md` Section 4.
+Search for the import patterns listed in `references/technology-signatures.md` Section 4.
 
 ### Step 1.5 — Directory Structure Signals
 
@@ -92,7 +94,7 @@ Cap the list at the 30-40 most significant technologies. Minor utilities (linter
 
 ## Phase 2: Layer Classification
 
-Using `@references/layer-classification.md`, classify each technology into layers.
+Using `references/layer-classification.md`, classify each technology into layers.
 
 **Critical rule:** Full-stack frameworks (Next.js, Nuxt, SvelteKit, Remix, Rails, Django, Laravel) MUST appear in BOTH `logic` AND `interface`.
 
@@ -284,8 +286,8 @@ Rules for `layers` values — use lowercase kebab-case identifiers:
 - UI libraries use short form: `@radix-ui/*` -> `radix-ui`
 
 Rules for `plugins` values:
-- List technology plugins that exist or should be created: `{tool}-dev`, `{tool}-ops`
-- List stack plugins if integration plugins exist: `stack-{name}-dev`
+- List technology plugins that exist or should be created: `{tool}-dev`, `{tool}-ops`, `{tool}-provision`
+- List stack plugins if integration plugins exist: `stack-{name}` (no process suffix)
 - Leave `process` empty unless the project uses specific business process plugins
 
 ### Step 5.4 — Identify Required Plugins
@@ -319,9 +321,9 @@ Cross-reference the `plugins` arrays with available plugins:
     "interface": ["nextjs", "tailwindcss", "shadcn"]
   },
   "plugins": {
-    "technology": ["directus-dev", "nextjs-dev", "nextjs-provision"],
+    "technology": ["directus-dev", "nextjs-dev", "nextjs-provision", "trigger-dev", "tailwindcss-dev"],
     "process": [],
-    "stack": ["stack-directus-nextjs-dev"]
+    "stack": ["stack-directus-nextjs"]
   }
 }
 \`\`\`
@@ -332,8 +334,9 @@ Cross-reference the `plugins` arrays with available plugins:
 | directus-dev | Exists | Install |
 | nextjs-dev | Exists | Install |
 | nextjs-provision | Exists | Install |
-| stack-directus-nextjs-dev | Exists | Install |
-| trigger-dev-dev | Missing | Create with `/plugin-creator:create` |
+| trigger-dev | Exists | Install |
+| stack-directus-nextjs | Exists | Install |
+| tailwindcss-dev | Missing | Author it as a Claude Code plugin (for example with `/plugin-dev:create-plugin` from the official `plugin-dev` plugin) |
 
 ### Template Creation Command
 

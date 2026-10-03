@@ -1,6 +1,6 @@
 # dataforseo-dev (Codex plugin)
 
-DataForSEO data analysis plugin. Keyword research, competitor analysis, backlink auditing, SERP monitoring, on-page audits, content analysis, and AI optimization via 70+ MCP tools.
+DataForSEO data for SEO work — keywords, SERP, backlinks, on-page, AI visibility — through the v3 MCP server. Not a general web-search tool.
 
 ## Install
 
@@ -16,7 +16,7 @@ codex plugin marketplace add .
 
 ## Components
 
-- 13 skill(s) under `skills/` (includes 3 command(s) converted to skills — Codex has no custom slash-command system)
+- 14 skill(s) under `skills/` (includes 3 command(s) converted to skills — Codex has no custom slash-command system)
 - 1 subagent definition(s) under `agents/` — **not installed automatically by Codex**. Copy manually:
 
 ```bash

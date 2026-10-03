@@ -113,18 +113,6 @@
       "category": "infrastructure"
     },
     {
-      "name": "firecrawl",
-      "source": {
-        "source": "local",
-        "path": "./firecrawl"
-      },
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_INSTALL"
-      },
-      "category": "development"
-    },
-    {
       "name": "flask-dev",
       "source": {
         "source": "local",
@@ -153,18 +141,6 @@
       "source": {
         "source": "local",
         "path": "./grammy-dev"
-      },
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_INSTALL"
-      },
-      "category": "development"
-    },
-    {
-      "name": "image-search-dev",
-      "source": {
-        "source": "local",
-        "path": "./image-search-dev"
       },
       "policy": {
         "installation": "AVAILABLE",
@@ -207,30 +183,6 @@
         "authentication": "ON_INSTALL"
       },
       "category": "collaboration"
-    },
-    {
-      "name": "media-hosting-ops",
-      "source": {
-        "source": "local",
-        "path": "./media-hosting-ops"
-      },
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_INSTALL"
-      },
-      "category": "operations"
-    },
-    {
-      "name": "n8n",
-      "source": {
-        "source": "local",
-        "path": "./n8n"
-      },
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_INSTALL"
-      },
-      "category": "development"
     },
     {
       "name": "n8n-dev",
@@ -281,34 +233,10 @@
       "category": "development"
     },
     {
-      "name": "nocobase",
-      "source": {
-        "source": "local",
-        "path": "./nocobase"
-      },
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_INSTALL"
-      },
-      "category": "development"
-    },
-    {
       "name": "nocobase-dev",
       "source": {
         "source": "local",
         "path": "./nocobase-dev"
-      },
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_INSTALL"
-      },
-      "category": "development"
-    },
-    {
-      "name": "nocodb",
-      "source": {
-        "source": "local",
-        "path": "./nocodb"
       },
       "policy": {
         "installation": "AVAILABLE",
@@ -339,18 +267,6 @@
         "authentication": "ON_INSTALL"
       },
       "category": "operations"
-    },
-    {
-      "name": "openclaw-configurator",
-      "source": {
-        "source": "local",
-        "path": "./openclaw-configurator"
-      },
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_INSTALL"
-      },
-      "category": "ai-agents"
     },
     {
       "name": "openclaw-ops",
@@ -485,40 +401,40 @@
       "category": "stack"
     },
     {
-      "name": "stack-directus-nextjs-dev",
+      "name": "stack-directus-nextjs",
       "source": {
         "source": "local",
-        "path": "./stack-directus-nextjs-dev"
+        "path": "./stack-directus-nextjs"
       },
       "policy": {
         "installation": "AVAILABLE",
         "authentication": "ON_INSTALL"
       },
-      "category": "development"
+      "category": "stack"
     },
     {
-      "name": "stack-directus-nextjs-trigger-dev",
+      "name": "stack-directus-nextjs-trigger",
       "source": {
         "source": "local",
-        "path": "./stack-directus-nextjs-trigger-dev"
+        "path": "./stack-directus-nextjs-trigger"
       },
       "policy": {
         "installation": "AVAILABLE",
         "authentication": "ON_INSTALL"
       },
-      "category": "development"
+      "category": "stack"
     },
     {
-      "name": "stack-flask-sqlalchemy-dev",
+      "name": "stack-flask-sqlalchemy",
       "source": {
         "source": "local",
-        "path": "./stack-flask-sqlalchemy-dev"
+        "path": "./stack-flask-sqlalchemy"
       },
       "policy": {
         "installation": "AVAILABLE",
         "authentication": "ON_INSTALL"
       },
-      "category": "development"
+      "category": "stack"
     },
     {
       "name": "taiga-ops",

@@ -1,6 +1,6 @@
 # flask-dev (Codex plugin)
 
-Flask dev plugin for Agents Store. Application factory patterns, blueprint organization, Jinja2 templates, Flask CLI recipes, and troubleshooting for developers building with Flask.
+Flask dev plugin for Agents Store. Project scaffold, application factory patterns, blueprint organization, Flask-Login authentication, CRUD views, Jinja2 templates, Flask CLI recipes, and troubleshooting for developers building with Flask.
 
 ## Install
 
@@ -16,7 +16,7 @@ codex plugin marketplace add .
 
 ## Components
 
-- 6 skill(s) under `skills/`
+- 8 skill(s) under `skills/`
 - 1 subagent definition(s) under `agents/` — **not installed automatically by Codex**. Copy manually:
 
 ```bash

@@ -1,6 +1,6 @@
 # nocodb-ops (Codex plugin)
 
-NocoDB ops plugin for Agents Store. Record management, views, reports, filtering, search, and data import/export for business users via MCP tools and CLI.
+NocoDB ops plugin for Agents Store. Record management, filtering (structured filters, exactDate date filters), sorting, reports, search, webhooks (events, payload, conditions), and data import/export for business users via the NocoDB MCP server (writes in batches of up to 100 records; extra tools on Cloud/licensed through listTools/callTool) and curl on the v3 API.
 
 ## Install
 
@@ -16,7 +16,7 @@ codex plugin marketplace add .
 
 ## Components
 
-- 15 skill(s) under `skills/` (includes 6 command(s) converted to skills — Codex has no custom slash-command system)
+- 16 skill(s) under `skills/` (includes 6 command(s) converted to skills — Codex has no custom slash-command system)
 - 1 subagent definition(s) under `agents/` — **not installed automatically by Codex**. Copy manually:
 
 ```bash

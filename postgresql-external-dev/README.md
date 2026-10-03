@@ -1,6 +1,6 @@
 # postgresql-external-dev (Codex plugin)
 
-PostgreSQL schema design for external database connections. Compatible SQL patterns for NocoDB and NocoBase — table creation, column types, relations, indexes, and anti-patterns.
+PostgreSQL knowledge for low-code stacks. Schema design for external database connections (compatible SQL patterns for NocoDB and NocoBase — table creation, column types, relations, indexes, anti-patterns), plus the 29-tool PostgreSQL MCP reference and the PostgREST REST API.
 
 ## Install
 
@@ -16,7 +16,7 @@ codex plugin marketplace add .
 
 ## Components
 
-- 6 skill(s) under `skills/`
+- 8 skill(s) under `skills/`
 - 1 subagent definition(s) under `agents/` — **not installed automatically by Codex**. Copy manually:
 
 ```bash
