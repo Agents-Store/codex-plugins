@@ -137,7 +137,7 @@ This enables CI/CD schema deployments across environments. Snapshots uploaded to
 
 ## Response Format
 
-```json
+```jsonc
 {
   "data": [ ... ],
   "meta": {

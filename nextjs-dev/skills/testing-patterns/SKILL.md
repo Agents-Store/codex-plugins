@@ -55,7 +55,7 @@ import '@testing-library/jest-dom/vitest'
 
 ### Add test script
 
-```json
+```jsonc
 // package.json
 {
   "scripts": {
