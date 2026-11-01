@@ -5,7 +5,7 @@ description: 'Search the web using optimal provider with automatic fallback Argu
 
 # Web Search
 
-Search the web with automatic fallback between providers. See CONNECTORS.md for provider mapping.
+Search the web with automatic fallback between providers. Follow `${CLAUDE_PLUGIN_ROOT}/skills/search-strategies/SKILL.md` for provider selection and query optimization. See CONNECTORS.md for provider mapping.
 
 ## Process
 

@@ -5,7 +5,7 @@ description: 'Read and extract content from a URL with fallback Arguments: <url>
 
 # Read URL
 
-Read and extract content from a web page or PDF. See CONNECTORS.md for provider mapping.
+Read and extract content from a web page or PDF. Follow `${CLAUDE_PLUGIN_ROOT}/skills/content-extraction/SKILL.md` for the provider fallback chain and the extraction modes. See CONNECTORS.md for provider mapping.
 
 ## Process
 

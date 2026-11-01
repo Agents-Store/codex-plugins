@@ -5,6 +5,8 @@ description: Set up document generator preferences — style, language, company 
 
 # Document Generator Setup
 
+The onboarding interview, the style presets and the logo handling are written down in `${CLAUDE_PLUGIN_ROOT}/skills/user-preferences/SKILL.md`; read it before Step 1.
+
 Run the onboarding interview to configure document generation preferences.
 
 ## Steps

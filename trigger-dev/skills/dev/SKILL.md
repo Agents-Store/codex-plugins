@@ -1,9 +1,11 @@
 ---
 name: dev
-description: 'Start the Trigger.dev dev server Arguments: --profile <name>.'
+description: 'Start the Trigger.dev dev server Arguments: [--profile <name>].'
 ---
 
 # Start Dev Server
+
+Method and rules: the `trigger-dev:cli-recipes` skill.
 
 1. Verify `trigger.config.ts` exists in the project
 2. Build the dev command:

@@ -7,6 +7,8 @@ description: 'Search GitHub repos and community platforms for n8n workflows Argu
 
 Search GitHub repositories and community platforms for n8n workflows not in the official template library.
 
+The tiered search strategy and the quality checks are written down in `${CLAUDE_PLUGIN_ROOT}/skills/community-source-discovery/SKILL.md`; read it before the first step.
+
 ## Arguments
 Format: `<query> [--source <github|community|all>]`
 - query: Search text (required)

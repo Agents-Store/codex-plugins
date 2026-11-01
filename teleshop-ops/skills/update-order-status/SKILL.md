@@ -7,6 +7,8 @@ description: 'Update the status of an order (created, processing, shipped, compl
 
 Change the status of an order in the Teleshop store.
 
+Method and rules: the `teleshop-ops:order-management` skill.
+
 ## Arguments
 Format: `<order-id> <status>`
 - order-id: The order ID (required)

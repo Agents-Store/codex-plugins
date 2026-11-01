@@ -1,6 +1,6 @@
 ---
 name: update
-description: 'Close the loop after work — bring the client documents, the spec and the generated documents up to what the code now does, move task statuses to what the audit found, journal the work and curate the changelog Arguments: --after M11-T9 | --release M11 | --dry | (empty = every task finished since the last work entry).'
+description: 'Close the loop after work — bring the client documents, the spec and the generated documents up to what the code now does, move task statuses to what the audit found, journal the work and curate the changelog Arguments: [--after M11-T9 | --release M11 | --dry | (empty = every task finished since the last work entry)].'
 ---
 
 The closing half of the loop. Everything else in this plugin moves a requirement

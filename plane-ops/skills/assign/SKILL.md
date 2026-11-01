@@ -7,6 +7,8 @@ description: 'Assign or unassign a Plane work item to one or more users Argument
 
 Assign a work item in Plane to one or more users. Replaces or appends depending on flags.
 
+Method and rules: the `plane-ops:work-items` skill.
+
 ## Arguments
 
 Format: `<project> <item> <assignee> [more...]`

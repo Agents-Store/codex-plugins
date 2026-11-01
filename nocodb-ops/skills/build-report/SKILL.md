@@ -7,6 +7,8 @@ description: 'Build an aggregation report from NocoDB table data Arguments: <tab
 
 Build an aggregation report from a NocoDB table.
 
+The aggregation types, the segmented reports and the dashboard pattern are written down in `${CLAUDE_PLUGIN_ROOT}/skills/views-and-reports/SKILL.md`; read it before the first step.
+
 ## Arguments
 
 Parse from "$ARGUMENTS":

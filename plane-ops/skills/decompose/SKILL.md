@@ -7,6 +7,8 @@ description: 'Break down a work item into smaller stories/tasks using INVEST cri
 
 Break down a work item into smaller, sprint-ready stories or tasks using INVEST criteria and vertical slicing.
 
+Method and rules: the `plane-ops:task-decomposition` skill.
+
 ## Arguments
 Format: `<work-item-identifier>`
 - work-item-identifier: Item identifier like "MP-42" (required)

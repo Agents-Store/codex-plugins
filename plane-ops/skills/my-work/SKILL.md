@@ -7,6 +7,8 @@ description: 'List Plane work items assigned to the current user Arguments: [--p
 
 Show open work items assigned to the current user across all projects, or filtered.
 
+Method and rules: the `plane-ops:work-items` skill.
+
 ## Arguments
 
 Format: `[flags...]`

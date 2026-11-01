@@ -7,6 +7,8 @@ description: 'Show the change history (activity log) of a Plane work item Argume
 
 Render the activity timeline of a work item — every state change, assignment, label, comment, link, and field edit.
 
+Method and rules: the `plane-ops:work-items` skill.
+
 ## Arguments
 
 Format: `<project> <item> [--limit n]`

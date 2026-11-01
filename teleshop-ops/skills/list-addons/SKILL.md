@@ -7,6 +7,8 @@ description: List all available store addons and their status
 
 List all available addons for the Teleshop store with their current status.
 
+Method and rules: the `teleshop-ops:addon-management` skill.
+
 ## Process
 
 1. **List all addons:**

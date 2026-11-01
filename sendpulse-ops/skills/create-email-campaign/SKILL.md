@@ -7,6 +7,8 @@ description: 'Create and send an email campaign Arguments: <subject> [--addressb
 
 Create and send an email campaign with pre-flight checks.
 
+Method and rules: the `sendpulse-ops:email-campaigns-templates` skill.
+
 ## Arguments
 Format: `<subject> [--addressbook <id>] [--sender <email>] [--template <id>]`
 - subject: Email subject line

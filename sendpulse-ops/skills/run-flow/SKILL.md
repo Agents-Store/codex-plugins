@@ -7,6 +7,8 @@ description: 'Run a chatbot automation flow for a contact Arguments: <flow-id> <
 
 Run a chatbot automation flow for a specific contact.
 
+Method and rules: the `sendpulse-ops:chatbot-management` skill.
+
 ## Arguments
 Format: `<flow-id> <contact-id>`
 - flow-id: The automation flow ID (optional — lists flows if omitted)

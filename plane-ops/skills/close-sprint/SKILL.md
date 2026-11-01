@@ -7,6 +7,8 @@ description: 'Close current sprint — review completion, transfer incomplete it
 
 Close the active sprint — review completion metrics, handle incomplete items, and archive.
 
+Method and rules: the `plane-ops:sprint-review-retro` skill.
+
 ## Arguments
 Format: `<project> [--transfer-to <next-cycle-name>]`
 - project: Project name or identifier (required)

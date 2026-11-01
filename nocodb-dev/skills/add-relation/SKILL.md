@@ -7,6 +7,8 @@ description: 'Set up a Link between two NocoDB tables, optionally with a Lookup 
 
 Connect two NocoDB tables with a Link field. Optionally add a Lookup so the linked record's display name is visible on the other side.
 
+How Link, Lookup and Rollup fields are built and verified is written down in `${CLAUDE_PLUGIN_ROOT}/skills/field-management/SKILL.md`; read it before the first step.
+
 ## Steps
 
 1. Resolve both table IDs via `mcp__plugin_nocodb-dev_nocodb__getTablesList`.

@@ -5,7 +5,7 @@ description: 'Crawl an entire website or map its structure Arguments: <url> [--d
 
 # Crawl Site
 
-Crawl a website to extract all pages or map its structure. See CONNECTORS.md for provider mapping.
+Crawl a website to extract all pages or map its structure. Follow `${CLAUDE_PLUGIN_ROOT}/skills/content-extraction/SKILL.md` for crawling and batch reading. See CONNECTORS.md for provider mapping.
 
 ## Process
 

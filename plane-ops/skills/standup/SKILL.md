@@ -7,6 +7,8 @@ description: 'Generate daily standup summary for current sprint Arguments: <proj
 
 Generate a daily standup summary — per-person status, sprint progress, and blockers.
 
+Method and rules: the `plane-ops:daily-standup` skill.
+
 ## Arguments
 Format: `<project>`
 - project: Project name or identifier (required)

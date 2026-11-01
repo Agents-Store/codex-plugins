@@ -7,6 +7,8 @@ description: 'Manage Plane labels — list, create, update, delete, or apply to 
 
 Manage labels in a Plane project. Labels drive triage, grooming, and reporting filters.
 
+Method and rules: the `plane-ops:labels-states-properties` skill.
+
 ## Arguments
 
 Format: `<action> <project> [args...]`

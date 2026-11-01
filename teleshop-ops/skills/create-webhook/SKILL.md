@@ -7,6 +7,8 @@ description: 'Create a new webhook for event notifications Arguments: <url> [<ev
 
 Create a new webhook endpoint for receiving store event notifications.
 
+Method and rules: the `teleshop-ops:webhook-management` skill.
+
 ## Arguments
 Format: `<url> [<event>]`
 - url: Webhook endpoint URL (required)

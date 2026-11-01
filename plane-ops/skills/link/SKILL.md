@@ -7,6 +7,8 @@ description: 'Add or list external links (PRs, docs, designs) on a Plane work it
 
 Attach external URLs to a work item — pull requests, design docs, Figma boards, runbooks.
 
+Method and rules: the `plane-ops:work-items` skill.
+
 ## Arguments
 
 Format: `<action> <project> <item> [url] [title]`

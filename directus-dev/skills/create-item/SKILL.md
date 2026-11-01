@@ -5,6 +5,8 @@ description: 'Create a new item in a Directus collection Arguments: <collection>
 
 # Create Item
 
+Follow the `item-operations` skill (`${CLAUDE_PLUGIN_ROOT}/skills/item-operations/SKILL.md`) for the query syntax, filters and batch rules; read it before the first call.
+
 ## Arguments
 
 - `collection` (required) — Collection name

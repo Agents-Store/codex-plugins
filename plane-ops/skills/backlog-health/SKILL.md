@@ -7,6 +7,8 @@ description: 'Analyze backlog health — unestimated items, stale items, missing
 
 Generate a health report for the project backlog — identifying gaps and recommending actions.
 
+Method and rules: the `plane-ops:backlog-management` skill.
+
 ## Arguments
 Format: `<project>`
 - project: Project name or identifier (required)

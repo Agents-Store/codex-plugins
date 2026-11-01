@@ -5,6 +5,8 @@ description: 'Generate a professional business proposal (DOCX/PDF) Arguments: <t
 
 # Generate Proposal
 
+Follow the `document-rules` skill (`${CLAUDE_PLUGIN_ROOT}/skills/document-rules/SKILL.md`) and the `document-generator` skill (`${CLAUDE_PLUGIN_ROOT}/skills/document-generator/SKILL.md`): the first holds the mandatory rules, the second the generation process. Read both before Step 1.
+
 Generate a professional business proposal with cover page, table of contents, structured sections, and branded formatting.
 
 ## Arguments

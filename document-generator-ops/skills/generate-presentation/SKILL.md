@@ -5,6 +5,8 @@ description: 'Generate a professional presentation (PPTX) Arguments: <title> [--
 
 # Generate Presentation
 
+Follow the `document-rules` skill (`${CLAUDE_PLUGIN_ROOT}/skills/document-rules/SKILL.md`) and the `document-generator` skill (`${CLAUDE_PLUGIN_ROOT}/skills/document-generator/SKILL.md`): the first holds the mandatory rules, the second the generation process. Read both before Step 1.
+
 Generate a professional PowerPoint presentation with title slide, agenda, content slides, and summary.
 
 ## Arguments

@@ -7,6 +7,8 @@ description: 'Search records in a NocoDB table by keyword Arguments: <table-name
 
 Search for records containing a keyword across text fields.
 
+The filter and where syntax, operators and sorting are written down in `${CLAUDE_PLUGIN_ROOT}/skills/search-filter/SKILL.md`; read it before the first step.
+
 ## Arguments
 
 Parse from "$ARGUMENTS":

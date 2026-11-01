@@ -7,7 +7,8 @@ description: 'Fan out gateway logs across selected instances, redacted, with per
 
 Read the runtime log of every selected instance in one pass. Read-only. Parse
 `[selector] [--tail <n>] [--since <dur>] [--grep <re>] [--errors-only]` from "$ARGUMENTS";
-defaults `--tail 200`, no `--since`, empty selector means every managed instance.
+defaults `--tail 200`, no `--since`, empty selector means every managed instance. The selector grammar and the
+instance model live in `${CLAUDE_PLUGIN_ROOT}/skills/fleet-model/SKILL.md`.
 
 ## 1. Resolve the targets
 ```bash

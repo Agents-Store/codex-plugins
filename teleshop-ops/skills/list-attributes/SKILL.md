@@ -1,11 +1,13 @@
 ---
 name: list-attributes
-description: 'List all product attributes with their values Arguments: --search <query>.'
+description: 'List all product attributes with their values Arguments: [--search <query>].'
 ---
 
 # List Attributes
 
 List all product attributes in the Teleshop store.
+
+Method and rules: the `teleshop-ops:attribute-management` skill.
 
 ## Arguments
 Format: `[--search <query>]`
