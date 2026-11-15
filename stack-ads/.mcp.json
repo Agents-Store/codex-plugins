@@ -1,0 +1,47 @@
+{
+  "mcpServers": {
+    "firecrawl": {
+      "type": "http",
+      "url": "https://mcp.firecrawl.dev/v2/mcp",
+      "bearer_token_env_var": "FIRECRAWL_API_KEY"
+    },
+    "apify": {
+      "type": "http",
+      "url": "https://mcp.apify.com",
+      "bearer_token_env_var": "APIFY_TOKEN"
+    },
+    "dataforseo": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "dataforseo-mcp-server@3"
+      ],
+      "env_vars": [
+        "DATAFORSEO_USERNAME",
+        "DATAFORSEO_PASSWORD"
+      ]
+    },
+    "google-ads": {
+      "command": "pipx",
+      "args": [
+        "run",
+        "--spec",
+        "google-ads-mcp==0.0.6",
+        "google-ads-mcp"
+      ],
+      "env_vars": [
+        "GOOGLE_CLOUD_PROJECT",
+        "GOOGLE_APPLICATION_CREDENTIALS"
+      ]
+    },
+    "meta-ads": {
+      "type": "http",
+      "url": "https://mcp.facebook.com/ads",
+      "bearer_token_env_var": "META_ACCESS_TOKEN"
+    },
+    "tiktok-ads": {
+      "type": "http",
+      "url": "https://business-api.tiktok.com/open_mcp/tt-ads-mcp-layer"
+    }
+  }
+}
