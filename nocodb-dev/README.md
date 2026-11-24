@@ -16,7 +16,7 @@ codex plugin marketplace add .
 
 ## Components
 
-- 18 skill(s) under `skills/` (includes 6 command(s) converted to skills — Codex has no custom slash-command system)
+- 19 skill(s) under `skills/` (includes 6 command(s) converted to skills — Codex has no custom slash-command system)
 - 1 subagent definition(s) under `agents/` — **not installed automatically by Codex**. Copy manually:
 
 ```bash
