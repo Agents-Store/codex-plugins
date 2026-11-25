@@ -25,7 +25,7 @@ cp agents/*.toml <repo>/.codex/agents/    # project-local
 
 <example>
 Context: User wants to plan a sprint
-user: "Start a two-week sprint in our Apollo project and pull in the top 5 backlog stories"
+user: "Start a two-week sprint in our Demo Project and pull in the top 5 backlog stories"
 assistant: "I'll use the taiga-assistant agent to create the sprint and move the stories into it."
 <commentary>
 Sprint planning across milestones and user stories — the agent creates the milestone and bulk-assigns stories.
@@ -43,7 +43,7 @@ Issue creation with classifiers, assignment, comment, and attachment — a core 
 
 <example>
 Context: User wants a status report
-user: "Give me a summary of open issues and remaining sprint points for project Apollo"
+user: "Give me a summary of open issues and remaining sprint points for project Demo Project"
 assistant: "I'll use the taiga-assistant agent to gather the stats and format the report."
 <commentary>
 Reporting from search, filtered lists, and stats endpoints — the agent aggregates and presents.
