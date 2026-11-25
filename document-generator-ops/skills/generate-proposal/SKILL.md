@@ -57,6 +57,6 @@ Parse from "$ARGUMENTS".
 
 ## Example Usage
 ```
-/document-generator-ops:generate-proposal "Cloud Migration Strategy" --company "TechCo Solutions"
+/document-generator-ops:generate-proposal "Cloud Migration Strategy" --company "Example Inc"
 /document-generator-ops:generate-proposal "Q2 Marketing Campaign" --format pdf
 ```
