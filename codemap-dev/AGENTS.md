@@ -159,6 +159,6 @@ type = "http"
 
 [mcp_servers.playwright]
 command = "npx"
-args = ["@playwright/mcp@0.0.83","--headless"]
+args = ["@playwright/mcp@0.0.86","--headless"]
 
 ```
